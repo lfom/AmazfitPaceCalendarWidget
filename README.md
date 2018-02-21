@@ -1,4 +1,3 @@
-![Amazfit Pace Calendar Widget v1.0](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/master/other%20files/icon.png)
 # Amazfit Pace Calendar Widget
 
 After @Quinny899 's excellent work, we are able to make widget/apps! So, here is the first Calendar Widget for our Amazfit Pace!

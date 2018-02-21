@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.kieronquinn.app.springboardexample">
+    package="com.dinodevs.pacecalendarwidget">
 
     <uses-sdk tools:overrideLibrary="android.support.wear" />
 
@@ -12,4 +12,4 @@
         android:theme="@style/AppTheme">
         <meta-data android:name="com.huami.watch.launcher.springboard.PASSAGER_TARGET" android:resource="@array/spring_depend" />
     </application>
-</manifest>
+    </manifest>

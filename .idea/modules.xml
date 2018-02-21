@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SpringboardExample.iml" filepath="$PROJECT_DIR$/SpringboardExample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AmazfitPaceCalendarWidget.iml" filepath="$PROJECT_DIR$/AmazfitPaceCalendarWidget.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

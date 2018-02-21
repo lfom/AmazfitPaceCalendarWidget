@@ -1,4 +1,4 @@
-package com.kieronquinn.app.springboardexample;
+package com.dinodevs.pacecalendarwidget;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,12 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CalendarView;
 import android.widget.Toast;
 
 import clc.sliteplugin.flowboard.AbstractPlugin;
 import clc.sliteplugin.flowboard.ISpringBoardHostStub;
 
-public class SpringboardPage extends AbstractPlugin {
+public class widget extends AbstractPlugin {
 
     /*
 
@@ -29,7 +30,7 @@ public class SpringboardPage extends AbstractPlugin {
      */
 
     //Tag for logging purposes. Change this to something suitable
-    private static final String TAG = "SpringboardPage";
+    private static final String TAG = "PaceCalendarWidget";
     //As AbstractPlugin is not an Activity or Service, we can't just use "this" as a context or getApplicationContext, so Context is global to allow easier access
     private Context mContext;
     //These get set up later
@@ -46,16 +47,20 @@ public class SpringboardPage extends AbstractPlugin {
         //Inflate layout as required. The layout here being inflated is "widget_blank"
         this.mView = LayoutInflater.from(paramContext).inflate(R.layout.widget_blank, null);
         //Container is the root of the layout, we're just using it to set a click listener here (you can remove this if you wish)
-        View container = this.mView.findViewById(R.id.container);
-        container.setOnClickListener(new View.OnClickListener() {
+        //View container = this.mView.findViewById(R.id.container);
+        /*container.setOnClickListener(new View.OnClickListener() {
             public void onClick(View paramAnonymousView) {
                 //Simply show a toast. Launching an activity is commented out but works as shown
                 Toast.makeText(mContext, "Clicked!", Toast.LENGTH_LONG).show();
-                /*Intent localIntent = new Intent(paramContext, MainActivity.class);
-                localIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                paramContext.startActivity(localIntent);*/
+                //Intent localIntent = new Intent(paramContext, MainActivity.class);
+                //localIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                //paramContext.startActivity(localIntent);
             }
-        });
+        });*/
+
+        CalendarView simpleCalendarView = (CalendarView) this.mView.findViewById(R.id.simpleCalendarView); // get the reference of CalendarView
+        simpleCalendarView.setShowWeekNumber(false); // set true value for showing the week numbers.
+
         return this.mView;
     }
 

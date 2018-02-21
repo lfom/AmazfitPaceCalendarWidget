@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
     android:id="@+id/container"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Hello World!" />
+    <CalendarView
+        android:id="@+id/simpleCalendarView"
+        android:layout_marginTop="5px"
+        android:layout_marginLeft="35px"
+        android:layout_marginRight="35px"
+        android:layout_marginBottom="36px"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:selectedWeekBackgroundColor="#2196F3"/>
+
 </LinearLayout>

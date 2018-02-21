@@ -1,10 +1,10 @@
-![Amazfit Pace Calendar Widget v1.0](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/other files/icon.png)
+![Amazfit Pace Calendar Widget v1.0](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/master/other%20files/icon.png)
 # Amazfit Pace Calendar Widget
 
 After @Quinny899 's excellent work, we are able to make widget/apps! So, here is the first Calendar Widget for our Amazfit Pace!
 
 ## Screenshot:
-![File > Project Structure > Dependencies](https://i.imgur.com/xIrVhJp.png)
+![Amazfit Pace Calendar Widget v1.0](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/master/other%20files/com.dinodevs.pacecalendarwidget.png)
 
 ## Installation (through ADB):
 `adb install -r PaceCalendarWidget-1.0.apk`

@@ -7,9 +7,17 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.CalendarView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.pwittchen.swipe.library.rx2.SimpleSwipeListener;
+import com.github.pwittchen.swipe.library.rx2.Swipe;
+import com.github.pwittchen.swipe.library.rx2.SwipeListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import clc.sliteplugin.flowboard.AbstractPlugin;
 import clc.sliteplugin.flowboard.ISpringBoardHostStub;
@@ -37,6 +45,11 @@ public class widget extends AbstractPlugin {
     private View mView;
     private boolean mHasActive = false;
     private ISpringBoardHostStub mHost = null;
+    private Calendar shown_date;
+    private APcalendar apcalendar;
+
+    public String errors = "";
+    private Swipe swipe;
 
     //Much like a fragment, getView returns the content view of the page. You can set up your layout here
     @Override
@@ -58,8 +71,98 @@ public class widget extends AbstractPlugin {
             }
         });*/
 
-        CalendarView simpleCalendarView = (CalendarView) this.mView.findViewById(R.id.simpleCalendarView); // get the reference of CalendarView
-        simpleCalendarView.setShowWeekNumber(false); // set true value for showing the week numbers.
+        this.shown_date = Calendar.getInstance();
+        try {
+            this.apcalendar = new APcalendar(this.mView, this.mContext, this.shown_date);
+        } catch (Exception e) {
+            this.errors = e.getMessage();
+        }
+
+        // Errors / Settings
+        TextView settings = (TextView) this.mView.findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(mContext, errors, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Pace Calendar Widget v1.1 by GreatApo", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Refresh current date
+        TextView refresh = (TextView) this.mView.findViewById(R.id.refresh);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar now = Calendar.getInstance();
+                widget.this.shown_date = now;
+                widget.this.apcalendar.refresh(now);
+
+                String date_string = (new SimpleDateFormat("dd/MM/yyyy")).format(now.getTime());
+                Toast.makeText(mContext, date_string, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        TextView up = (TextView) this.mView.findViewById(R.id.arrow_up);
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                widget.this.shown_date.add(Calendar.MONTH, -1);
+                widget.this.apcalendar.refresh(widget.this.shown_date);
+            }
+        });
+
+        TextView down = (TextView) this.mView.findViewById(R.id.arrow_down);
+        down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                widget.this.shown_date.add(Calendar.MONTH, 1);
+                widget.this.apcalendar.refresh(widget.this.shown_date);
+            }
+        });
+
+
+        this.mView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        widget.this.shown_date.add(Calendar.MONTH, -1);
+                        widget.this.apcalendar.refresh(widget.this.shown_date);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        widget.this.shown_date.add(Calendar.MONTH, 1);
+                        widget.this.apcalendar.refresh(widget.this.shown_date);
+                        break;
+                }
+                return true;
+            }
+        });
+
+        /*
+        this.mView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                swipe.dispatchTouchEvent(event);
+                return true;
+            }
+        });
+
+        swipe = new Swipe(20, 80);
+        swipe.setListener(new SimpleSwipeListener(){
+            @Override public boolean onSwipedUp(final MotionEvent event) {
+                widget.this.shown_date.add(Calendar.MONTH, -1);
+                widget.this.apcalendar.refresh(widget.this.shown_date);
+                return true;
+            }
+
+            @Override public boolean onSwipedDown(final MotionEvent event) {
+                widget.this.shown_date.add(Calendar.MONTH, 1);
+                widget.this.apcalendar.refresh(widget.this.shown_date);
+                return true;
+            }
+        });
+        */
 
         return this.mView;
     }

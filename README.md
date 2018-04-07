@@ -3,10 +3,11 @@
 After @Quinny899 's excellent work, we are able to make widget/apps! So, here is the first Calendar Widget for our Amazfit Pace!
 
 ## Screenshot:
+![Amazfit Pace Calendar Widget v1.1](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/master/other%20files/com.dinodevs.pacecalendarwidget-1.1.png)
 ![Amazfit Pace Calendar Widget v1.0](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/master/other%20files/com.dinodevs.pacecalendarwidget.png)
 
 ## Installation (through ADB):
-`adb install -r PaceCalendarWidget-1.0.apk`
+`adb install -r PaceCalendarWidget-1.1.apk`
 
 ## Uninstall (through ADB):
 `adb uninstall com.dinodevs.pacecalendarwidget`

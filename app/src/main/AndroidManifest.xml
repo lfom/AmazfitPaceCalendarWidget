@@ -3,6 +3,7 @@
     package="com.dinodevs.pacecalendarwidget">
 
     <uses-sdk tools:overrideLibrary="android.support.wear" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"

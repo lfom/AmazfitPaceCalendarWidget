@@ -2,12 +2,22 @@
 
 After @Quinny899 's excellent work, we are able to make widget/apps! So, here is the first Calendar Widget for our Amazfit Pace!
 
+## Features:
+- Widget Calendar
+- Change to previous/next months
+- Refresh to current date
+- Change calendar color
+- Show/Hide year number
+
 ## Screenshot:
-![Amazfit Pace Calendar Widget v1.1](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/master/other%20files/com.dinodevs.pacecalendarwidget-1.1.png)
-![Amazfit Pace Calendar Widget v1.0](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/master/other%20files/com.dinodevs.pacecalendarwidget.png)
+![Amazfit Pace Calendar Widget v1.2](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/master/other%20files/com.dinodevs.pacecalendarwidget-1.2.png)
+![Amazfit Pace Calendar Widget v1.2](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/master/other%20files/com.dinodevs.pacecalendarwidget-1.2-settings.png)
+
+## Download:
+You can compile the source code with Android Studio or download the latest version from our [XDA topic](https://forum.xda-developers.com/smartwatch/amazfit/app-widget-calendar-pace-t3751889).
 
 ## Installation (through ADB):
-`adb install -r PaceCalendarWidget-1.1.apk`
+`adb install -r PaceCalendarWidget-1.2.apk`
 
 ## Uninstall (through ADB):
 `adb uninstall com.dinodevs.pacecalendarwidget`

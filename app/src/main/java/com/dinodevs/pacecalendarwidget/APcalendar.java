@@ -1,9 +1,13 @@
 package com.dinodevs.pacecalendarwidget;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -20,28 +24,43 @@ public class APcalendar {
     private TextView view_monthName;
     private TextView view_year;
     private TextView[] view_boxes;
+    private TextView[] need_color;
+    private Context context;
 
     APcalendar(View view, Context context){
         this.getViewObjects(view, context);
     }
 
-    APcalendar(View view, Context context, Calendar date){
+    APcalendar(View view, Context context, Calendar date, int current_color){
         this.getViewObjects(view, context);
-        this.refresh(date);
+        this.refresh(date, current_color);
     }
 
     private void getViewObjects(View view, Context context) {
         this.view_monthName = (TextView) view.findViewById(R.id.textMonth);
         this.view_year = (TextView) view.findViewById(R.id.textYear);
+        this.context = context;
 
-        /*
+
         this.view_boxes = new TextView[42];
         for (int i = 0; i < 42; i++) {
             this.view_boxes[i] = (TextView) view.findViewById(
                 context.getResources().getIdentifier("calbox" + (i + 1), "id", context.getPackageName())
             );
         }
-        */
+
+        this.need_color = new TextView[]{
+                (TextView) view.findViewById(R.id.day1),
+                (TextView) view.findViewById(R.id.day2),
+                (TextView) view.findViewById(R.id.day3),
+                (TextView) view.findViewById(R.id.day4),
+                (TextView) view.findViewById(R.id.day5),
+                (TextView) view.findViewById(R.id.day6),
+                (TextView) view.findViewById(R.id.day7),
+                (TextView) view.findViewById(R.id.arrow_down),
+                (TextView) view.findViewById(R.id.arrow_up),
+                (TextView) view.findViewById(R.id.close_settings)
+        };
 
         this.view_boxes = new TextView[]{
             (TextView) view.findViewById(R.id.calbox1),
@@ -90,7 +109,18 @@ public class APcalendar {
     }
 
 
-    public void refresh(Calendar date) {
+    public void refresh(Calendar date, int current_color) {
+
+        // Get Settings
+        //SharedPreferences data = this.context.getApplicationContext().getSharedPreferences("Calendar_Data", 0);
+        //String color = data.getString("color", "#efb171");
+
+        // Coloring
+        for (int i = 0 ; i < 9; i++) {
+            this.need_color[i].setTextColor(current_color);
+        }
+        GradientDrawable BackgroundShape = (GradientDrawable)this.need_color[9].getBackground();
+        BackgroundShape.setColor(current_color);
 
         int year = date.get(Calendar.YEAR);
         int month = date.get(Calendar.MONTH);
@@ -127,6 +157,9 @@ public class APcalendar {
             if (i + 1 == current_day) {
                 this.view_boxes[monthStart + i].setTextColor(Color.parseColor("#000000"));
                 this.view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg);
+
+                BackgroundShape = (GradientDrawable)this.view_boxes[monthStart + i].getBackground();
+                BackgroundShape.setColor(current_color);
             }
             else {
                 this.view_boxes[monthStart + i].setTextColor(Color.parseColor("#FFFFFF"));

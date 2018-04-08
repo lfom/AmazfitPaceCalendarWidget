@@ -2,13 +2,21 @@ package com.dinodevs.pacecalendarwidget;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +24,8 @@ import com.github.pwittchen.swipe.library.rx2.SimpleSwipeListener;
 import com.github.pwittchen.swipe.library.rx2.Swipe;
 import com.github.pwittchen.swipe.library.rx2.SwipeListener;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -45,9 +55,12 @@ public class widget extends AbstractPlugin {
     private View mView;
     private boolean mHasActive = false;
     private ISpringBoardHostStub mHost = null;
+    //Calendar vars
+    private Vibrator vibe;
     private Calendar shown_date;
+    private int current_color;
+    private boolean shown_year;
     private APcalendar apcalendar;
-
     public String errors = "";
     private Swipe swipe;
 
@@ -73,10 +86,18 @@ public class widget extends AbstractPlugin {
 
         this.shown_date = Calendar.getInstance();
         try {
-            this.apcalendar = new APcalendar(this.mView, this.mContext, this.shown_date);
+            this.apcalendar = new APcalendar(this.mView, this.mContext, this.shown_date, this.current_color);
         } catch (Exception e) {
             this.errors = e.getMessage();
         }
+
+        // Set vibrator
+        this.vibe = (Vibrator) paramContext.getSystemService(Context.VIBRATOR_SERVICE);
+        // Set default settings
+        this.current_color = Color.parseColor("#efb171");
+        this.shown_year = true;
+        //SharedPreferences data = this.mContext.getApplicationContext().getSharedPreferences("Calendar_Data", 0);
+
 
         // Errors / Settings
         TextView settings = (TextView) this.mView.findViewById(R.id.settings);
@@ -84,7 +105,98 @@ public class widget extends AbstractPlugin {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(mContext, errors, Toast.LENGTH_SHORT).show();
-                Toast.makeText(mContext, "Pace Calendar Widget v1.1 by GreatApo", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Pace Calendar Widget v1.2 by GreatApo, Errors: "+errors, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        // Open Settings
+        ConstraintLayout whole_view_calendar = (ConstraintLayout) this.mView.findViewById(R.id.container);
+        whole_view_calendar.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(widget.this.mView.findViewById(R.id.settings_box).getVisibility()!=View.VISIBLE) {
+                    widget.this.vibe.vibrate(100);
+                    widget.this.mView.findViewById(R.id.settings_box).setVisibility(View.VISIBLE);
+                }
+                return true;
+            }
+        });
+
+        // Close Settings
+        TextView close_settings = (TextView) this.mView.findViewById(R.id.close_settings);
+        close_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                widget.this.mView.findViewById(R.id.settings_box).setVisibility(View.GONE);
+            }
+        });
+
+
+        // Change Color
+        TextView color1 = (TextView) this.mView.findViewById(R.id.color1);
+        color1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                widget.this.current_color = widget.this.mContext.getResources().getColor(R.color.basecolor1);
+                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+            }
+        });
+        TextView color2 = (TextView) this.mView.findViewById(R.id.color2);
+        color2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                widget.this.current_color = widget.this.mContext.getResources().getColor(R.color.basecolor2);
+                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+            }
+        });
+        TextView color3 = (TextView) this.mView.findViewById(R.id.color3);
+        color3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                widget.this.current_color = widget.this.mContext.getResources().getColor(R.color.basecolor3);
+                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+            }
+        });
+        TextView color4 = (TextView) this.mView.findViewById(R.id.color4);
+        color4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                widget.this.current_color = widget.this.mContext.getResources().getColor(R.color.basecolor4);
+                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+            }
+        });
+        TextView color5 = (TextView) this.mView.findViewById(R.id.color5);
+        color5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                widget.this.current_color = widget.this.mContext.getResources().getColor(R.color.basecolor5);
+                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+            }
+        });
+        TextView color6 = (TextView) this.mView.findViewById(R.id.color6);
+        color6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                widget.this.current_color = widget.this.mContext.getResources().getColor(R.color.basecolor6);
+                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+                //widget.this.mView.findViewById(R.id.color5).setText("✔");
+            }
+        });
+
+        // Year switch
+        CheckBox s = (CheckBox) this.mView.findViewById(R.id.year_switch);
+        s.setChecked(this.shown_year);
+        if(!s.isChecked()){widget.this.mView.findViewById(R.id.textYear).setVisibility(View.GONE);}
+        s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    widget.this.mView.findViewById(R.id.textYear).setVisibility(View.VISIBLE);
+                    widget.this.shown_year = true;
+                } else {
+                    widget.this.mView.findViewById(R.id.textYear).setVisibility(View.GONE);
+                    widget.this.shown_year = false;
+                }
             }
         });
 
@@ -95,49 +207,51 @@ public class widget extends AbstractPlugin {
             public void onClick(View v) {
                 Calendar now = Calendar.getInstance();
                 widget.this.shown_date = now;
-                widget.this.apcalendar.refresh(now);
+                widget.this.apcalendar.refresh(now, widget.this.current_color);
 
                 String date_string = (new SimpleDateFormat("dd/MM/yyyy")).format(now.getTime());
                 Toast.makeText(mContext, date_string, Toast.LENGTH_SHORT).show();
             }
         });
 
-
+        // Prev Month
         TextView up = (TextView) this.mView.findViewById(R.id.arrow_up);
         up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 widget.this.shown_date.add(Calendar.MONTH, -1);
-                widget.this.apcalendar.refresh(widget.this.shown_date);
+                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
             }
         });
 
+        // Next Month
         TextView down = (TextView) this.mView.findViewById(R.id.arrow_down);
         down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 widget.this.shown_date.add(Calendar.MONTH, 1);
-                widget.this.apcalendar.refresh(widget.this.shown_date);
+                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
             }
         });
 
-
+        /*
         this.mView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         widget.this.shown_date.add(Calendar.MONTH, -1);
-                        widget.this.apcalendar.refresh(widget.this.shown_date);
+                        widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
                         break;
                     case MotionEvent.ACTION_UP:
                         widget.this.shown_date.add(Calendar.MONTH, 1);
-                        widget.this.apcalendar.refresh(widget.this.shown_date);
+                        widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
                         break;
                 }
                 return true;
             }
         });
+        */
 
         /*
         this.mView.setOnTouchListener(new View.OnTouchListener() {
@@ -152,13 +266,13 @@ public class widget extends AbstractPlugin {
         swipe.setListener(new SimpleSwipeListener(){
             @Override public boolean onSwipedUp(final MotionEvent event) {
                 widget.this.shown_date.add(Calendar.MONTH, -1);
-                widget.this.apcalendar.refresh(widget.this.shown_date);
+                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
                 return true;
             }
 
             @Override public boolean onSwipedDown(final MotionEvent event) {
                 widget.this.shown_date.add(Calendar.MONTH, 1);
-                widget.this.apcalendar.refresh(widget.this.shown_date);
+                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
                 return true;
             }
         });
@@ -166,6 +280,17 @@ public class widget extends AbstractPlugin {
 
         return this.mView;
     }
+
+    /*
+    public void re_color(String color) {
+        SharedPreferences settings = widget.this.mContext.getApplicationContext().getSharedPreferences("Calendar_Data", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("color", color);
+        editor.apply(); // Apply the edits!
+
+        widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+    }*/
+
 
     //Return the icon for this page, used when the page is disabled in the app list. In this case, the launcher icon is used
     @Override
@@ -201,6 +326,11 @@ public class widget extends AbstractPlugin {
         }
         //Store active state
         this.mHasActive = true;
+
+        //Refreshes calendar
+        Calendar now = Calendar.getInstance();
+        widget.this.shown_date = now;
+        widget.this.apcalendar.refresh(now, widget.this.current_color);
     }
 
     private void refreshView() {

@@ -35,4 +35,4 @@ You can compile the source code with Android Studio or download the latest versi
 This app would be displayed as a widget after you reboot you watch (or the launcher). In order to move this widget you will need @Quinny899 's [Springboard Settings](https://forum.xda-developers.com/smartwatch/amazfit/app-springboard-settings-pace-rearrange-t3748651) app since it can't be moved through the phone app.
 
 ## Source:
-This app is completely based on @Quinny899 's work with small changes , basically just the app layout. For more follow the XDA topic [[DEV] Create custom home screen pages for the Pace](https://forum.xda-developers.com/smartwatch/amazfit/dev-create-custom-home-screen-pages-pace-t3751731).
+This app is based on @Quinny899 's work. For more follow the XDA topic [[DEV] Create custom home screen pages for the Pace](https://forum.xda-developers.com/smartwatch/amazfit/dev-create-custom-home-screen-pages-pace-t3751731).

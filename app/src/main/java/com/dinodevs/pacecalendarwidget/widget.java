@@ -59,6 +59,7 @@ public class widget extends AbstractPlugin {
     private Vibrator vibe;
     private Calendar shown_date;
     private int current_color;
+    private TextView current_color_element;
     private boolean shown_year;
     private APcalendar apcalendar;
     public String errors = "";
@@ -95,6 +96,8 @@ public class widget extends AbstractPlugin {
         this.vibe = (Vibrator) paramContext.getSystemService(Context.VIBRATOR_SERVICE);
         // Set default settings
         this.current_color = Color.parseColor("#efb171");
+        this.current_color_element = (TextView) this.mView.findViewById(R.id.color5);
+        this.current_color_element.setText("✔");
         this.shown_year = true;
         //SharedPreferences data = this.mContext.getApplicationContext().getSharedPreferences("Calendar_Data", 0);
 
@@ -104,8 +107,8 @@ public class widget extends AbstractPlugin {
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(mContext, errors, Toast.LENGTH_SHORT).show();
-                Toast.makeText(mContext, "Pace Calendar Widget v1.2 by GreatApo, Errors: "+errors, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Pace Calendar Widget v1.3 by GreatApo & DarkThanos" + (errors.length() > 0 ? ", Errors: " + errors : ""), Toast.LENGTH_SHORT).show();
+                widget.this.vibe.vibrate(10);
             }
         });
 
@@ -116,7 +119,7 @@ public class widget extends AbstractPlugin {
             @Override
             public boolean onLongClick(View v) {
                 if(widget.this.mView.findViewById(R.id.settings_box).getVisibility()!=View.VISIBLE) {
-                    widget.this.vibe.vibrate(100);
+                    widget.this.vibe.vibrate(50);
                     widget.this.mView.findViewById(R.id.settings_box).setVisibility(View.VISIBLE);
                 }
                 return true;
@@ -129,58 +132,58 @@ public class widget extends AbstractPlugin {
             @Override
             public void onClick(View v) {
                 widget.this.mView.findViewById(R.id.settings_box).setVisibility(View.GONE);
+                widget.this.vibe.vibrate(10);
             }
         });
 
 
         // Change Color
-        TextView color1 = (TextView) this.mView.findViewById(R.id.color1);
-        color1.setOnClickListener(new View.OnClickListener() {
+        ((TextView) this.mView.findViewById(R.id.color1)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                widget.this.current_color = widget.this.mContext.getResources().getColor(R.color.basecolor1);
-                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+                widget.this.changeColor(R.id.color1, R.color.basecolor1);
             }
         });
-        TextView color2 = (TextView) this.mView.findViewById(R.id.color2);
-        color2.setOnClickListener(new View.OnClickListener() {
+        ((TextView) this.mView.findViewById(R.id.color2)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                widget.this.current_color = widget.this.mContext.getResources().getColor(R.color.basecolor2);
-                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+                widget.this.changeColor(R.id.color2, R.color.basecolor2);
             }
         });
-        TextView color3 = (TextView) this.mView.findViewById(R.id.color3);
-        color3.setOnClickListener(new View.OnClickListener() {
+        ((TextView) this.mView.findViewById(R.id.color3)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                widget.this.current_color = widget.this.mContext.getResources().getColor(R.color.basecolor3);
-                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+                widget.this.changeColor(R.id.color3, R.color.basecolor3);
             }
         });
-        TextView color4 = (TextView) this.mView.findViewById(R.id.color4);
-        color4.setOnClickListener(new View.OnClickListener() {
+        ((TextView) this.mView.findViewById(R.id.color4)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                widget.this.current_color = widget.this.mContext.getResources().getColor(R.color.basecolor4);
-                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+                widget.this.changeColor(R.id.color4, R.color.basecolor4);
             }
         });
-        TextView color5 = (TextView) this.mView.findViewById(R.id.color5);
-        color5.setOnClickListener(new View.OnClickListener() {
+        ((TextView) this.mView.findViewById(R.id.color5)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                widget.this.current_color = widget.this.mContext.getResources().getColor(R.color.basecolor5);
-                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+                widget.this.changeColor(R.id.color5, R.color.basecolor5);
             }
         });
-        TextView color6 = (TextView) this.mView.findViewById(R.id.color6);
-        color6.setOnClickListener(new View.OnClickListener() {
+        ((TextView) this.mView.findViewById(R.id.color6)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                widget.this.current_color = widget.this.mContext.getResources().getColor(R.color.basecolor6);
+                widget.this.changeColor(R.id.color6, R.color.basecolor6);
+            }
+        });
+
+        //Next Translation
+        ((TextView) this.mView.findViewById(R.id.language)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                widget.this.apcalendar.tranlations.nextLang();
+                ((TextView) widget.this.mView.findViewById(R.id.language)).setText(widget.this.apcalendar.tranlations.getName());
+                widget.this.apcalendar.refresh_days();
                 widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
-                //widget.this.mView.findViewById(R.id.color5).setText("✔");
+                widget.this.vibe.vibrate(10);
             }
         });
 
@@ -197,6 +200,17 @@ public class widget extends AbstractPlugin {
                     widget.this.mView.findViewById(R.id.textYear).setVisibility(View.GONE);
                     widget.this.shown_year = false;
                 }
+                widget.this.vibe.vibrate(10);
+            }
+        });
+
+        // Monday switch
+        s = (CheckBox) this.mView.findViewById(R.id.monday_switch);
+        s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                widget.this.vibe.vibrate(10);
+                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+                widget.this.apcalendar.refresh_days();
             }
         });
 
@@ -211,6 +225,7 @@ public class widget extends AbstractPlugin {
 
                 String date_string = (new SimpleDateFormat("dd/MM/yyyy")).format(now.getTime());
                 Toast.makeText(mContext, date_string, Toast.LENGTH_SHORT).show();
+                widget.this.vibe.vibrate(10);
             }
         });
 
@@ -221,6 +236,7 @@ public class widget extends AbstractPlugin {
             public void onClick(View v) {
                 widget.this.shown_date.add(Calendar.MONTH, -1);
                 widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+                widget.this.vibe.vibrate(10);
             }
         });
 
@@ -231,6 +247,7 @@ public class widget extends AbstractPlugin {
             public void onClick(View v) {
                 widget.this.shown_date.add(Calendar.MONTH, 1);
                 widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+                widget.this.vibe.vibrate(10);
             }
         });
 
@@ -281,15 +298,15 @@ public class widget extends AbstractPlugin {
         return this.mView;
     }
 
-    /*
-    public void re_color(String color) {
-        SharedPreferences settings = widget.this.mContext.getApplicationContext().getSharedPreferences("Calendar_Data", 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString("color", color);
-        editor.apply(); // Apply the edits!
 
+    public void changeColor(int id, int color) {
+        widget.this.current_color_element.setText(" ");
+        widget.this.current_color = widget.this.mContext.getResources().getColor(color);
         widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
-    }*/
+        widget.this.current_color_element = (TextView) widget.this.mView.findViewById(id);
+        widget.this.current_color_element.setText("✔");
+        widget.this.vibe.vibrate(10);
+    }
 
 
     //Return the icon for this page, used when the page is disabled in the app list. In this case, the launcher icon is used

@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -16,31 +18,27 @@ import java.util.GregorianCalendar;
  */
 
 public class APcalendar {
-
-    // Months in english
-    private static String[] locale_months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-
     // Instance's view objects
     private TextView view_monthName;
     private TextView view_year;
+    private CheckBox monday_switch;
     private TextView[] view_boxes;
     private TextView[] need_color;
     private Context context;
-
-    APcalendar(View view, Context context){
-        this.getViewObjects(view, context);
-    }
+    public APtranslations tranlations;
 
     APcalendar(View view, Context context, Calendar date, int current_color){
+        this.tranlations = new APtranslations();
         this.getViewObjects(view, context);
         this.refresh(date, current_color);
+        this.refresh_days();
     }
 
     private void getViewObjects(View view, Context context) {
         this.view_monthName = (TextView) view.findViewById(R.id.textMonth);
         this.view_year = (TextView) view.findViewById(R.id.textYear);
+        this.monday_switch = (CheckBox) view.findViewById(R.id.monday_switch);
         this.context = context;
-
 
         this.view_boxes = new TextView[42];
         for (int i = 0; i < 42; i++) {
@@ -132,7 +130,7 @@ public class APcalendar {
         }
 
         // Set month name
-        this.view_monthName.setText( APcalendar.locale_months[month] );
+        this.view_monthName.setText( this.tranlations.getMonths()[month] );
 
         // Set year
         this.view_year.setText( year + "" );//or %100
@@ -140,6 +138,9 @@ public class APcalendar {
         // Number to fill the boxes
         GregorianCalendar first = new GregorianCalendar(year, month, 1);
         int monthStart = first.get(Calendar.DAY_OF_WEEK) - 1;
+        if(monday_switch.isChecked()){
+            monthStart = (monthStart-1 < 0) ? 6 : monthStart -1;
+        }
         int monthDays = first.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         // Previous month
@@ -172,5 +173,15 @@ public class APcalendar {
             this.view_boxes[i].setBackgroundResource(android.R.color.transparent);
         }
 
+    }
+
+    public void refresh_days() {
+        // Change days name
+        String[] days = this.tranlations.getDays();
+        int n = days.length;
+        int offset = (monday_switch.isChecked())? 1 : 0;
+        for (int i = 0 ; i < 7; i++) {
+            this.need_color[i].setText(days[(offset + i) % n].substring(0,3));
+        }
     }
 }

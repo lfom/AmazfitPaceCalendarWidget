@@ -2,12 +2,13 @@ package com.dinodevs.pacecalendarwidget;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.VibrationEffect;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
@@ -16,105 +17,179 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.github.pwittchen.swipe.library.rx2.SimpleSwipeListener;
-import com.github.pwittchen.swipe.library.rx2.Swipe;
-import com.github.pwittchen.swipe.library.rx2.SwipeListener;
-
-import java.io.File;
-import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import clc.sliteplugin.flowboard.AbstractPlugin;
 import clc.sliteplugin.flowboard.ISpringBoardHostStub;
 
 public class widget extends AbstractPlugin {
 
-    /*
-
-        Example Springboard Page for the Amazfit Pace. This class requires the library JAR as well to work
-
-        A springboard page has two modes: App Mode and Springboard Mode (my names, not Huami's)
-
-        App Mode is when the page is disabled in the launcher, and launched instead from the app list.
-        This behaves like a normal app, but with limited functionality. Swiping from the right to left should not be used in this mode as it is used to close the app
-
-        Springboard Mode is when the page is shown in the launcher, note that you should not use swipe left or right in this mode, to allow the user to swipe between pages
-
-     */
-
     //Tag for logging purposes. Change this to something suitable
     private static final String TAG = "PaceCalendarWidget";
+    // Version
+    public String version = "n/a";
+    // Errors
+    public String errors = "";
+
     //As AbstractPlugin is not an Activity or Service, we can't just use "this" as a context or getApplicationContext, so Context is global to allow easier access
     private Context mContext;
+
     //These get set up later
     private View mView;
     private boolean mHasActive = false;
     private ISpringBoardHostStub mHost = null;
-    //Calendar vars
+
+    // Swipe / Long press handling
+    private static int LONG_CLICK_DURATION = 600; // long click time
+    private static float min_swipe_length = 100; // minimum length of a swipe
+    private static long max_swipe_time = 250; // maximum time of a swipe
+    private boolean pressed_state = false; // true while touching the screen
+    private Handler handler;
+    private Runnable runnable;
+    private float mFirstY; // x position of first screen touch
+    private float mFirstX; // y position of first screen touch
+
+    // Calendar vars
     private Vibrator vibe;
     private Calendar shown_date;
     private int current_color;
     private TextView current_color_element;
     private boolean shown_year;
     private APcalendar apcalendar;
-    public String errors = "";
-    private Swipe swipe;
+
 
     //Much like a fragment, getView returns the content view of the page. You can set up your layout here
     @Override
     public View getView(Context paramContext) {
-        Log.d(TAG, "getView()" + paramContext.getPackageName());
+        //Log.d(TAG, "getView()" + paramContext.getPackageName());
+        // Get widget version number
+        try {
+            PackageInfo pInfo = paramContext.getPackageManager().getPackageInfo(paramContext.getPackageName(), 0);
+            this.version = pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
         //Keep context
         this.mContext = paramContext;
         //Inflate layout as required. The layout here being inflated is "widget_blank"
         this.mView = LayoutInflater.from(paramContext).inflate(R.layout.widget_blank, null);
-        //Container is the root of the layout, we're just using it to set a click listener here (you can remove this if you wish)
-        //View container = this.mView.findViewById(R.id.container);
-        /*container.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View paramAnonymousView) {
-                //Simply show a toast. Launching an activity is commented out but works as shown
-                Toast.makeText(mContext, "Clicked!", Toast.LENGTH_LONG).show();
-                //Intent localIntent = new Intent(paramContext, MainActivity.class);
-                //localIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                //paramContext.startActivity(localIntent);
-            }
-        });*/
+        // Set vibrator
+        this.vibe = (Vibrator) paramContext.getSystemService(Context.VIBRATOR_SERVICE);
 
+        // Set date to current
         this.shown_date = Calendar.getInstance();
+
+        // Run Calendar class
         try {
             this.apcalendar = new APcalendar(this.mView, this.mContext, this.shown_date, this.current_color);
         } catch (Exception e) {
             this.errors = e.getMessage();
         }
 
-        // Set vibrator
-        this.vibe = (Vibrator) paramContext.getSystemService(Context.VIBRATOR_SERVICE);
         // Set default settings
         this.current_color = Color.parseColor("#efb171");
         this.current_color_element = (TextView) this.mView.findViewById(R.id.color5);
         this.current_color_element.setText("✔");
         this.shown_year = true;
-        //SharedPreferences data = this.mContext.getApplicationContext().getSharedPreferences("Calendar_Data", 0);
 
-
-        // Errors / Settings
-        TextView settings = (TextView) this.mView.findViewById(R.id.settings);
+        // About / Errors button event
+        TextView settings = (TextView) this.mView.findViewById(R.id.about);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Pace Calendar Widget v1.3 by GreatApo & DarkThanos" + (errors.length() > 0 ? ", Errors: " + errors : ""), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Pace Calendar Widget v"+widget.this.version+" by GreatApo & DarkThanos" + (errors.length() > 0 ? ", Errors: " + errors : ""), Toast.LENGTH_SHORT).show();
                 widget.this.vibe.vibrate(10);
             }
         });
 
 
-        // Open Settings
+        //========= LONG PRESS AND SWIPE MANAGER =================
+        // long press to run
+        this.handler = new Handler();
+        this.runnable = new Runnable() {
+            @Override
+            public void run(){
+                if(pressed_state) {
+                    //Open settings
+                    Log.d("APcalendar", "Pop settings");
+                    widget.this.vibe.vibrate(50);
+                    widget.this.mView.findViewById(R.id.settings_box).setVisibility(View.VISIBLE);
+                }
+            }
+        };
+        // manager
         ConstraintLayout whole_view_calendar = (ConstraintLayout) this.mView.findViewById(R.id.container);
+        whole_view_calendar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                String action;
+                long down_duaration = motionEvent.getEventTime() - motionEvent.getDownTime();
+                float dy = Math.abs(mFirstY-motionEvent.getY());
+                float dx = Math.abs(mFirstX-motionEvent.getX());
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        action = "ACTION_DOWN";
+                        mFirstY = motionEvent.getY();
+                        mFirstX = motionEvent.getX();
+                        //Trigger long press
+                        handler.postDelayed(runnable, LONG_CLICK_DURATION);
+                        pressed_state = true;
+                        break;
+
+                    case MotionEvent.ACTION_CANCEL:
+                    case MotionEvent.ACTION_UP:
+                        action = "ACTION_UP/CANCEL";
+                        if(dx>dy){
+                            if( dx>min_swipe_length & down_duaration<max_swipe_time){
+                                if(mFirstX<motionEvent.getX()){
+                                    //Swipe right
+                                }else{
+                                    //Swipe left
+                                }
+                            }
+                        }else{
+                            if( dy>min_swipe_length & down_duaration<max_swipe_time){
+                                if(mFirstY<motionEvent.getY()){
+                                    //Swipe up
+                                    widget.this.shown_date.add(Calendar.MONTH, -1);
+                                    widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+                                    widget.this.vibe.vibrate(10);
+                                }else{
+                                    //Swipe down
+                                    widget.this.shown_date.add(Calendar.MONTH, 1);
+                                    widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
+                                    widget.this.vibe.vibrate(10);
+                                }
+                            }
+                        }
+                        //remove long press
+                        if(pressed_state & (dx>10 || dy>10)) {
+                            pressed_state = false;
+                            handler.removeCallbacks(runnable);
+                        }
+                    case MotionEvent.ACTION_MOVE:
+                        action = "ACTION_MOVE";
+                        //remove long press
+                        if(pressed_state & (dx>10 || dy>10)) {
+                            pressed_state = false;
+                            handler.removeCallbacks(runnable);
+                        }
+                        break;
+                    default:
+                        action = "unknown";
+                        break;
+                }
+
+                //Log.d(TAG, "TouchEvent : " +action+" dx,dy:"+ dx+","+dy);
+                return true;
+            }
+        });
+
+        /*
+        // Open with long press, problems on Stratos
         whole_view_calendar.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -125,6 +200,7 @@ public class widget extends AbstractPlugin {
                 return true;
             }
         });
+        */
 
         // Close Settings
         TextView close_settings = (TextView) this.mView.findViewById(R.id.close_settings);
@@ -135,7 +211,6 @@ public class widget extends AbstractPlugin {
                 widget.this.vibe.vibrate(10);
             }
         });
-
 
         // Change Color
         ((TextView) this.mView.findViewById(R.id.color1)).setOnClickListener(new View.OnClickListener() {
@@ -175,7 +250,7 @@ public class widget extends AbstractPlugin {
             }
         });
 
-        //Next Translation
+        // Next Translation
         ((TextView) this.mView.findViewById(R.id.language)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -251,50 +326,6 @@ public class widget extends AbstractPlugin {
             }
         });
 
-        /*
-        this.mView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                switch(event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        widget.this.shown_date.add(Calendar.MONTH, -1);
-                        widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        widget.this.shown_date.add(Calendar.MONTH, 1);
-                        widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
-                        break;
-                }
-                return true;
-            }
-        });
-        */
-
-        /*
-        this.mView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                swipe.dispatchTouchEvent(event);
-                return true;
-            }
-        });
-
-        swipe = new Swipe(20, 80);
-        swipe.setListener(new SimpleSwipeListener(){
-            @Override public boolean onSwipedUp(final MotionEvent event) {
-                widget.this.shown_date.add(Calendar.MONTH, -1);
-                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
-                return true;
-            }
-
-            @Override public boolean onSwipedDown(final MotionEvent event) {
-                widget.this.shown_date.add(Calendar.MONTH, 1);
-                widget.this.apcalendar.refresh(widget.this.shown_date, widget.this.current_color);
-                return true;
-            }
-        });
-        */
-
         return this.mView;
     }
 
@@ -307,7 +338,6 @@ public class widget extends AbstractPlugin {
         widget.this.current_color_element.setText("✔");
         widget.this.vibe.vibrate(10);
     }
-
 
     //Return the icon for this page, used when the page is disabled in the app list. In this case, the launcher icon is used
     @Override
@@ -343,15 +373,14 @@ public class widget extends AbstractPlugin {
         }
         //Store active state
         this.mHasActive = true;
-
-        //Refreshes calendar
-        Calendar now = Calendar.getInstance();
-        widget.this.shown_date = now;
-        widget.this.apcalendar.refresh(now, widget.this.current_color);
     }
 
     private void refreshView() {
         //Called when the page reloads, check for updates here if you need to
+        //Refreshes calendar
+        Calendar now = Calendar.getInstance();
+        widget.this.shown_date = now;
+        widget.this.apcalendar.refresh(now, widget.this.current_color);
     }
 
     //Returns the springboard host

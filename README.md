@@ -1,11 +1,11 @@
 # Amazfit Pace Calendar Widget
 
-After @Quinny899 's excellent work, we are able to make widget/apps! So, here is the first Calendar Widget for our Amazfit Pace!
+After @Quinny899 's excellent work, we are able to make widget/apps! So, here is the first Calendar Widget for our Amazfit Pace/Stratos!
 
 ## Features:
-- This is a Pace Widget
+- This is a Pace/Stratos Widget
 - Long press for settings
-- Change to previous/next months
+- Change to previous/next months (swipe/buttons)
 - Refresh to current date
 - Change calendar color
 - Show/Hide year number
@@ -19,14 +19,16 @@ After @Quinny899 's excellent work, we are able to make widget/apps! So, here is
 * You can't get phone's calendar events, working on it...
 
 ## Screenshot:
-![Amazfit Pace Calendar Widget v1.3](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/master/other%20files/com.dinodevs.pacecalendarwidget-1.3.png)
-![Amazfit Pace Calendar Widget v1.3](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/master/other%20files/com.dinodevs.pacecalendarwidget-1.3-settings.png)
+![Amazfit Pace Calendar Widget v1.4](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/master/other%20files/com.dinodevs.pacecalendarwidget-1.3.png)
+![Amazfit Pace Calendar Widget v1.4](https://raw.githubusercontent.com/GreatApo/AmazfitPaceCalendarWidget/master/other%20files/com.dinodevs.pacecalendarwidget-1.3-settings.png)
 
 ## Download:
 You can compile the source code with Android Studio or download the latest version from our [XDA topic](https://forum.xda-developers.com/smartwatch/amazfit/app-widget-calendar-pace-t3751889).
 
 ## Installation (through ADB):
-`adb install -r PaceCalendarWidget-1.3.apk`
+`adb install -r PaceCalendarWidget-1.4.apk`
+and then restart the phone or the launcher
+`adb shell am force-stop com.huami.watch.launcher`
 
 ## Uninstall (through ADB):
 `adb uninstall com.dinodevs.pacecalendarwidget`

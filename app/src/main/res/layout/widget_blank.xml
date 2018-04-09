@@ -628,7 +628,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:id="@+id/settings"
+            android:id="@+id/about"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:gravity="center"

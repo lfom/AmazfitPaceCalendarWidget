@@ -143,7 +143,7 @@ public class widget extends AbstractPlugin {
                     case MotionEvent.ACTION_UP:
                         action = "ACTION_UP/CANCEL";
                         if(dx>dy){
-                            if( dx>min_swipe_length & down_duaration<max_swipe_time){
+                            if( dx>min_swipe_length && down_duaration<max_swipe_time){
                                 if(mFirstX<motionEvent.getX()){
                                     //Swipe right
                                 }else{
@@ -151,7 +151,7 @@ public class widget extends AbstractPlugin {
                                 }
                             }
                         }else{
-                            if( dy>min_swipe_length & down_duaration<max_swipe_time){
+                            if( dy>min_swipe_length && down_duaration<max_swipe_time){
                                 if(mFirstY<motionEvent.getY()){
                                     //Swipe up
                                     widget.this.shown_date.add(Calendar.MONTH, -1);
@@ -166,14 +166,14 @@ public class widget extends AbstractPlugin {
                             }
                         }
                         //remove long press
-                        if(pressed_state & (dx>10 || dy>10)) {
+                        if(pressed_state) {
                             pressed_state = false;
                             handler.removeCallbacks(runnable);
                         }
                     case MotionEvent.ACTION_MOVE:
                         action = "ACTION_MOVE";
                         //remove long press
-                        if(pressed_state & (dx>10 || dy>10)) {
+                        if(pressed_state && (dx>10 || dy>10)) {
                             pressed_state = false;
                             handler.removeCallbacks(runnable);
                         }

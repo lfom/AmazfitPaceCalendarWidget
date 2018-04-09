@@ -9,6 +9,7 @@ android {
         versionName '1.4'
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionCode 20180409
     }
     buildTypes {
         release {

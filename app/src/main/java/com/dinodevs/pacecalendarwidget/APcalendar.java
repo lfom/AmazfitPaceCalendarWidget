@@ -1,20 +1,16 @@
 package com.dinodevs.pacecalendarwidget;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
- * Created by Apostolos on 06/04/2018.
+ * Created by GreatApo on 06/04/2018.
  */
 
 public class APcalendar {

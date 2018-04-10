@@ -1,11 +1,8 @@
 package com.dinodevs.pacecalendarwidget;
-
-import android.icu.text.StringSearch;
-
 import java.util.Arrays;
 
 /**
- * Created by Apostolos on 08/04/2018.
+ * Created by GreatApo on 08/04/2018.
  */
 
 public class APtranslations {
@@ -58,18 +55,18 @@ public class APtranslations {
 
         public static String[][] other = {
                 {"Select color","Show year","Monday 1st"},//"English",
-                {"Select color","Show year","Monday 1st"},//"Chinese",
-                {"Select color","Show year","Monday 1st"},//"French",
+                {"选择颜色","显示年份","星期一放1"},//"Chinese",
+                {"Choisissez la couleur","Afficher l'année","Mettez 1er"},//"French",
                 {"Farbe auswählen","Jahr anzeigen","Montag erste"},//"German",
                 {"Επιλογή χρώματος","Εμφάνιση χρονιάς","Δευτέρα 1η"},//"Greek",
-                {"Select color","Show year","Monday 1st"},//"Hungarian",
-                {"Select color","Show year","Monday 1st"},//"Italian",
-                {"Select color","Show year","Monday 1st"},//"Japanese",
-                {"Select color","Show year","Monday 1st"},//"Portuguese",
+                {"Válasszon színt","Az év megjelenítése","Hétfő 1"},//"Hungarian",
+                {"Seleziona colore","Mostra l'anno","Lunedì 1°"},//"Italian",
+                {"色を選択","年を表示","月曜日に入れて"},//"Japanese",
+                {"Selecione a cor","Mostrar ano","Segunda-feira"},//"Portuguese",
                 {"Выбор цвета","Показ года","Пон. 1-й"},//"Russian",
-                {"Select color","Show year","Monday 1st"},//"Slovak",
-                {"Select color","Show year","Monday 1st"}//"Spanish"
-                //{"Select color","Show year","Monday 1st"},//, "Turkish",
+                {"Vyberte farbu","Zobraziť rok","Pondelok 1."},//"Slovak",
+                {"Seleccionar el color","Mostrar año","Lunes 1°"}//"Spanish"
+                //{"Renk seç","Yılı göster","Pazartesi 1"},//, "Turkish",
         };
 
         public static String[] getDays(int lang) {

@@ -112,7 +112,7 @@ public class widget extends AbstractPlugin {
         this.runnable = new Runnable() {
             @Override
             public void run(){
-                if(pressed_state) {
+                if(pressed_state && widget.this.mHasActive) {
                     //Open settings
                     Log.d("APcalendar", "Pop settings");
                     widget.this.vibe.vibrate(50);

@@ -16,6 +16,10 @@ public class APtranslations {
         };
 
         public static String[] languages = {
+                "English", "Chinese", "French", "German", "Ελληνικά", "Hungarian", "Italian", "Japanese", "Portuguese", "Русский", "Slovak", "Spanish"//, "Turkish",
+        };
+
+        public static String[] languages_en = {
                 "English", "Chinese", "French", "German", "Greek", "Hungarian", "Italian", "Japanese", "Portuguese", "Russian", "Slovak", "Spanish"//, "Turkish",
         };
 
@@ -52,6 +56,21 @@ public class APtranslations {
                 //{"Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"},
         };
 
+        public static String[][] other = {
+                {"Select color","Show year","Monday 1st"},//"English",
+                {"Select color","Show year","Monday 1st"},//"Chinese",
+                {"Select color","Show year","Monday 1st"},//"French",
+                {"Farbe auswählen","Jahr anzeigen","Montag erste"},//"German",
+                {"Επιλογή χρώματος","Εμφάνιση χρονιάς","Δευτέρα 1η"},//"Greek",
+                {"Select color","Show year","Monday 1st"},//"Hungarian",
+                {"Select color","Show year","Monday 1st"},//"Italian",
+                {"Select color","Show year","Monday 1st"},//"Japanese",
+                {"Select color","Show year","Monday 1st"},//"Portuguese",
+                {"Выбор цвета","Показ года","Пон. 1-й"},//"Russian",
+                {"Select color","Show year","Monday 1st"},//"Slovak",
+                {"Select color","Show year","Monday 1st"}//"Spanish"
+                //{"Select color","Show year","Monday 1st"},//, "Turkish",
+        };
 
         public static String[] getDays(int lang) {
             return translations.days[lang % translations.codes.length];
@@ -83,6 +102,8 @@ public class APtranslations {
     public String getName() {
         return translations.languages[this.lang_number];
     }
+
+    public String[] getOther() {return translations.other[this.lang_number];}
 
     public void nextLang() {
         this.lang_number = (this.lang_number + 1) % translations.codes.length;

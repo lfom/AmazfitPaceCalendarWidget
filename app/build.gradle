@@ -6,10 +6,10 @@ android {
         applicationId 'com.dinodevs.pacecalendarwidget'
         minSdkVersion 21
         targetSdkVersion 27
-        versionName '1.4'
+        versionName '1.5'
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 20180409
+        versionCode 20180410
     }
     buildTypes {
         release {

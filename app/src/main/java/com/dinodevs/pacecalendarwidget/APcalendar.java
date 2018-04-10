@@ -24,6 +24,7 @@ public class APcalendar {
     private CheckBox monday_switch;
     private TextView[] view_boxes;
     private TextView[] need_color;
+    private TextView[] other_to_translate;
     private Context context;
     public APtranslations tranlations;
 
@@ -58,6 +59,12 @@ public class APcalendar {
                 (TextView) view.findViewById(R.id.arrow_down),
                 (TextView) view.findViewById(R.id.arrow_up),
                 (TextView) view.findViewById(R.id.close_settings)
+        };
+
+        this.other_to_translate = new TextView[]{
+                (TextView) view.findViewById(R.id.select_color),
+                (TextView) view.findViewById(R.id.year_switch),
+                (TextView) view.findViewById(R.id.monday_switch)
         };
 
         this.view_boxes = new TextView[]{
@@ -182,6 +189,11 @@ public class APcalendar {
         int offset = (monday_switch.isChecked())? 1 : 0;
         for (int i = 0 ; i < 7; i++) {
             this.need_color[i].setText(days[(offset + i) % n].substring(0,3));
+        }
+
+        String[] other = this.tranlations.getOther();
+        for (int i = 0 ; i < 3; i++) {
+            this.other_to_translate[i].setText(other[i]);
         }
     }
 }

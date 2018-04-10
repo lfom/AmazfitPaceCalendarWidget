@@ -43,7 +43,7 @@ public class widget extends AbstractPlugin {
 
     // Swipe / Long press handling
     private static int LONG_CLICK_DURATION = 600; // long click time
-    private static float min_swipe_length = 100; // minimum length of a swipe
+    private static float min_swipe_length = 80; // minimum length of a swipe
     private static long max_swipe_time = 250; // maximum time of a swipe
     private boolean pressed_state = false; // true while touching the screen
     private Handler handler;
@@ -112,7 +112,7 @@ public class widget extends AbstractPlugin {
         this.runnable = new Runnable() {
             @Override
             public void run(){
-                if(pressed_state && widget.this.mHasActive) {
+                if(pressed_state && widget.this.mHasActive) {// We need the mHasActive because Stratos has a bug when changing widget
                     //Open settings
                     Log.d("APcalendar", "Pop settings");
                     widget.this.vibe.vibrate(50);

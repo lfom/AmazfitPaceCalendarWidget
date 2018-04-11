@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -14,55 +13,57 @@ import java.util.GregorianCalendar;
  */
 
 public class APcalendar {
-    // Instance's view objects
+    // Calendar variables
+    private int color;
+    private int year;
+    private int month;
+    private int day;
+    public boolean isMondayFirst;
+
+    // Calendar View objects
     private TextView view_monthName;
     private TextView view_year;
-    private CheckBox monday_switch;
     private TextView[] view_boxes;
-    private TextView[] need_color;
-    private TextView[] other_to_translate;
-    private Context context;
-    public APtranslations tranlations;
+    private TextView[] view_colorable;
 
-    APcalendar(View view, Context context, Calendar date, int current_color){
+    // Calendar translations
+    private APtranslations tranlations;
+
+    // Constructor
+    APcalendar(View view, Context context, Calendar date, int color){
+        this.isMondayFirst = false;
+
+        // Create translations instance
         this.tranlations = new APtranslations();
-        this.getViewObjects(view, context);
-        this.refresh(date, current_color);
-        this.refresh_days();
+
+        // Init view objects
+        this.initViewObjects(view, context);
+
+        // Refresh calendar
+        this.refresh(date, color);
+        this.refreshDays();
     }
 
-    private void getViewObjects(View view, Context context) {
+    // Initialize View objects
+    private void initViewObjects(View view, Context context) {
+        // Get header objects
         this.view_monthName = (TextView) view.findViewById(R.id.textMonth);
         this.view_year = (TextView) view.findViewById(R.id.textYear);
-        this.monday_switch = (CheckBox) view.findViewById(R.id.monday_switch);
-        this.context = context;
 
-        this.view_boxes = new TextView[42];
-        for (int i = 0; i < 42; i++) {
-            this.view_boxes[i] = (TextView) view.findViewById(
-                context.getResources().getIdentifier("calbox" + (i + 1), "id", context.getPackageName())
-            );
-        }
-
-        this.need_color = new TextView[]{
-                (TextView) view.findViewById(R.id.day1),
-                (TextView) view.findViewById(R.id.day2),
-                (TextView) view.findViewById(R.id.day3),
-                (TextView) view.findViewById(R.id.day4),
-                (TextView) view.findViewById(R.id.day5),
-                (TextView) view.findViewById(R.id.day6),
-                (TextView) view.findViewById(R.id.day7),
-                (TextView) view.findViewById(R.id.arrow_down),
-                (TextView) view.findViewById(R.id.arrow_up),
-                (TextView) view.findViewById(R.id.close_settings)
+        // Get color-able view objects
+        this.view_colorable = new TextView[]{
+            (TextView) view.findViewById(R.id.day1),
+            (TextView) view.findViewById(R.id.day2),
+            (TextView) view.findViewById(R.id.day3),
+            (TextView) view.findViewById(R.id.day4),
+            (TextView) view.findViewById(R.id.day5),
+            (TextView) view.findViewById(R.id.day6),
+            (TextView) view.findViewById(R.id.day7),
+            (TextView) view.findViewById(R.id.arrow_down),
+            (TextView) view.findViewById(R.id.arrow_up)
         };
 
-        this.other_to_translate = new TextView[]{
-                (TextView) view.findViewById(R.id.select_color),
-                (TextView) view.findViewById(R.id.year_switch),
-                (TextView) view.findViewById(R.id.monday_switch)
-        };
-
+        // Get dates boxes
         this.view_boxes = new TextView[]{
             (TextView) view.findViewById(R.id.calbox1),
             (TextView) view.findViewById(R.id.calbox2),
@@ -107,63 +108,85 @@ public class APcalendar {
             (TextView) view.findViewById(R.id.calbox41),
             (TextView) view.findViewById(R.id.calbox42)
         };
+
+        /*
+        // Alternative way but not tested
+        this.view_boxes = new TextView[42];
+        for (int i = 0; i < 42; i++) {
+            this.view_boxes[i] = (TextView) view.findViewById(
+                context.getResources().getIdentifier("calbox" + (i + 1), "id", context.getPackageName())
+            );
+        }
+        */
     }
 
+    // Set calendar color
+    private void setColor(int color) {
+        // Save new color
+        this.color = color;
 
-    public void refresh(Calendar date, int current_color) {
-
-        // Get Settings
-        //SharedPreferences data = this.context.getApplicationContext().getSharedPreferences("Calendar_Data", 0);
-        //String color = data.getString("color", "#efb171");
-
-        // Coloring
-        for (int i = 0 ; i < 9; i++) {
-            this.need_color[i].setTextColor(current_color);
+        // Update Colors
+        for(int i = this.view_colorable.length - 1; i >= 0; i--) {
+            this.view_colorable[i].setTextColor(this.color);
         }
-        GradientDrawable BackgroundShape = (GradientDrawable)this.need_color[9].getBackground();
-        BackgroundShape.setColor(current_color);
+    }
 
-        int year = date.get(Calendar.YEAR);
-        int month = date.get(Calendar.MONTH);
+    // Set date to show
+    private void setDate(Calendar date) {
+        this.year = date.get(Calendar.YEAR);
+        this.month = date.get(Calendar.MONTH);
 
         Calendar now = Calendar.getInstance();
-        int current_day = -1;
+        this.day = -1;
         if (year == now.get(Calendar.YEAR) && month == now.get(Calendar.MONTH)) {
-            current_day = now.get(Calendar.DAY_OF_MONTH);
+            this.day = now.get(Calendar.DAY_OF_MONTH);
         }
+    }
 
-        // Set month name
-        this.view_monthName.setText( this.tranlations.getMonths()[month] );
+    public void refresh(Calendar date, int color) {
+        // Update colors
+        this.setColor(color);
+        // Refresh calendar
+        this.refresh(date);
+    }
 
+    public void refresh(Calendar date) {
+        // Update date
+        this.setDate(date);
+        // Refresh calendar
+        this.refresh();
+    }
+
+    public void refresh() {
+        // Change month name
+        this.refreshMonthName();
         // Set year
-        this.view_year.setText( year + "" );//or %100
+        this.view_year.setText(String.valueOf(this.year));
 
         // Number to fill the boxes
-        GregorianCalendar first = new GregorianCalendar(year, month, 1);
+        GregorianCalendar first = new GregorianCalendar(this.year, this.month, 1);
         int monthStart = first.get(Calendar.DAY_OF_WEEK) - 1;
-        if(monday_switch.isChecked()){
-            monthStart = (monthStart-1 < 0) ? 6 : monthStart -1;
+        if(this.isMondayFirst){
+            monthStart = (monthStart - 1 < 0) ? 6 : monthStart - 1;
         }
         int monthDays = first.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         // Previous month
-        Calendar previous = new GregorianCalendar(year, month, 1);
+        Calendar previous = new GregorianCalendar(this.year, this.month, 1);
         previous.add(Calendar.MONTH, -1);
         int previousMonthDays = previous.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         for (int i = monthStart - 1; i >= 0; i--) {
-            this.view_boxes[i].setText(previousMonthDays - monthStart + i + 1 + "");
+            this.view_boxes[i].setText(String.valueOf(previousMonthDays - monthStart + i + 1));
             this.view_boxes[i].setTextColor(Color.parseColor("#505050"));
             this.view_boxes[i].setBackgroundResource(android.R.color.transparent);
         }
         for (int i = 0; i < monthDays; i++) {
-            this.view_boxes[monthStart + i].setText((i + 1) + "");
-            if (i + 1 == current_day) {
+            this.view_boxes[monthStart + i].setText(String.valueOf(i + 1));
+            if (i + 1 == this.day) {
                 this.view_boxes[monthStart + i].setTextColor(Color.parseColor("#000000"));
                 this.view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg);
-
-                BackgroundShape = (GradientDrawable)this.view_boxes[monthStart + i].getBackground();
-                BackgroundShape.setColor(current_color);
+                ((GradientDrawable) this.view_boxes[monthStart + i].getBackground()).setColor(this.color);
             }
             else {
                 this.view_boxes[monthStart + i].setTextColor(Color.parseColor("#FFFFFF"));
@@ -171,25 +194,30 @@ public class APcalendar {
             }
         }
         for (int i = monthStart + monthDays; i < 42; i++) {
-            this.view_boxes[i].setText(i - monthStart - monthDays + 1 + "");
+            this.view_boxes[i].setText(String.valueOf(i - monthStart - monthDays + 1));
             this.view_boxes[i].setTextColor(Color.parseColor("#505050"));
             this.view_boxes[i].setBackgroundResource(android.R.color.transparent);
         }
 
     }
 
-    public void refresh_days() {
-        // Change days name
+    public void refreshMonthName() {
+        // Set month name
+        this.view_monthName.setText(this.tranlations.getMonths()[this.month]);
+    }
+
+    public void refreshDays() {
+        // Get days translations
         String[] days = this.tranlations.getDays();
         int n = days.length;
-        int offset = (monday_switch.isChecked())? 1 : 0;
+        int offset = (this.isMondayFirst)? 1 : 0;
+        // Change days names
         for (int i = 0 ; i < 7; i++) {
-            this.need_color[i].setText(days[(offset + i) % n].substring(0,3));
+            this.view_colorable[i].setText(days[(offset + i) % n].substring(0,3));
         }
+    }
 
-        String[] other = this.tranlations.getOther();
-        for (int i = 0 ; i < 3; i++) {
-            this.other_to_translate[i].setText(other[i]);
-        }
+    public APtranslations getTranlations() {
+        return this.tranlations;
     }
 }

@@ -4,6 +4,8 @@
 
     <uses-sdk tools:overrideLibrary="android.support.wear" />
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_" />
 
     <application
         android:allowBackup="true"

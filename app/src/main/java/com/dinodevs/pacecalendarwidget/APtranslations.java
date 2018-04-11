@@ -9,15 +9,15 @@ public class APtranslations {
     public static class translations {
 
         public static String[] codes = {
-                "en", "zh", "fr", "de", "gr", "hu", "it", "ja", "pt", "ru", "sk", "es"//, "tr",
+                "en", "zh", "fr", "de", "gr", "he", "hu", "it", "ja", "pt", "ru", "sk", "es"//, "tr",
         };
 
         public static String[] languages = {
-                "English", "Chinese", "French", "German", "Ελληνικά", "Hungarian", "Italian", "Japanese", "Portuguese", "Русский", "Slovak", "Spanish"//, "Turkish",
+                "English", "中文", "Français", "Deutsch", "Ελληνικά", "עברית", "Magyar", "Italiano", "日本語", "Português", "Русский", "Slovenčina", "Español"//, "Türkçe",
         };
 
         public static String[] languages_en = {
-                "English", "Chinese", "French", "German", "Greek", "Hungarian", "Italian", "Japanese", "Portuguese", "Russian", "Slovak", "Spanish"//, "Turkish",
+                "English", "Chinese", "French", "German", "Greek", "Hebrew", "Hungarian", "Italian", "Japanese", "Portuguese", "Russian", "Slovak", "Spanish"//, "Turkish",
         };
 
         public static String[][] days = {
@@ -26,6 +26,7 @@ public class APtranslations {
                 {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"},
                 {"Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"},
                 {"Κυριακή", "Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο"},
+                {"ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"},
                 {"Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombaton"},
                 {"Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"},
                 {"日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"},
@@ -43,6 +44,7 @@ public class APtranslations {
                 {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "octobre", "Novembre", "Décembre"},
                 {"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"},
                 {"Ιανουάριος", "Φεβρουάριος", "Μάρτιος", "Απρίλιος", "Μάιος", "Ιούνιος", "Ιούλιος", "Αύγουστος", "Σεπτέμβριος", "Οκτώβριος", "Νοέμβριος", "Δεκέμβριος"},
+                {"ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני", "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"},
                 {"Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December"},
                 {"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"},
                 {"1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"},
@@ -54,19 +56,20 @@ public class APtranslations {
         };
 
         public static String[][] other = {
-                {"Select color","Show year","Monday 1st"},//"English",
-                {"选择颜色","显示年份","星期一放1"},//"Chinese",
-                {"Choisissez la couleur","Afficher l'année","Mettez 1er"},//"French",
-                {"Farbe auswählen","Jahr anzeigen","Montag erste"},//"German",
-                {"Επιλογή χρώματος","Εμφάνιση χρονιάς","Δευτέρα 1η"},//"Greek",
-                {"Válasszon színt","Az év megjelenítése","Hétfő 1"},//"Hungarian",
-                {"Seleziona colore","Mostra l'anno","Lunedì 1°"},//"Italian",
-                {"色を選択","年を表示","月曜日に入れて"},//"Japanese",
-                {"Selecione a cor","Mostrar ano","Segunda-feira"},//"Portuguese",
-                {"Выбор цвета","Показ года","Пон. 1-й"},//"Russian",
-                {"Vyberte farbu","Zobraziť rok","Pondelok 1."},//"Slovak",
-                {"Seleccionar el color","Mostrar año","Lunes 1°"}//"Spanish"
-                //{"Renk seç","Yılı göster","Pazartesi 1"},//, "Turkish",
+                {"Select color","Show year","Monday 1st"},                  //"English",
+                {"选择颜色","显示年份","星期一放1"},                          //"Chinese",
+                {"Choisissez la couleur","Afficher l'année","Mettez 1er"},  //"French",
+                {"Farbe auswählen","Jahr anzeigen","Montag erste"},         //"German",
+                {"Επιλογή χρώματος","Εμφάνιση χρονιάς","Δευτέρα 1η"},       //"Greek",
+                {"בחירת צבע","הצג שנה","החל מיום שני"},                     //"Hebrew"
+                {"Válasszon színt","Az év megjelenítése","Hétfő 1"},        //"Hungarian",
+                {"Seleziona colore","Mostra l'anno","Lunedì 1°"},           //"Italian",
+                {"色を選択","年を表示","月曜日に入れて"},                     //"Japanese",
+                {"Selecione a cor","Mostrar ano","Segunda-feira"},          //"Portuguese",
+                {"Выбор цвета","Показ года","Пон. 1-й"},                    //"Russian",
+                {"Vyberte farbu","Zobraziť rok","Pondelok 1."},             //"Slovak",
+                {"Seleccionar el color","Mostrar año","Lunes 1°"}           //"Spanish"
+                //{"Renk seç","Yılı göster","Pazartesi 1"},                 //"Turkish"
         };
 
         public static String[] getDays(int lang) {
@@ -85,11 +88,7 @@ public class APtranslations {
 
     }
     APtranslations (String code) {
-        // Find lang number by code
-        int index = Arrays.asList(translations.codes).indexOf(code);
-        if (index >= 0) {
-            this.lang_number = index;
-        }
+        this.setLang(code);
     }
 
     public String getCode() {
@@ -104,6 +103,13 @@ public class APtranslations {
 
     public void nextLang() {
         this.lang_number = (this.lang_number + 1) % translations.codes.length;
+    }
+    public void setLang(String code) {
+        // Find lang number by code
+        int index = Arrays.asList(translations.codes).indexOf(code);
+        if (index >= 0) {
+            this.lang_number = index;
+        }
     }
 
     public String[] getDays() {

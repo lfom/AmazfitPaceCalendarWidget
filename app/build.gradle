@@ -2,34 +2,34 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+
     defaultConfig {
         applicationId 'com.dinodevs.pacecalendarwidget'
         minSdkVersion 21
         targetSdkVersion 27
-        versionName '1.5'
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 20180410
+        versionName '1.6'
+        versionCode 20180411
     }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-    buildToolsVersion '27.0.3'
-    productFlavors {
     }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:27.0.2'
-    compile 'com.android.support:support-compat:27.0.2'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:support-compat:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation files('libs/SpringboardPluginLib.jar')
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.github.pwittchen:swipe-rx2:0.3.0'
+    implementation 'com.github.pwittchen:swipe-rx2:0.3.0'
 }

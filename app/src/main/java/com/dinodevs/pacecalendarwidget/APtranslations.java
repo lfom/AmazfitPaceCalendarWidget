@@ -9,15 +9,15 @@ public class APtranslations {
     public static class translations {
 
         public static String[] codes = {
-                "en", "zh", "fr", "de", "gr", "he", "hu", "it", "ja", "pt", "ru", "sk", "es"//, "tr",
+                "en", "zh", "fr", "de", "gr", "he", "hu", "it", "ja", "pl", "pt", "ru", "sk", "es"//, "tr",
         };
 
         public static String[] languages = {
-                "English", "中文", "Français", "Deutsch", "Ελληνικά", "עברית", "Magyar", "Italiano", "日本語", "Português", "Русский", "Slovenčina", "Español"//, "Türkçe",
+                "English", "中文", "Français", "Deutsch", "Ελληνικά", "עברית", "Magyar", "Italiano", "日本語", "Polski", "Português", "Русский", "Slovenčina", "Español"//, "Türkçe",
         };
 
         public static String[] languages_en = {
-                "English", "Chinese", "French", "German", "Greek", "Hebrew", "Hungarian", "Italian", "Japanese", "Portuguese", "Russian", "Slovak", "Spanish"//, "Turkish",
+                "English", "Chinese", "French", "German", "Greek", "Hebrew", "Hungarian", "Italian", "Japanese", "Polish", "Portuguese", "Russian", "Slovak", "Spanish"//, "Turkish",
         };
 
         public static String[][] days = {
@@ -30,6 +30,7 @@ public class APtranslations {
                 {"Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombaton"},
                 {"Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"},
                 {"日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"},
+                {"Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"},
                 {"Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"},
                 {"воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"},
                 {"Nedeľa", "Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota"},
@@ -48,6 +49,7 @@ public class APtranslations {
                 {"Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December"},
                 {"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"},
                 {"1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"},
+                {"Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"},
                 {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"},
                 {"январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"},
                 {"Január", "Február", "Marec", "Apríl", "Máj", "Jún", "Júl", "August", "September", "Október", "November", "December"},
@@ -65,6 +67,7 @@ public class APtranslations {
                 {"Válasszon színt","Az év megjelenítése","Hétfő 1"},        //"Hungarian",
                 {"Seleziona colore","Mostra l'anno","Lunedì 1°"},           //"Italian",
                 {"色を選択","年を表示","月曜日に入れて"},                     //"Japanese",
+                {"Wybierz kolor","Pokaż rok","Poniedziałek 1."},            //"English",
                 {"Selecione a cor","Mostrar ano","Segunda-feira"},          //"Portuguese",
                 {"Выбор цвета","Показ года","Пон. 1-й"},                    //"Russian",
                 {"Vyberte farbu","Zobraziť rok","Pondelok 1."},             //"Slovak",

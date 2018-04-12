@@ -50,11 +50,13 @@ adb shell am force-stop com.huami.watch.launcher
 ### Thanks to the Developers
 
 This porject was made posible by:
-	- GreatApo **Widget Creator** [[Github](https://github.com/GreatApo)|[XDA](https://forum.xda-developers.com/member.php?u=3668555)]
-	- Quinny899 **Widget Example Creator / Springboard Settings Creator** [[Github](https://github.com/KieronQuinn)|[XDA](https://forum.xda-developers.com/member.php?u=3563640)]
-	- XDA developers community (tester, translators, developers)
+
+ - GreatApo - *Widget Creator* - [ [Github](https://github.com/GreatApo) | [XDA](https://forum.xda-developers.com/member.php?u=3668555) ]
+ - Quinny899 - *Widget Example Creator / Springboard Settings Creator* - [ [Github](https://github.com/KieronQuinn) | [XDA](https://forum.xda-developers.com/member.php?u=3563640) ]
+ - XDA developers community (testers, translators, developers)
 
 Some more links:
-	- GreatApo's [Amazfit Pace Calendar Widget - XDA topic](https://forum.xda-developers.com/smartwatch/amazfit/app-widget-calendar-pace-t3751889)
-	- Quinny's [Springboard Settings - XDA topic](https://forum.xda-developers.com/smartwatch/amazfit/app-springboard-settings-pace-rearrange-t3748651)
-	- Quinny's [Widget Creation guide - XDA topic](https://forum.xda-developers.com/smartwatch/amazfit/dev-create-custom-home-screen-pages-pace-t3751731).
+
+ - GreatApo's [Amazfit Pace Calendar Widget - XDA topic](https://forum.xda-developers.com/smartwatch/amazfit/app-widget-calendar-pace-t3751889)
+ - Quinny's [Springboard Settings - XDA topic](https://forum.xda-developers.com/smartwatch/amazfit/app-springboard-settings-pace-rearrange-t3748651)
+ - Quinny's [Widget Creation guide - XDA topic](https://forum.xda-developers.com/smartwatch/amazfit/dev-create-custom-home-screen-pages-pace-t3751731).

@@ -3,7 +3,8 @@
 # Amazfit Pace Calendar Widget
 ![Amazfit Pace Calendar Widget Banner](other%20files/amazfit-calendar-widget.png)
 
-After @Quinny899 's excellent work, we are able to make widget/apps! So, here is the first Calendar Widget for our Amazfit Pace/Stratos!
+After [Quinny899](https://github.com/KieronQuinn)'s excellent work, we are able to make widget/apps!
+So, here is the first Calendar Widget for our Amazfit Pace/Stratos!
 
 
 

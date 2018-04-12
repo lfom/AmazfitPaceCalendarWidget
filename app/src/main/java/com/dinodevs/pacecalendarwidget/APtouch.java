@@ -10,8 +10,10 @@ import java.util.Calendar;
 public class APtouch {
 
     private int LONG_CLICK_DURATION = 600;   // long click time
+    private int LONG_CLICK_MOVEMENT_THRESHOLD = 10;   // long click time
     private float MIN_SWIPE_LENGTH = 80;     // minimum length of a swipe
     private long MAX_SWIPE_TIME = 250;       // maximum time of a swipe
+    private long MAX_DOUBLE_CLICK_TIME = 300;// maximum time of a swipe
 
     private View.OnTouchListener listener;
 
@@ -19,11 +21,16 @@ public class APtouch {
     private boolean handler_active;
     private Runnable handler_runnable;
 
+    private long last_click_time;
     private long start_time;
     private float start_position_x;
     private float start_position_y;
+    private boolean moved;
 
     APtouch () {
+
+        // Double click timer
+        this.last_click_time = 0;
 
         // Long Click handler
         this.handler = new Handler();
@@ -63,6 +70,7 @@ public class APtouch {
         this.start_time = Calendar.getInstance().getTimeInMillis();
         this.start_position_x = motionEvent.getX();
         this.start_position_y = motionEvent.getY();
+        this.moved = false;
 
         // Log.d(this.TAG, "[Action Down] {x:" + this.start_position_x + ", y:" + this.start_position_y + "}");
 
@@ -76,11 +84,12 @@ public class APtouch {
         // Find dx and dy
         float dx = Math.abs(this.start_position_x - motionEvent.getX());
         float dy = Math.abs(this.start_position_y - motionEvent.getY());
+        this.moved = true;
 
         // Log.d(this.TAG, "[Action Move] {dx:" + dx + ", dy:" + dy + "}");
 
         // Disable long click
-        if (this.handler_active && (dx > 10 || dy > 10)) {
+        if (this.handler_active && (dx > this.LONG_CLICK_MOVEMENT_THRESHOLD || dy > this.LONG_CLICK_MOVEMENT_THRESHOLD)) {
             this.handler_active = false;
             this.handler.removeCallbacks(this.handler_runnable);
         }
@@ -94,8 +103,24 @@ public class APtouch {
             this.handler.removeCallbacks(this.handler_runnable);
         }
 
-        // Check if haven't met time limit
-        if (Calendar.getInstance().getTimeInMillis() - this.start_time > this.MAX_SWIPE_TIME) {
+        long now = Calendar.getInstance().getTimeInMillis();
+
+        // If it was a click
+        if (!this.moved) {
+            if (this.last_click_time > 0 && now - this.last_click_time < this.MAX_DOUBLE_CLICK_TIME) {
+                this.last_click_time = 0;
+                return onDoubleClick();
+            }
+            else {
+                this.last_click_time = now;
+                return onClick();
+            }
+        }
+
+        this.last_click_time = 0;
+
+        // Check if haven't met time limit for a swipe
+        if (now - this.start_time > this.MAX_SWIPE_TIME) {
             // Log.d(this.TAG, "[Action Up] Not time long enough to be a swipe.");
             return true;
         }
@@ -150,5 +175,7 @@ public class APtouch {
     public boolean onSwipeDown() {return true;}
     public boolean onSwipeLeft() {return true;}
     public boolean onSwipeRight() {return true;}
+    public boolean onClick() {return true;}
+    public boolean onDoubleClick() {return this.onClick();}
     public boolean onLongClick() {return true;}
 }

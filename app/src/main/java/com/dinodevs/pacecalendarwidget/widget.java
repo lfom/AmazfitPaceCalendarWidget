@@ -150,7 +150,9 @@ public class widget extends AbstractPlugin {
                 widget.this.vibrate();
                 return true;
             }
+
             @Override
+            //public boolean onDoubleClick() {// Not onLongClick
             public boolean onLongClick() {
                 // Open settings
                 // Log.d(widget.TAG, "Pop settings");
@@ -207,7 +209,9 @@ public class widget extends AbstractPlugin {
         });
 
         // Monday switch (first day of the week)
+        boolean isMondayFirst = this.settings.get("monday_first", false);
         CheckBox monday_first_checkbox = this.mView.findViewById(R.id.monday_switch);
+        monday_first_checkbox.setChecked(isMondayFirst);
         monday_first_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 widget.this.changeMondayFirst(isChecked);

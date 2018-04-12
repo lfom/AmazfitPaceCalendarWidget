@@ -10,13 +10,13 @@ After @Quinny899 's excellent work, we are able to make widget/apps! So, here is
 ### Features
 - This is a Pace/Stratos Widget
 - Long press for settings
-- navigate between months (Swipe / Buttons)
+- Navigate between months (Swipe / Buttons)
 - Refresh to current date
 - Select calendar colors
 - Show/Hide year number
 - Select Sunday or Monday for 1st week day
 - Vibration on button touches
-- Supported languages: English, Chinese, French, German, Greek, Hungarian, Italian, Japanese, Portuguese, Russian, Slovak, Spanish, Turkish
+- Supported languages: English, Chinese, French, German, Greek, Hungarian, Italian, Japanese, Portuguese, Russian, Slovak, Spanish
 
 
 

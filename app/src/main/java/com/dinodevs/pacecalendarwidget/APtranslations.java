@@ -67,7 +67,7 @@ public class APtranslations {
                 {"Válasszon színt","Az év megjelenítése","Hétfő 1"},        //"Hungarian",
                 {"Seleziona colore","Mostra l'anno","Lunedì 1°"},           //"Italian",
                 {"色を選択","年を表示","月曜日に入れて"},                     //"Japanese",
-                {"Wybierz kolor","Pokaż rok","Poniedziałek 1."},            //"English",
+                {"Wybierz kolor","Pokaż rok","Poniedziałek 1."},            //"Polish",
                 {"Selecione a cor","Mostrar ano","Segunda-feira"},          //"Portuguese",
                 {"Выбор цвета","Показ года","Пон. 1-й"},                    //"Russian",
                 {"Vyberte farbu","Zobraziť rok","Pondelok 1."},             //"Slovak",

@@ -154,10 +154,12 @@ public class widget extends AbstractPlugin {
             @Override
             //public boolean onDoubleClick() {// Not onLongClick
             public boolean onLongClick() {
-                // Open settings
-                // Log.d(widget.TAG, "Pop settings");
-                widget.this.mView.findViewById(R.id.settings_box).setVisibility(View.VISIBLE);
-                widget.this.vibrate(50);
+                if(widget.this.isActive) {
+                    // Open settings
+                    // Log.d(widget.TAG, "Pop settings");
+                    widget.this.mView.findViewById(R.id.settings_box).setVisibility(View.VISIBLE);
+                    widget.this.vibrate(50);
+                }
                 return true;
             }
         };
@@ -414,7 +416,8 @@ public class widget extends AbstractPlugin {
         // Reload day names
         this.apcalendar.refreshDays();
         // Refresh calendar UI (month name etc)
-        this.apcalendar.refreshMonthName();
+        this.apcalendar.refresh();
+        //this.apcalendar.refreshMonthName();
     }
 
 

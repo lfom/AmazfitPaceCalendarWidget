@@ -9,11 +9,11 @@ import java.util.Calendar;
 
 public class APtouch {
 
-    private int LONG_CLICK_DURATION = 600;   // long click time
+    private int LONG_CLICK_DURATION = 1000;   // long click time
     private int LONG_CLICK_MOVEMENT_THRESHOLD = 10;   // long click time
     private float MIN_SWIPE_LENGTH = 80;     // minimum length of a swipe
     private long MAX_SWIPE_TIME = 250;       // maximum time of a swipe
-    private long MAX_DOUBLE_CLICK_TIME = 300;// maximum time of a swipe
+    private long MAX_DOUBLE_CLICK_TIME = 300;// maximum time of a double click
 
     private View.OnTouchListener listener;
 

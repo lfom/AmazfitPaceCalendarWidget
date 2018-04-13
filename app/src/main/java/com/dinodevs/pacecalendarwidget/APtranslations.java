@@ -27,7 +27,7 @@ public class APtranslations {
                 {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"},
                 {"Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"},
                 {"Κυριακή", "Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο"},
-                {"א'", "ב'", "ג'", "ד'", "ה'", "ו'" ,"ש'"},
+                {"ש'","ו'","ה'","ד'","ג'","ב'","א'"},
                 {"Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombaton"},
                 {"Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"},
                 {"日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"},
@@ -122,7 +122,9 @@ public class APtranslations {
         return translations.getDays(this.lang_number);
     }
 
-    public String[] getMonths() {
-        return translations.getMonths(this.lang_number);
+    public String[] getMonths() {return translations.getMonths(this.lang_number);}
+
+    public boolean isRtL() {
+        return (translations.codes[this.lang_number]=="he");
     }
 }

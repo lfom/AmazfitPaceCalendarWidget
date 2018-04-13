@@ -24,6 +24,7 @@ public class APcalendar {
     private TextView view_monthName;
     private TextView view_year;
     private TextView[] view_boxes;
+    private TextView[] view_boxes_rtl;
     private TextView[] view_colorable;
 
     // Calendar translations
@@ -109,6 +110,52 @@ public class APcalendar {
             (TextView) view.findViewById(R.id.calbox42)
         };
 
+        // Get date boxes for rtl
+        this.view_boxes_rtl = new TextView[]{
+                (TextView) view.findViewById(R.id.calbox7),
+                (TextView) view.findViewById(R.id.calbox6),
+                (TextView) view.findViewById(R.id.calbox5),
+                (TextView) view.findViewById(R.id.calbox4),
+                (TextView) view.findViewById(R.id.calbox3),
+                (TextView) view.findViewById(R.id.calbox2),
+                (TextView) view.findViewById(R.id.calbox1),
+                (TextView) view.findViewById(R.id.calbox14),
+                (TextView) view.findViewById(R.id.calbox13),
+                (TextView) view.findViewById(R.id.calbox12),
+                (TextView) view.findViewById(R.id.calbox11),
+                (TextView) view.findViewById(R.id.calbox10),
+                (TextView) view.findViewById(R.id.calbox9),
+                (TextView) view.findViewById(R.id.calbox8),
+                (TextView) view.findViewById(R.id.calbox21),
+                (TextView) view.findViewById(R.id.calbox20),
+                (TextView) view.findViewById(R.id.calbox19),
+                (TextView) view.findViewById(R.id.calbox18),
+                (TextView) view.findViewById(R.id.calbox17),
+                (TextView) view.findViewById(R.id.calbox16),
+                (TextView) view.findViewById(R.id.calbox15),
+                (TextView) view.findViewById(R.id.calbox28),
+                (TextView) view.findViewById(R.id.calbox27),
+                (TextView) view.findViewById(R.id.calbox26),
+                (TextView) view.findViewById(R.id.calbox25),
+                (TextView) view.findViewById(R.id.calbox24),
+                (TextView) view.findViewById(R.id.calbox23),
+                (TextView) view.findViewById(R.id.calbox22),
+                (TextView) view.findViewById(R.id.calbox35),
+                (TextView) view.findViewById(R.id.calbox34),
+                (TextView) view.findViewById(R.id.calbox33),
+                (TextView) view.findViewById(R.id.calbox32),
+                (TextView) view.findViewById(R.id.calbox31),
+                (TextView) view.findViewById(R.id.calbox30),
+                (TextView) view.findViewById(R.id.calbox29),
+                (TextView) view.findViewById(R.id.calbox42),
+                (TextView) view.findViewById(R.id.calbox41),
+                (TextView) view.findViewById(R.id.calbox40),
+                (TextView) view.findViewById(R.id.calbox39),
+                (TextView) view.findViewById(R.id.calbox38),
+                (TextView) view.findViewById(R.id.calbox37),
+                (TextView) view.findViewById(R.id.calbox36)
+        };
+
         /*
         // Alternative way but not tested
         this.view_boxes = new TextView[42];
@@ -176,27 +223,30 @@ public class APcalendar {
         previous.add(Calendar.MONTH, -1);
         int previousMonthDays = previous.getActualMaximum(Calendar.DAY_OF_MONTH);
 
+        // Change rotation for right to left languages
+        TextView[] temp_view_boxes = (this.tranlations.isRtL()) ? this.view_boxes_rtl.clone() : this.view_boxes.clone();
+
         for (int i = monthStart - 1; i >= 0; i--) {
-            this.view_boxes[i].setText(String.valueOf(previousMonthDays - monthStart + i + 1));
-            this.view_boxes[i].setTextColor(Color.parseColor("#505050"));
-            this.view_boxes[i].setBackgroundResource(android.R.color.transparent);
+            temp_view_boxes[i].setText(String.valueOf(previousMonthDays - monthStart + i + 1));
+            temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
+            temp_view_boxes[i].setBackgroundResource(android.R.color.transparent);
         }
         for (int i = 0; i < monthDays; i++) {
-            this.view_boxes[monthStart + i].setText(String.valueOf(i + 1));
+            temp_view_boxes[monthStart + i].setText(String.valueOf(i + 1));
             if (i + 1 == this.day) {
-                this.view_boxes[monthStart + i].setTextColor(Color.parseColor("#000000"));
-                this.view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg);
-                ((GradientDrawable) this.view_boxes[monthStart + i].getBackground()).setColor(this.color);
+                temp_view_boxes[monthStart + i].setTextColor(Color.parseColor("#000000"));
+                temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg);
+                ((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
             }
             else {
-                this.view_boxes[monthStart + i].setTextColor(Color.parseColor("#FFFFFF"));
-                this.view_boxes[monthStart + i].setBackgroundResource(android.R.color.transparent);
+                temp_view_boxes[monthStart + i].setTextColor(Color.parseColor("#FFFFFF"));
+                temp_view_boxes[monthStart + i].setBackgroundResource(android.R.color.transparent);
             }
         }
         for (int i = monthStart + monthDays; i < 42; i++) {
-            this.view_boxes[i].setText(String.valueOf(i - monthStart - monthDays + 1));
-            this.view_boxes[i].setTextColor(Color.parseColor("#505050"));
-            this.view_boxes[i].setBackgroundResource(android.R.color.transparent);
+            temp_view_boxes[i].setText(String.valueOf(i - monthStart - monthDays + 1));
+            temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
+            temp_view_boxes[i].setBackgroundResource(android.R.color.transparent);
         }
 
     }
@@ -213,7 +263,7 @@ public class APcalendar {
         int offset = (this.isMondayFirst)? 1 : 0;
         // Change days names
         for (int i = 0 ; i < 7; i++) {
-            this.view_colorable[i].setText(days[(offset + i) % n].substring(0,3));
+            this.view_colorable[i].setText(   (days[(offset + i) % n].length()>3) ? days[(offset + i) % n].substring(0, 3) : days[(offset + i) % n] );
         }
     }
 

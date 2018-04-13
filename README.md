@@ -19,6 +19,7 @@ So, here is the first Calendar Widget for our Amazfit Pace/Stratos!
 - Vibration on button touches
 - Supported languages: English, Chinese, Czech, French, German, Greek, Hebrew, Hungarian, Italian, Japanese, Polish, Portuguese, Russian, Slovak, Spanish
 - Right to left Calendar support
+- Settings are saved
 
 
 

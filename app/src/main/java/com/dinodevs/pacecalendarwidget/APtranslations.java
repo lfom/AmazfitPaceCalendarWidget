@@ -9,20 +9,21 @@ public class APtranslations {
     public static class translations {
 
         public static String[] codes = {
-                "en", "zh", "fr", "de", "gr", "he", "hu", "it", "ja", "pl", "pt", "ru", "sk", "es"//, "tr",
+                "en", "zh", "cz", "fr", "de", "gr", "he", "hu", "it", "ja", "pl", "pt", "ru", "sk", "es"//, "tr",
         };
 
         public static String[] languages = {
-                "English", "中文", "Français", "Deutsch", "Ελληνικά", "עברית", "Magyar", "Italiano", "日本語", "Polski", "Português", "Русский", "Slovenčina", "Español"//, "Türkçe",
+                "English", "中文", "Czech", "Français", "Deutsch", "Ελληνικά", "עברית", "Magyar", "Italiano", "日本語", "Polski", "Português", "Русский", "Slovenčina", "Español"//, "Türkçe",
         };
 
         public static String[] languages_en = {
-                "English", "Chinese", "French", "German", "Greek", "Hebrew", "Hungarian", "Italian", "Japanese", "Polish", "Portuguese", "Russian", "Slovak", "Spanish"//, "Turkish",
+                "English", "Chinese", "Czech", "French", "German", "Greek", "Hebrew", "Hungarian", "Italian", "Japanese", "Polish", "Portuguese", "Russian", "Slovak", "Spanish"//, "Turkish",
         };
 
         public static String[][] days = {
                 {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"},
                 {"星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"},
+                {"Po", "Út", "St", "Čt", "Pá", "So", "Ne"},
                 {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"},
                 {"Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"},
                 {"Κυριακή", "Δευτέρα", "Τρίτη", "Τετάρτη", "Πέμπτη", "Παρασκευή", "Σάββατο"},
@@ -42,6 +43,7 @@ public class APtranslations {
         public static String[][] months = {
                 {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"},
                 {"一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"},
+                {"Leden", "Únor", "Březen", "Duben", "Květen", "Červen", "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec"},
                 {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "octobre", "Novembre", "Décembre"},
                 {"Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"},
                 {"Ιανουάριος", "Φεβρουάριος", "Μάρτιος", "Απρίλιος", "Μάιος", "Ιούνιος", "Ιούλιος", "Αύγουστος", "Σεπτέμβριος", "Οκτώβριος", "Νοέμβριος", "Δεκέμβριος"},
@@ -60,6 +62,7 @@ public class APtranslations {
         public static String[][] other = {
                 {"Select color","Show year","Monday 1st"},                  //"English",
                 {"选择颜色","显示年份","星期一放1"},                          //"Chinese",
+                {"Vyberte barvu", "Zobrazit rok", "Od pondělka"},           //"Czech",
                 {"Choisissez la couleur","Afficher l'année","Mettez 1er"},  //"French",
                 {"Farbe auswählen","Jahr anzeigen","Montag erste"},         //"German",
                 {"Επιλογή χρώματος","Εμφάνιση χρονιάς","Δευτέρα 1η"},       //"Greek",

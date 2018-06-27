@@ -9,15 +9,15 @@ public class APtranslations {
     public static class translations {
 
         public static String[] codes = {
-                "en", "zh", "cz", "nl", "fr", "de", "gr", "he", "hu", "it", "ja", "pl", "pt", "ru", "sk", "es"//, "tr",
+                "en", "zh", "cz", "nl", "fr", "de", "gr", "he", "hu", "it", "ja", "pl", "pt", "ru", "sk", "es", "tr",
         };
 
         public static String[] languages = {
-                "English", "中文", "Czech", "Nederlands", "Français", "Deutsch", "Ελληνικά", "עברית", "Magyar", "Italiano", "日本語", "Polski", "Português", "Русский", "Slovenčina", "Español"//, "Türkçe",
+                "English", "中文", "Czech", "Nederlands", "Français", "Deutsch", "Ελληνικά", "עברית", "Magyar", "Italiano", "日本語", "Polski", "Português", "Русский", "Slovenčina", "Español", "Türkçe",
         };
 
         public static String[] languages_en = {
-                "English", "Chinese", "Czech", "Dutch", "French", "German", "Greek", "Hebrew", "Hungarian", "Italian", "Japanese", "Polish", "Portuguese", "Russian", "Slovak", "Spanish"//, "Turkish",
+                "English", "Chinese", "Czech", "Dutch", "French", "German", "Greek", "Hebrew", "Hungarian", "Italian", "Japanese", "Polish", "Portuguese", "Russian", "Slovak", "Spanish", "Turkish",
         };
 
         public static String[][] days = {
@@ -36,8 +36,8 @@ public class APtranslations {
                 {"Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"},
                 {"воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"},
                 {"Nedeľa", "Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota"},
-                {"Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"}//,
-                //{"Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"},
+                {"Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"},
+                {"Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"},
         };
 
         public static String[][] months = {
@@ -56,8 +56,8 @@ public class APtranslations {
                 {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"},
                 {"январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"},
                 {"Január", "Február", "Marec", "Apríl", "Máj", "Jún", "Júl", "August", "September", "Október", "November", "December"},
-                {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"}//,
-                //{"Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"},
+                {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"},
+                {"Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"},
         };
 
         public static String[][] other = {
@@ -76,8 +76,8 @@ public class APtranslations {
                 {"Selecione a cor","Mostrar ano","Segunda-feira"},          //"Portuguese",
                 {"Выбор цвета","Показ года","Пон. 1-й"},                    //"Russian",
                 {"Vyberte farbu","Zobraziť rok","Pondelok 1."},             //"Slovak",
-                {"Seleccionar el color","Mostrar año","Lunes 1°"}           //"Spanish"
-                //{"Renk seç","Yılı göster","Pazartesi 1"},                 //"Turkish"
+                {"Seleccionar el color","Mostrar año","Lunes 1°"},          //"Spanish"
+                {"Renk seç","Yılı göster","Pazartesi 1"},                   //"Turkish"
         };
 
         public static String[] getDays(int lang) {

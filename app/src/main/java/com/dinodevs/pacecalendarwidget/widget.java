@@ -118,7 +118,6 @@ public class widget extends AbstractPlugin {
             this.updateLanguage();
         }
 
-
         // If monday first
         if (this.settings.get("monday_first", false)) {
             this.changeMondayFirst(true);
@@ -152,8 +151,8 @@ public class widget extends AbstractPlugin {
             }
 
             @Override
-            //public boolean onDoubleClick() {// Not onLongClick
-            public boolean onLongClick() {
+            public boolean onDoubleClick() {// Not onLongClick
+            //public boolean onLongClick() {
                 if(widget.this.isActive) {
                     // Open settings
                     // Log.d(widget.TAG, "Pop settings");
@@ -165,6 +164,16 @@ public class widget extends AbstractPlugin {
         };
         ConstraintLayout layout = this.mView.findViewById(R.id.container);
         layout.setOnTouchListener(handler.listen());
+
+        // Open Settings button
+        TextView open_settings_button = this.mView.findViewById(R.id.settings_icon);
+        open_settings_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                widget.this.mView.findViewById(R.id.settings_box).setVisibility(View.VISIBLE);
+                widget.this.vibrate(50);
+            }
+        });
 
         // Close Settings button
         TextView close_settings_button = this.mView.findViewById(R.id.close_settings);

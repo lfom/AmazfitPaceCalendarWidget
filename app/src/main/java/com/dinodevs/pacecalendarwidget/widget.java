@@ -57,14 +57,18 @@ public class widget extends AbstractPlugin {
     public View getView(Context paramContext) {
         // Save Activity variables
         this.mContext = paramContext;
-        this.mView = LayoutInflater.from(paramContext).inflate(R.layout.widget_blank, null);
+        this.mView = LayoutInflater.from(paramContext).inflate(R.layout.widget_calendar, null);
+
+        Log.d(widget.TAG, "Starting calendar...");
 
         // Initialize variables
         this.init();
 
+        Log.d(widget.TAG, "Attaching listeners...");
         // Attach event listeners
         this.initListeners();
 
+        Log.d(widget.TAG, "Done...");
         return this.mView;
     }
 
@@ -123,6 +127,7 @@ public class widget extends AbstractPlugin {
             this.changeMondayFirst(true);
         }
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     private void initListeners(){
@@ -310,25 +315,7 @@ public class widget extends AbstractPlugin {
         }
         this.changeColor(R.id.color5, R.color.basecolor5);
     }
-    /*
-    private int parseStringToColor(String color_name) {
-        switch (color_name) {
-            case "red":
-                return R.color.basecolor1;
-            case "blue":
-                return R.color.basecolor2;
-            case "green":
-                return R.color.basecolor3;
-            case "purple":
-                return R.color.basecolor4;
-            case "orange":
-                return R.color.basecolor5;
-            case "yellow":
-                return R.color.basecolor6;
-        }
-        return R.color.basecolor5;
-    }
-    */
+
     private String parseColorToString(int color) {
         switch (color) {
             case R.color.basecolor1:

@@ -13,11 +13,11 @@ public class APtranslations {
         };
 
         public static String[] languages = {
-                "English", "中文", "Czech", "Nederlands", "Français", "Deutsch", "Ελληνικά", "עברית", "Magyar", "Italiano", "日本語", "한국어", "Polski", "Português", "Русский", "Slovenčina", "Español", "Türkçe",
+                "English", "中文", "Czech", "Nederlands", "Français", "Deutsch", "Ελληνικά", "עברית", "Magyar", "Italiano", "日本語", "한국어", "Polski", "Português", "Русский", "Slovenčina", "Español", "ไทย", "Türkçe",
         };
 
         public static String[] languages_en = {
-                "English", "Chinese", "Czech", "Dutch", "French", "German", "Greek", "Hebrew", "Hungarian", "Italian", "Japanese", "Korean", "Polish", "Portuguese", "Russian", "Slovak", "Spanish", "Turkish",
+                "English", "Chinese", "Czech", "Dutch", "French", "German", "Greek", "Hebrew", "Hungarian", "Italian", "Japanese", "Korean", "Polish", "Portuguese", "Russian", "Slovak", "Spanish", "Thai", "Turkish",
         };
 
         public static String[][] days = {
@@ -38,6 +38,7 @@ public class APtranslations {
                 {"воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"},
                 {"Nedeľa", "Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota"},
                 {"Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"},
+                {"อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัสบดี", "ุกร์", "สาร์"},
                 {"Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"},
         };
 
@@ -59,6 +60,7 @@ public class APtranslations {
                 {"январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"},
                 {"Január", "Február", "Marec", "Apríl", "Máj", "Jún", "Júl", "August", "September", "Október", "November", "December"},
                 {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"},
+                {"มกราคม", "กุมภาพันธ์", "ีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ันวาคม"},
                 {"Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"},
         };
 
@@ -80,6 +82,7 @@ public class APtranslations {
                 {"Выбор цвета","Показ года","Пон. 1-й"},                    //"Russian",
                 {"Vyberte farbu","Zobraziť rok","Pondelok 1."},             //"Slovak",
                 {"Seleccionar el color","Mostrar año","Lunes 1°"},          //"Spanish"
+                {"เลือกสี", "แสดงปี", "ัปดาห์จะเริ่มในวันจันทร์"},                         //"Thai"
                 {"Renk seç","Yılı göster","Pazartesi 1"},                   //"Turkish"
         };
 

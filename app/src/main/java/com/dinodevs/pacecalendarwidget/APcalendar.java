@@ -27,6 +27,7 @@ public class APcalendar {
     private TextView[] view_boxes;
     private TextView[] view_boxes_rtl;
     private TextView[] view_colorable;
+    private TextView[] view_week;
 
     // Calendar translations
     private APtranslations tranlations;
@@ -34,7 +35,7 @@ public class APcalendar {
     // Constructor
     APcalendar(View view, Context context, Calendar date, int color){
         this.isMondayFirst = false;
-        this.doIvibrate = false;
+        this.doIvibrate = true;
 
         // Create translations instance
         this.tranlations = new APtranslations();
@@ -63,7 +64,13 @@ public class APcalendar {
             (TextView) view.findViewById(R.id.day6),
             (TextView) view.findViewById(R.id.day7),
             (TextView) view.findViewById(R.id.arrow_down),
-            (TextView) view.findViewById(R.id.arrow_up)
+            (TextView) view.findViewById(R.id.arrow_up),
+            (TextView) view.findViewById(R.id.week1),
+            (TextView) view.findViewById(R.id.week2),
+            (TextView) view.findViewById(R.id.week3),
+            (TextView) view.findViewById(R.id.week4),
+            (TextView) view.findViewById(R.id.week5),
+            (TextView) view.findViewById(R.id.week6)
         };
 
         // Get dates boxes
@@ -158,6 +165,16 @@ public class APcalendar {
                 (TextView) view.findViewById(R.id.calbox36)
         };
 
+        // Get week num view objects
+        this.view_week = new TextView[]{
+                (TextView) view.findViewById(R.id.week1),
+                (TextView) view.findViewById(R.id.week2),
+                (TextView) view.findViewById(R.id.week3),
+                (TextView) view.findViewById(R.id.week4),
+                (TextView) view.findViewById(R.id.week5),
+                (TextView) view.findViewById(R.id.week6)
+        };
+
         /*
         // Alternative way but not tested
         this.view_boxes = new TextView[42];
@@ -215,6 +232,7 @@ public class APcalendar {
         // Number to fill the boxes
         GregorianCalendar first = new GregorianCalendar(this.year, this.month, 1);
         int monthStart = first.get(Calendar.DAY_OF_WEEK) - 1;
+        int week = first.get(Calendar.WEEK_OF_YEAR);
         if(this.isMondayFirst){
             monthStart = (monthStart - 1 < 0) ? 6 : monthStart - 1;
         }
@@ -228,11 +246,13 @@ public class APcalendar {
         // Change rotation for right to left languages
         TextView[] temp_view_boxes = (this.tranlations.isRtL()) ? this.view_boxes_rtl.clone() : this.view_boxes.clone();
 
+        // Populate last month boxes
         for (int i = monthStart - 1; i >= 0; i--) {
             temp_view_boxes[i].setText(String.valueOf(previousMonthDays - monthStart + i + 1));
             temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
             temp_view_boxes[i].setBackgroundResource(android.R.color.transparent);
         }
+        // Populate month's boxes
         for (int i = 0; i < monthDays; i++) {
             temp_view_boxes[monthStart + i].setText(String.valueOf(i + 1));
             if (i + 1 == this.day) {
@@ -245,12 +265,17 @@ public class APcalendar {
                 temp_view_boxes[monthStart + i].setBackgroundResource(android.R.color.transparent);
             }
         }
+        // Populate next month's boxes
         for (int i = monthStart + monthDays; i < 42; i++) {
             temp_view_boxes[i].setText(String.valueOf(i - monthStart - monthDays + 1));
             temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
             temp_view_boxes[i].setBackgroundResource(android.R.color.transparent);
         }
 
+        // Populate week boxes
+        for (int i = 0; i < 6; i++) {
+            this.view_week[i].setText(String.valueOf(week+i));
+        }
     }
 
     public void refreshMonthName() {

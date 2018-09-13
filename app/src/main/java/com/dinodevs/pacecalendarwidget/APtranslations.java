@@ -65,25 +65,25 @@ public class APtranslations {
         };
 
         public static String[][] other = {
-                {"Select color","Show year","Monday 1st", "Vibrate"},                  //"English",
-                {"选择颜色","显示年份","星期一放1", "Vibrate"},                           //"Chinese",
-                {"Vyberte barvu", "Zobrazit rok", "Od pondělka", "Vibrate"},           //"Czech",
-                {"Selecteer kleur","Toon jaar","Maandag 1e", "Vibrate"},               //"Dutch"
-                {"Choisissez la couleur","Afficher l'année","Mettez 1er", "Vibrate"},  //"French",
-                {"Farbe auswählen","Jahr anzeigen","Montag erste", "Vibrate"},         //"German",
-                {"Επιλογή χρώματος","Εμφάνιση χρονιάς","Δευτέρα 1η", "Δόνηση"},        //"Greek",
-                {"בחירת צבע","הצג שנה","החל מיום שני", "Vibrate"},                     //"Hebrew"
-                {"Válasszon színt","Az év megjelenítése","Hétfő 1", "Vibrate"},        //"Hungarian",
-                {"Seleziona colore","Mostra l'anno","Lunedì 1°", "Vibrate"},           //"Italian",
-                {"色を選択","年を表示","月曜日に入れて", "Vibrate"},                       //"Japanese",
-                {"연도 표시","월요일로 주 시작","색상 선택", "Vibrate"},                   //"Korean", by eastway11
-                {"Wybierz kolor","Pokaż rok","Poniedziałek 1.", "Vibrate"},            //"Polish",
-                {"Selecione a cor","Mostrar ano","Segunda-feira", "Vibrate"},          //"Portuguese",
-                {"Выбор цвета","Показ года","Пон. 1-й", "Vibrate"},                    //"Russian",
-                {"Vyberte farbu","Zobraziť rok","Pondelok 1.", "Vibrate"},             //"Slovak",
-                {"Seleccionar el color","Mostrar año","Lunes 1°", "Vibrate"},          //"Spanish"
-                {"เลือกสี", "แสดงปี", "ัปดาห์จะเริ่มในวันจันทร์", "Vibrate"},                         //"Thai", by iamping
-                {"Renk seç","Yılı göster","Pazartesi 1", "Vibrate"},                   //"Turkish"
+                {"Select color","Show year","Monday 1st", "Vibrate", "Weeks No"},                  //"English",
+                {"选择颜色","显示年份","星期一放1", "Vibrate", "Weeks No"},                           //"Chinese",
+                {"Vyberte barvu", "Zobrazit rok", "Od pondělka", "Vibrate", "Weeks No"},           //"Czech",
+                {"Selecteer kleur","Toon jaar","Maandag 1e", "Vibrate", "Weeks No"},               //"Dutch"
+                {"Choisissez la couleur","Afficher l'année","Mettez 1er", "Vibrate", "Weeks No"},  //"French",
+                {"Farbe auswählen","Jahr anzeigen","Montag erste", "Vibrate", "Weeks No"},         //"German",
+                {"Επιλογή χρώματος","Εμφάνιση χρονιάς","Δευτέρα 1η", "Δόνηση", "Αρ εβδομάδας"},    //"Greek",
+                {"בחירת צבע","הצג שנה","החל מיום שני", "Vibrate", "Weeks No"},                     //"Hebrew"
+                {"Válasszon színt","Az év megjelenítése","Hétfő 1", "Vibrate", "Weeks No"},        //"Hungarian",
+                {"Seleziona colore","Mostra l'anno","Lunedì 1°", "Vibrate", "Weeks No"},           //"Italian",
+                {"色を選択","年を表示","月曜日に入れて", "Vibrate", "Weeks No"},                       //"Japanese",
+                {"연도 표시","월요일로 주 시작","색상 선택", "Vibrate", "Weeks No"},                   //"Korean", by eastway11
+                {"Wybierz kolor","Pokaż rok","Poniedziałek 1.", "Vibrate", "Weeks No"},            //"Polish",
+                {"Selecione a cor","Mostrar ano","Segunda-feira", "Vibrate", "Weeks No"},          //"Portuguese",
+                {"Выбор цвета","Показ года","Пон. 1-й", "Vibrate", "Weeks No"},                    //"Russian",
+                {"Vyberte farbu","Zobraziť rok","Pondelok 1.", "Vibrate", "Weeks No"},             //"Slovak",
+                {"Seleccionar el color","Mostrar año","Lunes 1°", "Vibrate", "Weeks No"},          //"Spanish"
+                {"เลือกสี", "แสดงปี", "ัปดาห์จะเริ่มในวันจันทร์", "Vibrate", "Weeks No"},                         //"Thai", by iamping
+                {"Renk seç","Yılı göster","Pazartesi 1", "Vibrate", "Weeks No"},                   //"Turkish"
         };
 
         public static String[] getDays(int lang) {

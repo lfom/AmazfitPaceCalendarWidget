@@ -1,4 +1,4 @@
-[![latest release](https://img.shields.io/badge/latest%20release-v1.6.3-green.svg?style=flat-square)](https://github.com/GreatApo/AmazfitPaceCalendarWidget/releases/latest)
+[![latest release](https://img.shields.io/badge/latest%20release-v1.6.4-green.svg?style=flat-square) ![release date](https://img.shields.io/badge/release%20date-2018.09.13-orange.svg?style=flat-square)](https://github.com/GreatApo/AmazfitPaceCalendarWidget/releases/latest)
 
 # Amazfit Pace Calendar Widget
 ![Amazfit Pace Calendar Widget Banner](other%20files/amazfit-calendar-widget.png)
@@ -15,9 +15,10 @@ So, here is the first Calendar Widget for our Amazfit Pace/Stratos!
 - Refresh to current date
 - Select calendar colors
 - Show/Hide year number
+- Show/Hide week numbers
 - Select Sunday or Monday for 1st week day
 - Vibration on button touches
-- Supported languages: English, Chinese, Czech, Dutch, French, German, Greek, Hebrew, Hungarian, Italian, Japanese, Polish, Portuguese, Russian, Slovak, Spanish, Turkish
+- Supported languages: English, Chinese, Czech, Dutch, French, German, Greek, Hebrew, Hungarian, Italian, Japanese, Polish, Portuguese, Russian, Slovak, Spanish, Thai, Turkish
 - Right to left Calendar support
 - Settings are saved
 

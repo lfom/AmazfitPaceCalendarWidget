@@ -1,4 +1,4 @@
-[![latest release](https://img.shields.io/badge/latest%20release-v1.6.4-green.svg?style=flat-square) ![release date](https://img.shields.io/badge/release%20date-2018.09.13-orange.svg?style=flat-square)](https://github.com/GreatApo/AmazfitPaceCalendarWidget/releases/latest)
+[![latest release](https://img.shields.io/badge/latest%20release-v1.7.0-green.svg?style=flat-square) ![release date](https://img.shields.io/badge/release%20date-2018.09.13-orange.svg?style=flat-square)](https://github.com/GreatApo/AmazfitPaceCalendarWidget/releases/latest)
 
 # Amazfit Pace Calendar Widget
 ![Amazfit Pace Calendar Widget Banner](other%20files/amazfit-calendar-widget.png)
@@ -39,7 +39,7 @@ To install this widget, you will need a PC with the ADB installed. Connect your 
 
 ```shell
 adb uninstall com.dinodevs.pacecalendarwidget
-adb install -r PaceCalendarWidget.apk
+adb install -r PaceCalendarWidget.X.X.X.apk
 adb shell am force-stop com.huami.watch.launcher
 ```
 

@@ -18,7 +18,7 @@ So, here is the first Calendar Widget for our Amazfit Pace/Stratos!
 - Show/Hide week numbers
 - Select Sunday or Monday for 1st week day
 - Vibration on button touches
-- Supported languages: English, Chinese, Czech, Dutch, French, German, Greek, Hebrew, Hungarian, Italian, Japanese, Polish, Portuguese, Russian, Slovak, Spanish, Thai, Turkish
+- Supported languages: English, Chinese, Czech, Dutch, French, German, Greek, Hebrew, Hungarian, Italian, Japanese, Korean, Polish, Portuguese, Russian, Slovak, Spanish, Thai, Turkish
 - Right to left Calendar support
 - Settings are saved
 

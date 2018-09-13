@@ -235,6 +235,18 @@ public class widget extends AbstractPlugin {
             }
         });
 
+
+        // Monday switch (first day of the week)
+        boolean doIvibrate = this.settings.get("vibrate", false);
+        CheckBox vibrate_checkbox = this.mView.findViewById(R.id.vibrate_switch);
+        vibrate_checkbox.setChecked(doIvibrate);
+        vibrate_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                widget.this.changeVibration(isChecked);
+                widget.this.vibrate();
+            }
+        });
+
         // Refresh current date
         TextView refresh_button = this.mView.findViewById(R.id.refresh);
         refresh_button.setOnClickListener(new View.OnClickListener() {
@@ -382,6 +394,15 @@ public class widget extends AbstractPlugin {
         this.settings.set("monday_first", mondayFirst);
     }
 
+
+    // Sunday/Monday first day of the week
+    private void changeVibration(boolean vibrate){
+        this.apcalendar.doIvibrate = vibrate;
+
+        // Save setting
+        this.settings.set("vibrate", vibrate);
+    }
+
     // Change to the next language
     private void rotateLanguage() {
         // Load next lang
@@ -401,7 +422,8 @@ public class widget extends AbstractPlugin {
         TextView[] view_other = new TextView[]{
                 this.mView.findViewById(R.id.select_color),
                 this.mView.findViewById(R.id.year_switch),
-                this.mView.findViewById(R.id.monday_switch)
+                this.mView.findViewById(R.id.monday_switch),
+                this.mView.findViewById(R.id.vibrate_switch)
         };
 
         String[] other = this.aptranslations.getOther();
@@ -430,10 +452,12 @@ public class widget extends AbstractPlugin {
 
     // Vibrator wrappers
     private void vibrate () {
-        this.vibrate(10);
+        if(apcalendar.doIvibrate)
+            this.vibrate(10);
     }
     private void vibrate (long milliseconds) {
-        this.vibe.vibrate(milliseconds);
+        if(apcalendar.doIvibrate)
+            this.vibe.vibrate(milliseconds);
     }
 
     // Toast wrapper

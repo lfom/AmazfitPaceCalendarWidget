@@ -19,6 +19,7 @@ public class APcalendar {
     private int month;
     private int day;
     public boolean isMondayFirst;
+    public boolean doIvibrate;
 
     // Calendar View objects
     private TextView view_monthName;
@@ -33,6 +34,7 @@ public class APcalendar {
     // Constructor
     APcalendar(View view, Context context, Calendar date, int color){
         this.isMondayFirst = false;
+        this.doIvibrate = false;
 
         // Create translations instance
         this.tranlations = new APtranslations();

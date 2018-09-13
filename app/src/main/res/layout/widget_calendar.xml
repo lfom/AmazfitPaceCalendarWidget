@@ -490,7 +490,7 @@
             app:layout_constraintHorizontal_bias="0.142"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.611" />
+            app:layout_constraintVertical_bias="0.56" />
 
         <CheckBox
             android:id="@+id/monday_switch"
@@ -508,7 +508,25 @@
             app:layout_constraintHorizontal_bias="0.15"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.729" />
+            app:layout_constraintVertical_bias="0.67" />
+
+    <CheckBox
+        android:id="@+id/vibrate_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:checked="false"
+        android:gravity="center"
+        android:text="Vibrate"
+        android:textColor="#000"
+        android:textOff=""
+        android:textOn=""
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.78" />
 
         <TextView
             android:id="@+id/select_color"

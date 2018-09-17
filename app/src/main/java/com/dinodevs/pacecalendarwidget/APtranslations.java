@@ -32,7 +32,7 @@ public class APtranslations {
                 {"Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombaton"},
                 {"Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"},
                 {"日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"},
-                {"일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"},
+                {"일", "월", "화", "수", "목", "금", "토"},
                 {"Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"},
                 {"Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"},
                 {"воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"},
@@ -60,7 +60,7 @@ public class APtranslations {
                 {"январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"},
                 {"Január", "Február", "Marec", "Apríl", "Máj", "Jún", "Júl", "August", "September", "Október", "November", "December"},
                 {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"},
-                {"มกราคม", "กุมภาพันธ์", "ีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ันวาคม"},
+                {"มกราคม", "กุมภาพันธ์", "ีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"},
                 {"Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"},
         };
 
@@ -76,13 +76,13 @@ public class APtranslations {
                 {"Válasszon színt","Az év megjelenítése","Hétfő 1", "Vibrate", "Weeks No"},        //"Hungarian",
                 {"Seleziona colore","Mostra l'anno","Lunedì 1°", "Vibrate", "Weeks No"},           //"Italian",
                 {"色を選択","年を表示","月曜日に入れて", "Vibrate", "Weeks No"},                       //"Japanese",
-                {"연도 표시","월요일로 주 시작","색상 선택", "Vibrate", "Weeks No"},                   //"Korean", by eastway11
+                {"색상 선택","연도 표시","색상 선택", "진동", "주차 표시"},                             //"Korean", by eastway11
                 {"Wybierz kolor","Pokaż rok","Poniedziałek 1.", "Vibrate", "Weeks No"},            //"Polish",
                 {"Selecione a cor","Mostrar ano","Segunda-feira", "Vibrate", "Weeks No"},          //"Portuguese",
                 {"Выбор цвета","Показ года","Пон. 1-й", "Vibrate", "Weeks No"},                    //"Russian",
                 {"Vyberte farbu","Zobraziť rok","Pondelok 1.", "Vibrate", "Weeks No"},             //"Slovak",
                 {"Seleccionar el color","Mostrar año","Lunes 1°", "Vibrate", "Weeks No"},          //"Spanish"
-                {"เลือกสี", "แสดงปี", "ัปดาห์จะเริ่มในวันจันทร์", "Vibrate", "Weeks No"},                         //"Thai", by iamping
+                {"เลือกสี", "แสดงปี", "ัเริ่มวันจันทร์", "สั่น", "เลขสัปดาห์"},                                      //"Thai", by iamping
                 {"Renk seç","Yılı göster","Pazartesi 1", "Vibrate", "Weeks No"},                   //"Turkish"
         };
 

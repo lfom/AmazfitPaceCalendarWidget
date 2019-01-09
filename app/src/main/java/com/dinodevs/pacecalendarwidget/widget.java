@@ -44,6 +44,7 @@ public class widget extends AbstractPlugin {
     private Vibrator vibe;
     private Calendar shown_date;
     private boolean shown_year;
+    private boolean show_week;
     private int current_color;
     private TextView current_color_element;
 
@@ -57,14 +58,18 @@ public class widget extends AbstractPlugin {
     public View getView(Context paramContext) {
         // Save Activity variables
         this.mContext = paramContext;
-        this.mView = LayoutInflater.from(paramContext).inflate(R.layout.widget_blank, null);
+        this.mView = LayoutInflater.from(paramContext).inflate(R.layout.widget_calendar, null);
+
+        Log.d(widget.TAG, "Starting calendar...");
 
         // Initialize variables
         this.init();
 
+        Log.d(widget.TAG, "Attaching listeners...");
         // Attach event listeners
         this.initListeners();
 
+        Log.d(widget.TAG, "Done...");
         return this.mView;
     }
 
@@ -96,6 +101,7 @@ public class widget extends AbstractPlugin {
 
         // Set default settings
         this.shown_year = this.settings.get("show_year", true);
+        this.show_week = this.settings.get("show_week", false);
         this.changeColorByName(this.settings.get("color", "orange"));
 
         // Init Calendar
@@ -123,6 +129,7 @@ public class widget extends AbstractPlugin {
             this.changeMondayFirst(true);
         }
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     private void initListeners(){
@@ -230,6 +237,28 @@ public class widget extends AbstractPlugin {
             }
         });
 
+        // Vibration switch
+        boolean doIvibrate = this.settings.get("vibrate", false);
+        CheckBox vibrate_checkbox = this.mView.findViewById(R.id.vibrate_switch);
+        vibrate_checkbox.setChecked(doIvibrate);
+        vibrate_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                widget.this.changeVibration(isChecked);
+                widget.this.vibrate();
+            }
+        });
+
+        // Week switch (show week number)
+        CheckBox week_checkbox = this.mView.findViewById(R.id.week_switch);
+        week_checkbox.setChecked(this.show_week);
+        this.changeWeekVisibility(this.show_week);
+        week_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                widget.this.changeWeekVisibility(isChecked);
+                widget.this.vibrate();
+            }
+        });
+
         // Refresh current date
         TextView refresh_button = this.mView.findViewById(R.id.refresh);
         refresh_button.setOnClickListener(new View.OnClickListener() {
@@ -263,7 +292,6 @@ public class widget extends AbstractPlugin {
             }
         });
     }
-
 
 
     // Change widget color
@@ -310,25 +338,7 @@ public class widget extends AbstractPlugin {
         }
         this.changeColor(R.id.color5, R.color.basecolor5);
     }
-    /*
-    private int parseStringToColor(String color_name) {
-        switch (color_name) {
-            case "red":
-                return R.color.basecolor1;
-            case "blue":
-                return R.color.basecolor2;
-            case "green":
-                return R.color.basecolor3;
-            case "purple":
-                return R.color.basecolor4;
-            case "orange":
-                return R.color.basecolor5;
-            case "yellow":
-                return R.color.basecolor6;
-        }
-        return R.color.basecolor5;
-    }
-    */
+
     private String parseColorToString(int color) {
         switch (color) {
             case R.color.basecolor1:
@@ -385,6 +395,33 @@ public class widget extends AbstractPlugin {
         this.settings.set("show_year", this.shown_year);
     }
 
+    // Show/Hide week number
+    private void changeWeekVisibility(boolean visible){
+        // If show week
+        if (visible) {
+            this.show_week = true;
+            this.mView.findViewById(R.id.week1).setVisibility(View.VISIBLE);
+            this.mView.findViewById(R.id.week2).setVisibility(View.VISIBLE);
+            this.mView.findViewById(R.id.week3).setVisibility(View.VISIBLE);
+            this.mView.findViewById(R.id.week4).setVisibility(View.VISIBLE);
+            this.mView.findViewById(R.id.week5).setVisibility(View.VISIBLE);
+            this.mView.findViewById(R.id.week6).setVisibility(View.VISIBLE);
+        }
+        // If hide week
+        else {
+            this.show_week = false;
+            this.mView.findViewById(R.id.week1).setVisibility(View.GONE);
+            this.mView.findViewById(R.id.week2).setVisibility(View.GONE);
+            this.mView.findViewById(R.id.week3).setVisibility(View.GONE);
+            this.mView.findViewById(R.id.week4).setVisibility(View.GONE);
+            this.mView.findViewById(R.id.week5).setVisibility(View.GONE);
+            this.mView.findViewById(R.id.week6).setVisibility(View.GONE);
+        }
+
+        // Save setting
+        this.settings.set("show_week", this.show_week);
+    }
+
     // Sunday/Monday first day of the week
     private void changeMondayFirst(boolean mondayFirst){
         this.apcalendar.isMondayFirst = mondayFirst;
@@ -393,6 +430,15 @@ public class widget extends AbstractPlugin {
 
         // Save setting
         this.settings.set("monday_first", mondayFirst);
+    }
+
+
+    // Vibration
+    private void changeVibration(boolean vibrate){
+        this.apcalendar.doIvibrate = vibrate;
+
+        // Save setting
+        this.settings.set("vibrate", vibrate);
     }
 
     // Change to the next language
@@ -414,7 +460,9 @@ public class widget extends AbstractPlugin {
         TextView[] view_other = new TextView[]{
                 this.mView.findViewById(R.id.select_color),
                 this.mView.findViewById(R.id.year_switch),
-                this.mView.findViewById(R.id.monday_switch)
+                this.mView.findViewById(R.id.monday_switch),
+                this.mView.findViewById(R.id.vibrate_switch),
+                this.mView.findViewById(R.id.week_switch)
         };
 
         String[] other = this.aptranslations.getOther();
@@ -443,10 +491,12 @@ public class widget extends AbstractPlugin {
 
     // Vibrator wrappers
     private void vibrate () {
-        this.vibrate(10);
+        if(apcalendar.doIvibrate)
+            this.vibrate(10);
     }
     private void vibrate (long milliseconds) {
-        this.vibe.vibrate(milliseconds);
+        if(apcalendar.doIvibrate)
+            this.vibe.vibrate(milliseconds);
     }
 
     // Toast wrapper

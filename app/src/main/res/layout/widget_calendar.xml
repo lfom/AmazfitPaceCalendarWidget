@@ -149,6 +149,13 @@
         app:layout_constraintTop_toBottomOf="@+id/day7"/>
 
     <TextView
+        android:id="@+id/week1"
+        style="@style/WeekText"
+        android:text="99"
+        app:layout_constraintStart_toEndOf="@+id/calbox7"
+        app:layout_constraintTop_toBottomOf="@+id/day7"/>
+
+    <TextView
         android:id="@+id/calbox8"
         style="@style/NumberText"
         android:layout_marginStart="30dp"
@@ -196,6 +203,13 @@
         style="@style/NumberText"
         android:text="9"
         app:layout_constraintStart_toEndOf="@+id/calbox13"
+        app:layout_constraintTop_toBottomOf="@+id/calbox7"/>
+
+    <TextView
+        android:id="@+id/week2"
+        style="@style/WeekText"
+        android:text="99"
+        app:layout_constraintStart_toEndOf="@+id/calbox14"
         app:layout_constraintTop_toBottomOf="@+id/calbox7"/>
 
     <TextView
@@ -249,6 +263,13 @@
         app:layout_constraintTop_toBottomOf="@+id/calbox14"/>
 
     <TextView
+        android:id="@+id/week3"
+        style="@style/WeekText"
+        android:text="99"
+        app:layout_constraintStart_toEndOf="@+id/calbox21"
+        app:layout_constraintTop_toBottomOf="@+id/calbox14"/>
+
+    <TextView
         android:id="@+id/calbox22"
         style="@style/NumberText"
         android:layout_marginStart="30dp"
@@ -296,6 +317,13 @@
         style="@style/NumberText"
         android:text="23"
         app:layout_constraintStart_toEndOf="@+id/calbox27"
+        app:layout_constraintTop_toBottomOf="@+id/calbox21"/>
+
+    <TextView
+        android:id="@+id/week4"
+        style="@style/WeekText"
+        android:text="99"
+        app:layout_constraintStart_toEndOf="@+id/calbox28"
         app:layout_constraintTop_toBottomOf="@+id/calbox21"/>
 
     <TextView
@@ -349,6 +377,13 @@
         app:layout_constraintTop_toBottomOf="@+id/calbox28"/>
 
     <TextView
+        android:id="@+id/week5"
+        style="@style/WeekText"
+        android:text="99"
+        app:layout_constraintStart_toEndOf="@+id/calbox35"
+        app:layout_constraintTop_toBottomOf="@+id/calbox28"/>
+
+    <TextView
         android:id="@+id/calbox36"
         style="@style/NumberText"
         android:layout_marginStart="30dp"
@@ -396,6 +431,13 @@
         style="@style/NumberText"
         android:text="6"
         app:layout_constraintStart_toEndOf="@+id/calbox41"
+        app:layout_constraintTop_toBottomOf="@+id/calbox35"/>
+
+    <TextView
+        android:id="@+id/week6"
+        style="@style/WeekText"
+        android:text="99"
+        app:layout_constraintStart_toEndOf="@+id/calbox42"
         app:layout_constraintTop_toBottomOf="@+id/calbox35"/>
 
     <TextView
@@ -487,10 +529,10 @@
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.142"
+            app:layout_constraintHorizontal_bias="0.10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.611" />
+            app:layout_constraintVertical_bias="0.56" />
 
         <CheckBox
             android:id="@+id/monday_switch"
@@ -505,10 +547,46 @@
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.67" />
+
+        <CheckBox
+            android:id="@+id/vibrate_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:checked="false"
+            android:gravity="center"
+            android:text="Vibrate"
+            android:textColor="#000"
+            android:textOff=""
+            android:textOn=""
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.15"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.729" />
+            app:layout_constraintVertical_bias="0.78" />
+
+        <CheckBox
+            android:id="@+id/week_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:checked="false"
+            android:gravity="center"
+            android:text="Weeks No"
+            android:textColor="#000"
+            android:textOff=""
+            android:textOn=""
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.56" />
 
         <TextView
             android:id="@+id/select_color"
@@ -659,7 +737,7 @@
             app:layout_constraintHorizontal_bias="0.731"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.65" />
+            app:layout_constraintVertical_bias="0.75" />
 
         <TextView
             android:id="@+id/close_settings"

@@ -10,7 +10,7 @@ So, here is the first Calendar Widget for our Amazfit Pace/Stratos!
 
 ### Features
 - This is a Pace/Stratos/Verge Widget
-- Double tap/press for settings (2sec)
+- Press gear icon for settings
 - Navigate between months (Swipe / Buttons)
 - Refresh to current date
 - Select calendar colors

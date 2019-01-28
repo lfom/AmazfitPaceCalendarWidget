@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:paddingTop="6dip"
+        android:textColor="@color/time"
+        android:textSize="12sp"/>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time"
+        android:scrollbars="vertical" />
+
+    <TextView
+        android:id="@+id/backToTop"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:gravity="center|top"
+        android:text="@string/top"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="4dip"/>
+</RelativeLayout>

@@ -27,8 +27,6 @@ import clc.sliteplugin.flowboard.ISpringBoardHostStub;
 
 public class widget extends AbstractPlugin {
 
-    // Tag for logging purposes.
-    private static String TAG = "PaceCalendarWidget";
     // Version
     public String version = "n/a";
     // Errors for debugging
@@ -60,16 +58,16 @@ public class widget extends AbstractPlugin {
         this.mContext = paramContext;
         this.mView = LayoutInflater.from(paramContext).inflate(R.layout.widget_calendar, null);
 
-        Log.d(widget.TAG, "Starting calendar...");
+        Log.d(Constants.TAG, "Starting calendar...");
 
         // Initialize variables
         this.init();
 
-        Log.d(widget.TAG, "Attaching listeners...");
+        Log.d(Constants.TAG, "Attaching listeners...");
         // Attach event listeners
         this.initListeners();
 
-        Log.d(widget.TAG, "Done...");
+        Log.d(Constants.TAG, "Done...");
         return this.mView;
     }
 
@@ -97,7 +95,7 @@ public class widget extends AbstractPlugin {
         this.errors = "";
 
         // Load settings
-        this.settings = new APsettings(widget.TAG, mContext);
+        this.settings = new APsettings(Constants.TAG, mContext);
 
         // Set default settings
         this.shown_year = this.settings.get("show_year", true);
@@ -162,7 +160,7 @@ public class widget extends AbstractPlugin {
             //public boolean onLongClick() {
                 if(widget.this.isActive) {
                     // Open settings
-                    // Log.d(widget.TAG, "Pop settings");
+                    // Log.d(Constants.TAG, "Pop settings");
                     widget.this.mView.findViewById(R.id.settings_box).setVisibility(View.VISIBLE);
                     widget.this.vibrate(50);
                 }
@@ -289,6 +287,19 @@ public class widget extends AbstractPlugin {
             public void onClick(View v) {
                 widget.this.changeMonth(1);
                 widget.this.vibrate();
+            }
+        });
+
+        //Timeline
+        TextView month = this.mView.findViewById(R.id.textMonth);
+        month.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                final Intent timelineIntent = new Intent(mContext, Timeline.class);
+                timelineIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                mContext.startActivity(timelineIntent);
+                return false;
             }
         });
     }
@@ -612,7 +623,7 @@ public class widget extends AbstractPlugin {
     // Called when the page is loading and being bound to the host
     @Override
     public void onBindHost(ISpringBoardHostStub paramISpringBoardHostStub) {
-        // Log.d(widget.TAG, "onBindHost");
+        // Log.d(Constants.TAG, "onBindHost");
         //Store host
         this.host = paramISpringBoardHostStub;
     }

@@ -2,15 +2,15 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId 'com.dinodevs.pacecalendarwidget'
         minSdkVersion 21
         targetSdkVersion 27
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionName '1.7.1'
-        versionCode 20180917
+        versionName '1.8.0'
+        versionCode 20190116
     }
     buildTypes {
         release {

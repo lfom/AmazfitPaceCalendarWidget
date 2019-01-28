@@ -9,15 +9,15 @@ public class APtranslations {
     public static class translations {
 
         public static String[] codes = {
-                "en", "zh", "hr", "cz", "nl", "fr", "de", "gr", "he", "hu", "it", "ja", "kr", "pl", "pt", "ru", "sk", "es", "th", "tr",
+                "en", "zh", "hr", "cz", "nl", "fr", "de", "gr", "he", "hu", "it", "ja", "kr", "pl", "pt", "ro", "ru", "sk", "es", "th", "tr",
         };
 
         public static String[] languages = {
-                "English", "中文", "Hrvatski", "Czech", "Nederlands", "Français", "Deutsch", "Ελληνικά", "עברית", "Magyar", "Italiano", "日本語", "한국어", "Polski", "Português", "Русский", "Slovenčina", "Español", "ไทย", "Türkçe",
+                "English", "中文", "Hrvatski", "Czech", "Nederlands", "Français", "Deutsch", "Ελληνικά", "עברית", "Magyar", "Italiano", "日本語", "한국어", "Polski", "Português", "Română", "Русский", "Slovenčina", "Español", "ไทย", "Türkçe",
         };
 
         public static String[] languages_en = {
-                "English", "Chinese", "Croatian", "Czech", "Dutch", "French", "German", "Greek", "Hebrew", "Hungarian", "Italian", "Japanese", "Korean", "Polish", "Portuguese", "Russian", "Slovak", "Spanish", "Thai", "Turkish",
+                "English", "Chinese", "Croatian", "Czech", "Dutch", "French", "German", "Greek", "Hebrew", "Hungarian", "Italian", "Japanese", "Korean", "Polish", "Portuguese", "Romanian", "Russian", "Slovak", "Spanish", "Thai", "Turkish",
         };
 
         public static String[][] days = {
@@ -36,6 +36,7 @@ public class APtranslations {
                 {"일", "월", "화", "수", "목", "금", "토"},
                 {"Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"},
                 {"Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"},
+                {"Duminică", "Luni", "Marți", "Miercuri", "Joi", "Vineri", "Sâmbătă"},
                 {"воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"},
                 {"Nedeľa", "Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok", "Sobota"},
                 {"Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"},
@@ -59,6 +60,7 @@ public class APtranslations {
                 {"1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"},
                 {"Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"},
                 {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"},
+                {"Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie", "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"},
                 {"январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"},
                 {"Január", "Február", "Marec", "Apríl", "Máj", "Jún", "Júl", "August", "September", "Október", "November", "December"},
                 {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"},
@@ -82,6 +84,7 @@ public class APtranslations {
                 {"색상 선택","연도 표시","색상 선택", "진동", "주차 표시"},                             //"Korean", by eastway11
                 {"Wybierz kolor","Pokaż rok","Poniedziałek 1.", "Vibrate", "Weeks No"},            //"Polish",
                 {"Selecione a cor","Mostrar ano","Segunda-feira", "Vibrate", "Weeks No"},          //"Portuguese",
+                {"Alege Culoarea","Arată Anul","Luni Prima", "Vibrație", "Nr. Săptămână"},         //"Romanian",
                 {"Выбор цвета","Показ года","Пон. 1-й", "Vibrate", "Weeks No"},                    //"Russian",
                 {"Vyberte farbu","Zobraziť rok","Pondelok 1.", "Vibrate", "Weeks No"},             //"Slovak",
                 {"Seleccionar el color","Mostrar año","Lunes 1°", "Vibrate", "Weeks No"},          //"Spanish"

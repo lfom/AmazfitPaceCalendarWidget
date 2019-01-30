@@ -3,10 +3,21 @@ package com.dinodevs.pacecalendarwidget;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.provider.Settings;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Created by GreatApo on 06/04/2018.
@@ -32,10 +43,15 @@ public class APcalendar {
     // Calendar translations
     private APtranslations tranlations;
 
+    private Context mContext;
+    private List<List<Integer>> eventsList;
+    private List<List<String>> eventsTitle;
+
     // Constructor
     APcalendar(View view, Context context, Calendar date, int color){
         this.isMondayFirst = false;
         this.doIvibrate = true;
+        mContext = context;
 
         // Create translations instance
         this.tranlations = new APtranslations();
@@ -219,6 +235,10 @@ public class APcalendar {
     public void refresh(Calendar date) {
         // Update date
         this.setDate(date);
+
+        //Load days with events
+        this.loadCalendarEvents();
+
         // Refresh calendar
         this.refresh();
     }
@@ -248,14 +268,24 @@ public class APcalendar {
 
         // Populate last month boxes
         for (int i = monthStart - 1; i >= 0; i--) {
-            temp_view_boxes[i].setText(String.valueOf(previousMonthDays - monthStart + i + 1));
-            temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
+            int currDay = previousMonthDays - monthStart + i + 1;
+            int prevMonth = this.month > 0 ? this.month - 1 : 11;
+            //Log.i(Constants.TAG, "previous month day: " + currDay);
+            temp_view_boxes[i].setText(String.valueOf(currDay));
             temp_view_boxes[i].setBackgroundResource(android.R.color.transparent);
+            if (eventsList.get(prevMonth).isEmpty()) {
+                temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
+            } else if (eventsList.get(prevMonth).contains(currDay)) {
+                //Log.i(Constants.TAG, "previous month event: " + currDay);
+                temp_view_boxes[i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
+            } else
+                temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
         }
         // Populate month's boxes
         for (int i = 0; i < monthDays; i++) {
-            temp_view_boxes[monthStart + i].setText(String.valueOf(i + 1));
-            if (i + 1 == this.day) {
+            final int thisDay = i + 1;
+            temp_view_boxes[monthStart + i].setText(String.valueOf(thisDay));
+            if (thisDay == this.day) {
                 temp_view_boxes[monthStart + i].setTextColor(Color.parseColor("#000000"));
                 temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg);
                 ((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
@@ -264,12 +294,34 @@ public class APcalendar {
                 temp_view_boxes[monthStart + i].setTextColor(Color.parseColor("#FFFFFF"));
                 temp_view_boxes[monthStart + i].setBackgroundResource(android.R.color.transparent);
             }
+
+            if (eventsList.get(this.month).contains(thisDay)) {
+                //Log.i(Constants.TAG, "this month event: " + thisDay);
+                final int index = eventsList.get(this.month).indexOf(thisDay);
+                temp_view_boxes[monthStart + i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
+                temp_view_boxes[monthStart + i].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        toast(String.format("%s: %s", String.valueOf(thisDay), eventsTitle.get(month).get(index)));
+                    }
+                });
+            }
         }
         // Populate next month's boxes
         for (int i = monthStart + monthDays; i < 42; i++) {
-            temp_view_boxes[i].setText(String.valueOf(i - monthStart - monthDays + 1));
-            temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
+            int currDay = i - monthStart - monthDays + 1;
+            int nextMonth = this.month < 11 ? this.month + 1 : 0;
+            //Log.i(Constants.TAG, "next month day: " + currDay);
+            temp_view_boxes[i].setText(String.valueOf(currDay));
             temp_view_boxes[i].setBackgroundResource(android.R.color.transparent);
+            if (eventsList.get(nextMonth).isEmpty()) {
+                temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
+            } else if (eventsList.get(nextMonth).contains(currDay)) {
+                //Log.i(Constants.TAG, "next month event: " + currDay);
+                temp_view_boxes[i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
+            } else
+                temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
+
         }
 
         // Populate week boxes
@@ -296,5 +348,65 @@ public class APcalendar {
 
     public APtranslations getTranlations() {
         return this.tranlations;
+    }
+
+    private void loadCalendarEvents() {
+
+        // Load data
+        String calendarEvents = Settings.System.getString(mContext.getContentResolver(), "CustomCalendarData");
+
+        List<List<Integer>> events = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            List<Integer> list = new ArrayList<>();
+            events.add(list);
+        }
+
+        List<List<String>> titles = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            List<String> list = new ArrayList<>();
+            titles.add(list);
+        }
+
+        try {
+            // Check if correct form of JSON
+            JSONObject json_data = new JSONObject(calendarEvents);
+
+            // If there are events
+            if( json_data.has("events") ){
+                int event_number = json_data.getJSONArray("events").length();
+
+                Calendar calendar = Calendar.getInstance();
+
+                // Get data
+                for(int i=0; i<event_number; i++) {
+                    JSONArray data = json_data.getJSONArray("events").getJSONArray(i);
+
+                    //Log.i(Constants.TAG, "title: " + data.getString(0) + " \\ start: " + data.getString(2));
+                    if(!data.getString(2).equals("") && !data.getString(2).equals("null")) {
+                        calendar.setTimeInMillis(Long.parseLong(data.getString(2)));
+                        if (calendar.get(Calendar.YEAR) >= this.year) {
+                            titles.get(calendar.get(Calendar.MONTH)).add(data.getString(0));
+                            events.get(calendar.get(Calendar.MONTH)).add(calendar.get(Calendar.DAY_OF_MONTH));
+                            Log.i(Constants.TAG, "month: " + calendar.get(Calendar.MONTH)
+                                    + " \\ days: " + events.get(calendar.get(Calendar.MONTH)).toString());
+                        }
+                    }
+
+                }
+            }
+        } catch (JSONException e) {
+            Log.e(Constants.TAG, e.getLocalizedMessage(), e);
+        }
+
+        this.eventsList = events;
+        this.eventsTitle = titles;
+    }
+
+    // Toast wrapper
+    private void toast(String message) {
+        Toast toast = Toast.makeText(this.mContext, message, Toast.LENGTH_SHORT);
+        TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+        if( v != null) v.setGravity(Gravity.CENTER);
+        toast.show();
     }
 }

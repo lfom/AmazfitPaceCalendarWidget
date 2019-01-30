@@ -12,7 +12,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/NormalAppTheme">
+        android:theme="@style/NormalAppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <meta-data android:name="com.huami.watch.launcher.springboard.PASSAGER_TARGET" android:resource="@array/spring_depend" />
+
+        <activity
+            android:label="@string/timeline_name"
+            android:name=".Timeline" />
+
     </application>
 </manifest>

@@ -157,7 +157,7 @@ public class widget extends AbstractPlugin {
 
             @Override
             public boolean onDoubleClick() {// Not onLongClick
-                //public boolean onLongClick() {
+            //public boolean onLongClick() {
                 if(widget.this.isActive) {
                     // Open settings
                     // Log.d(Constants.TAG, "Pop settings");

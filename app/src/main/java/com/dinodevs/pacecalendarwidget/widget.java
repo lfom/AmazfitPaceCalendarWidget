@@ -136,7 +136,7 @@ public class widget extends AbstractPlugin {
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                widget.this.toast("Pace Calendar Widget v" + widget.this.version + " by GreatApo & DarkThanos" + (widget.this.errors.length() > 0 ? " Errors: " + widget.this.errors : ""));
+                widget.this.toast("Calendar Widget v" + widget.this.version + " by GreatApo, LFOM & DarkThanos" + (widget.this.errors.length() > 0 ? " Errors: " + widget.this.errors : ""));
                 widget.this.vibrate();
             }
         });
@@ -291,15 +291,15 @@ public class widget extends AbstractPlugin {
         });
 
         //Timeline
-        TextView month = this.mView.findViewById(R.id.textMonth);
-        month.setOnLongClickListener(new View.OnLongClickListener() {
+        TextView events = this.mView.findViewById(R.id.events_icon);
+        events.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
+            public void onClick(View v) {
+                toast("Loading events...");
                 final Intent timelineIntent = new Intent(mContext, Timeline.class);
                 timelineIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                         Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 mContext.startActivity(timelineIntent);
-                return false;
             }
         });
     }

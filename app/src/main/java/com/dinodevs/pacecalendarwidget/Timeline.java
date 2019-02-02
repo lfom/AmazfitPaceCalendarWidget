@@ -92,7 +92,6 @@ public class Timeline extends Activity {
         } else {
             header_pattern = Constants.HEADER_PATTERN_12H;
             time_pattern = Constants.TIME_PATTERN_12H;
-
         }
 
         // Show Time/Date
@@ -114,7 +113,7 @@ public class Timeline extends Activity {
             @Override
             public void onClick(View v) {
                 refresh_time();
-                Timeline.this.toast("Timeline Widget v" + Timeline.this.version + " by GreatApo");
+                Timeline.this.toast("Calendar Widget v" + Timeline.this.version + " by GreatApo, LFOM & DarkThanos");
             }
         });
         // Refresh events
@@ -123,7 +122,7 @@ public class Timeline extends Activity {
             public boolean onLongClick(View v) {
                 refresh_time();
                 loadCalendarEvents();
-                Timeline.this.toast("Refreshing events...");
+                Timeline.this.toast("Events were refreshed...");
                 return true;
             }
         });
@@ -134,7 +133,6 @@ public class Timeline extends Activity {
             public void onClick(View v) {
                 ListView list = Timeline.this.mView.findViewById(R.id.list);
                 list.setSelectionAfterHeaderView();
-                //Timeline.this.toast("▲ Top");
             }
         });
     }
@@ -287,7 +285,6 @@ public class Timeline extends Activity {
                     || !calendarEvents.equals(Settings.System.getString(mContext.getContentResolver(), "CustomCalendarData")) ) {
                 // Refresh timeline
                 loadCalendarEvents();
-                Timeline.this.toast("Refreshing events...");
             }
         }
         // Save state

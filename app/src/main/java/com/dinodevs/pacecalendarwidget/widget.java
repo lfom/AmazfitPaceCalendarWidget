@@ -642,5 +642,4 @@ public class widget extends AbstractPlugin {
         super.onDestroy();
     }
 
-
 }

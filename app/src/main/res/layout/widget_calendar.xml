@@ -47,7 +47,6 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_marginRight="24dp"
             app:layout_constraintEnd_toStartOf="@+id/arrow_down"
             app:layout_constraintStart_toEndOf="@+id/arrow_up"
@@ -59,49 +58,56 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:text="Sun"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/day2"
                 style="@style/DayHeaderText"
                 android:layout_height="wrap_content"
                 android:text="Mon"
-                app:layout_constraintStart_toEndOf="@+id/day1" />
+                app:layout_constraintStart_toEndOf="@+id/day1"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/day3"
                 style="@style/DayHeaderText"
                 android:layout_height="wrap_content"
                 android:text="Tue"
-                app:layout_constraintStart_toEndOf="@+id/day2" />
+                app:layout_constraintStart_toEndOf="@+id/day2"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/day4"
                 style="@style/DayHeaderText"
                 android:layout_height="wrap_content"
                 android:text="Wed"
-                app:layout_constraintStart_toEndOf="@+id/day3" />
+                app:layout_constraintStart_toEndOf="@+id/day3"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/day5"
                 style="@style/DayHeaderText"
                 android:layout_height="wrap_content"
                 android:text="Thu"
-                app:layout_constraintStart_toEndOf="@+id/day4" />
+                app:layout_constraintStart_toEndOf="@+id/day4"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/day6"
                 style="@style/DayHeaderText"
                 android:layout_height="wrap_content"
                 android:text="Fri"
-                app:layout_constraintStart_toEndOf="@+id/day5" />
+                app:layout_constraintStart_toEndOf="@+id/day5"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/day7"
                 style="@style/DayHeaderText"
                 android:layout_height="wrap_content"
                 android:text="Sat"
-                app:layout_constraintStart_toEndOf="@+id/day6" />
+                app:layout_constraintStart_toEndOf="@+id/day6"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/calbox1"
@@ -116,49 +122,49 @@
                 style="@style/NumberText"
                 android:text="27"
                 app:layout_constraintStart_toEndOf="@+id/calbox1"
-                app:layout_constraintTop_toBottomOf="@+id/day2" />
+                app:layout_constraintTop_toBottomOf="@+id/day2"/>
 
             <TextView
                 android:id="@+id/calbox3"
                 style="@style/NumberText"
                 android:text="28"
                 app:layout_constraintStart_toEndOf="@+id/calbox2"
-                app:layout_constraintTop_toBottomOf="@+id/day3" />
+                app:layout_constraintTop_toBottomOf="@+id/day3"/>
 
             <TextView
                 android:id="@+id/calbox4"
                 style="@style/NumberText"
                 android:text="29"
                 app:layout_constraintStart_toEndOf="@+id/calbox3"
-                app:layout_constraintTop_toBottomOf="@+id/day4" />
+                app:layout_constraintTop_toBottomOf="@+id/day4"/>
 
             <TextView
                 android:id="@+id/calbox5"
                 style="@style/NumberText"
                 android:text="30"
                 app:layout_constraintStart_toEndOf="@+id/calbox4"
-                app:layout_constraintTop_toBottomOf="@+id/day5" />
+                app:layout_constraintTop_toBottomOf="@+id/day5"/>
 
             <TextView
                 android:id="@+id/calbox6"
                 style="@style/NumberText"
                 android:text="1"
                 app:layout_constraintStart_toEndOf="@+id/calbox5"
-                app:layout_constraintTop_toBottomOf="@+id/day6" />
+                app:layout_constraintTop_toBottomOf="@+id/day6"/>
 
             <TextView
                 android:id="@+id/calbox7"
                 style="@style/NumberText"
                 android:text="2"
                 app:layout_constraintStart_toEndOf="@+id/calbox6"
-                app:layout_constraintTop_toBottomOf="@+id/day7" />
+                app:layout_constraintTop_toBottomOf="@+id/day7"/>
 
             <TextView
                 android:id="@+id/week1"
                 style="@style/WeekText"
                 android:text="99"
                 app:layout_constraintStart_toEndOf="@+id/calbox7"
-                app:layout_constraintTop_toBottomOf="@+id/day7" />
+                app:layout_constraintTop_toBottomOf="@+id/day7"/>
 
             <TextView
                 android:id="@+id/calbox8"
@@ -166,56 +172,56 @@
                 android:layout_marginStart="30dp"
                 android:text="3"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calbox1" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox1"/>
 
             <TextView
                 android:id="@+id/calbox9"
                 style="@style/NumberText"
                 android:text="4"
                 app:layout_constraintStart_toEndOf="@+id/calbox8"
-                app:layout_constraintTop_toBottomOf="@+id/calbox2" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox2"/>
 
             <TextView
                 android:id="@+id/calbox10"
                 style="@style/NumberText"
                 android:text="5"
                 app:layout_constraintStart_toEndOf="@+id/calbox9"
-                app:layout_constraintTop_toBottomOf="@+id/calbox3" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox3"/>
 
             <TextView
                 android:id="@+id/calbox11"
                 style="@style/NumberText"
                 android:text="6"
                 app:layout_constraintStart_toEndOf="@+id/calbox10"
-                app:layout_constraintTop_toBottomOf="@+id/calbox4" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox4"/>
 
             <TextView
                 android:id="@+id/calbox12"
                 style="@style/NumberText"
                 android:text="7"
                 app:layout_constraintStart_toEndOf="@+id/calbox11"
-                app:layout_constraintTop_toBottomOf="@+id/calbox5" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox5"/>
 
             <TextView
                 android:id="@+id/calbox13"
                 style="@style/NumberText"
                 android:text="8"
                 app:layout_constraintStart_toEndOf="@+id/calbox12"
-                app:layout_constraintTop_toBottomOf="@+id/calbox6" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox6"/>
 
             <TextView
                 android:id="@+id/calbox14"
                 style="@style/NumberText"
                 android:text="9"
                 app:layout_constraintStart_toEndOf="@+id/calbox13"
-                app:layout_constraintTop_toBottomOf="@+id/calbox7" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox7"/>
 
             <TextView
                 android:id="@+id/week2"
                 style="@style/WeekText"
                 android:text="99"
                 app:layout_constraintStart_toEndOf="@+id/calbox14"
-                app:layout_constraintTop_toBottomOf="@+id/calbox7" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox7"/>
 
             <TextView
                 android:id="@+id/calbox15"
@@ -223,56 +229,56 @@
                 android:layout_marginStart="30dp"
                 android:text="10"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calbox8" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox8"/>
 
             <TextView
                 android:id="@+id/calbox16"
                 style="@style/NumberText"
                 android:text="11"
                 app:layout_constraintStart_toEndOf="@+id/calbox15"
-                app:layout_constraintTop_toBottomOf="@+id/calbox9" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox9"/>
 
             <TextView
                 android:id="@+id/calbox17"
                 style="@style/NumberText"
                 android:text="12"
                 app:layout_constraintStart_toEndOf="@+id/calbox16"
-                app:layout_constraintTop_toBottomOf="@+id/calbox10" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox10"/>
 
             <TextView
                 android:id="@+id/calbox18"
                 style="@style/NumberText"
                 android:text="13"
                 app:layout_constraintStart_toEndOf="@+id/calbox17"
-                app:layout_constraintTop_toBottomOf="@+id/calbox11" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox11"/>
 
             <TextView
                 android:id="@+id/calbox19"
                 style="@style/NumberText"
                 android:text="14"
                 app:layout_constraintStart_toEndOf="@+id/calbox18"
-                app:layout_constraintTop_toBottomOf="@+id/calbox12" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox12"/>
 
             <TextView
                 android:id="@+id/calbox20"
                 style="@style/NumberText"
                 android:text="15"
                 app:layout_constraintStart_toEndOf="@+id/calbox19"
-                app:layout_constraintTop_toBottomOf="@+id/calbox13" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox13"/>
 
             <TextView
                 android:id="@+id/calbox21"
                 style="@style/NumberText"
                 android:text="16"
                 app:layout_constraintStart_toEndOf="@+id/calbox20"
-                app:layout_constraintTop_toBottomOf="@+id/calbox14" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox14"/>
 
             <TextView
                 android:id="@+id/week3"
                 style="@style/WeekText"
                 android:text="99"
                 app:layout_constraintStart_toEndOf="@+id/calbox21"
-                app:layout_constraintTop_toBottomOf="@+id/calbox14" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox14"/>
 
             <TextView
                 android:id="@+id/calbox22"
@@ -280,56 +286,56 @@
                 android:layout_marginStart="30dp"
                 android:text="17"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calbox15" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox15"/>
 
             <TextView
                 android:id="@+id/calbox23"
                 style="@style/NumberText"
                 android:text="18"
                 app:layout_constraintStart_toEndOf="@+id/calbox22"
-                app:layout_constraintTop_toBottomOf="@+id/calbox16" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox16"/>
 
             <TextView
                 android:id="@+id/calbox24"
                 style="@style/NumberText"
                 android:text="19"
                 app:layout_constraintStart_toEndOf="@+id/calbox23"
-                app:layout_constraintTop_toBottomOf="@+id/calbox17" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox17"/>
 
             <TextView
                 android:id="@+id/calbox25"
                 style="@style/NumberText"
                 android:text="20"
                 app:layout_constraintStart_toEndOf="@+id/calbox24"
-                app:layout_constraintTop_toBottomOf="@+id/calbox18" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox18"/>
 
             <TextView
                 android:id="@+id/calbox26"
                 style="@style/NumberText"
                 android:text="21"
                 app:layout_constraintStart_toEndOf="@+id/calbox25"
-                app:layout_constraintTop_toBottomOf="@+id/calbox19" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox19"/>
 
             <TextView
                 android:id="@+id/calbox27"
                 style="@style/NumberText"
                 android:text="22"
                 app:layout_constraintStart_toEndOf="@+id/calbox26"
-                app:layout_constraintTop_toBottomOf="@+id/calbox20" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox20"/>
 
             <TextView
                 android:id="@+id/calbox28"
                 style="@style/NumberText"
                 android:text="23"
                 app:layout_constraintStart_toEndOf="@+id/calbox27"
-                app:layout_constraintTop_toBottomOf="@+id/calbox21" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox21"/>
 
             <TextView
                 android:id="@+id/week4"
                 style="@style/WeekText"
                 android:text="99"
                 app:layout_constraintStart_toEndOf="@+id/calbox28"
-                app:layout_constraintTop_toBottomOf="@+id/calbox21" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox21"/>
 
             <TextView
                 android:id="@+id/calbox29"
@@ -337,56 +343,56 @@
                 android:layout_marginStart="30dp"
                 android:text="24"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calbox22" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox22"/>
 
             <TextView
                 android:id="@+id/calbox30"
                 style="@style/NumberText"
                 android:text="25"
                 app:layout_constraintStart_toEndOf="@+id/calbox29"
-                app:layout_constraintTop_toBottomOf="@+id/calbox23" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox23"/>
 
             <TextView
                 android:id="@+id/calbox31"
                 style="@style/NumberText"
                 android:text="26"
                 app:layout_constraintStart_toEndOf="@+id/calbox30"
-                app:layout_constraintTop_toBottomOf="@+id/calbox24" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox24"/>
 
             <TextView
                 android:id="@+id/calbox32"
                 style="@style/NumberText"
                 android:text="27"
                 app:layout_constraintStart_toEndOf="@+id/calbox31"
-                app:layout_constraintTop_toBottomOf="@+id/calbox25" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox25"/>
 
             <TextView
                 android:id="@+id/calbox33"
                 style="@style/NumberText"
                 android:text="28"
                 app:layout_constraintStart_toEndOf="@+id/calbox32"
-                app:layout_constraintTop_toBottomOf="@+id/calbox26" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox26"/>
 
             <TextView
                 android:id="@+id/calbox34"
                 style="@style/NumberText"
                 android:text="29"
                 app:layout_constraintStart_toEndOf="@+id/calbox33"
-                app:layout_constraintTop_toBottomOf="@+id/calbox27" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox27"/>
 
             <TextView
                 android:id="@+id/calbox35"
                 style="@style/NumberText"
                 android:text="30"
                 app:layout_constraintStart_toEndOf="@+id/calbox34"
-                app:layout_constraintTop_toBottomOf="@+id/calbox28" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox28"/>
 
             <TextView
                 android:id="@+id/week5"
                 style="@style/WeekText"
                 android:text="99"
                 app:layout_constraintStart_toEndOf="@+id/calbox35"
-                app:layout_constraintTop_toBottomOf="@+id/calbox28" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox28"/>
 
             <TextView
                 android:id="@+id/calbox36"
@@ -394,214 +400,58 @@
                 android:layout_marginStart="30dp"
                 android:text="31"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calbox29" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox29"/>
 
             <TextView
                 android:id="@+id/calbox37"
                 style="@style/NumberText"
                 android:text="1"
                 app:layout_constraintStart_toEndOf="@+id/calbox36"
-                app:layout_constraintTop_toBottomOf="@+id/calbox30" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox30"/>
 
             <TextView
                 android:id="@+id/calbox38"
                 style="@style/NumberText"
                 android:text="2"
                 app:layout_constraintStart_toEndOf="@+id/calbox37"
-                app:layout_constraintTop_toBottomOf="@+id/calbox31" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox31"/>
 
             <TextView
                 android:id="@+id/calbox39"
                 style="@style/NumberText"
                 android:text="3"
                 app:layout_constraintStart_toEndOf="@+id/calbox38"
-                app:layout_constraintTop_toBottomOf="@+id/calbox32" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox32"/>
 
             <TextView
                 android:id="@+id/calbox40"
                 style="@style/NumberText"
                 android:text="4"
                 app:layout_constraintStart_toEndOf="@+id/calbox39"
-                app:layout_constraintTop_toBottomOf="@+id/calbox33" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox33"/>
 
             <TextView
                 android:id="@+id/calbox41"
                 style="@style/NumberText"
                 android:text="5"
                 app:layout_constraintStart_toEndOf="@+id/calbox40"
-                app:layout_constraintTop_toBottomOf="@+id/calbox34" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox34"/>
 
             <TextView
                 android:id="@+id/calbox42"
                 style="@style/NumberText"
                 android:text="6"
                 app:layout_constraintStart_toEndOf="@+id/calbox41"
-                app:layout_constraintTop_toBottomOf="@+id/calbox35" />
+                app:layout_constraintTop_toBottomOf="@+id/calbox35"/>
 
-    <TextView
-        android:id="@+id/refresh"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:gravity="center|top"
-        android:text="↺"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.963"
-        app:layout_constraintHorizontal_bias="0.32" />
+            <TextView
+                android:id="@+id/week6"
+                style="@style/WeekText"
+                android:text="99"
+                app:layout_constraintStart_toEndOf="@+id/calbox42"
+                app:layout_constraintTop_toBottomOf="@+id/calbox35"/>
 
         </android.support.constraint.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/settings_icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:text="✎"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.963" />
-
-    <TextView
-        android:id="@+id/events_icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:text="⌸"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.963" />
-
-    <TextView
-        android:id="@+id/arrow_up"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:text="△"
-        android:textColor="#efb171"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/arrow_down"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:text="▽"
-        android:textColor="#efb171"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/settings_box"
-        android:layout_width="190dp"
-        android:layout_height="190dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="18dp"
-        android:background="@drawable/settings_bg"
-        android:clickable="true"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <CheckBox
-            android:id="@+id/year_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:checked="false"
-            android:gravity="center"
-            android:text="Show year"
-            android:textColor="#000"
-            android:textOff=""
-            android:textOn=""
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.10"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.56" />
-
-        <CheckBox
-            android:id="@+id/monday_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:checked="false"
-            android:gravity="center"
-            android:text="Monday 1st"
-            android:textColor="#000"
-            android:textOff=""
-            android:textOn=""
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.12"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.67" />
-
-        <CheckBox
-            android:id="@+id/vibrate_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:checked="false"
-            android:gravity="center"
-            android:text="Vibrate"
-            android:textColor="#000"
-            android:textOff=""
-            android:textOn=""
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.15"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.78" />
-
-        <CheckBox
-            android:id="@+id/week_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:checked="false"
-            android:gravity="center"
-            android:text="Weeks No"
-            android:textColor="#000"
-            android:textOff=""
-            android:textOn=""
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.95"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.56" />
 
         <TextView
             android:id="@+id/refresh"
@@ -616,8 +466,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.963"
-            app:layout_constraintHorizontal_bias="0.40" />
-
+            app:layout_constraintHorizontal_bias="0.32" />
 
         <TextView
             android:id="@+id/settings_icon"
@@ -630,7 +479,23 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.963" />
+
+        <TextView
+            android:id="@+id/events_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="⌸"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.68"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.963" />
@@ -674,7 +539,6 @@
             android:background="@drawable/settings_bg"
             android:clickable="true"
             android:visibility="gone"
-            tools:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

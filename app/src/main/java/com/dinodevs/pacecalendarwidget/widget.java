@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.text.SimpleDateFormat;
@@ -171,7 +172,7 @@ public class widget extends AbstractPlugin {
         layout.setOnTouchListener(handler.listen());
 
         // Open Settings button
-        TextView open_settings_button = this.mView.findViewById(R.id.settings_icon);
+        ImageView open_settings_button = this.mView.findViewById(R.id.settings_icon);
         open_settings_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -258,7 +259,7 @@ public class widget extends AbstractPlugin {
         });
 
         // Refresh current date
-        TextView refresh_button = this.mView.findViewById(R.id.refresh);
+        ImageView refresh_button = this.mView.findViewById(R.id.refresh);
         refresh_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -291,7 +292,7 @@ public class widget extends AbstractPlugin {
         });
 
         //Timeline
-        TextView events = this.mView.findViewById(R.id.events_icon);
+        ImageView events = this.mView.findViewById(R.id.events_icon);
         events.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -641,6 +642,5 @@ public class widget extends AbstractPlugin {
     public void onDestroy() {
         super.onDestroy();
     }
-
 
 }

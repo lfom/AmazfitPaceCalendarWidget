@@ -273,11 +273,13 @@ public class APcalendar {
             //Log.i(Constants.TAG, "previous month day: " + currDay);
             temp_view_boxes[i].setText(String.valueOf(currDay));
             temp_view_boxes[i].setBackgroundResource(android.R.color.transparent);
-            if (eventsList.get(prevMonth).isEmpty()) {
-                temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
-            } else if (eventsList.get(prevMonth).contains(currDay)) {
-                //Log.i(Constants.TAG, "previous month event: " + currDay);
-                temp_view_boxes[i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
+            if (eventsList != null) {
+                if (eventsList.get(prevMonth).isEmpty()) {
+                    temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
+                } else if (eventsList.get(prevMonth).contains(currDay)) {
+                    //Log.i(Constants.TAG, "previous month event: " + currDay);
+                    temp_view_boxes[i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
+                }
             } else
                 temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
         }
@@ -295,16 +297,18 @@ public class APcalendar {
                 temp_view_boxes[monthStart + i].setBackgroundResource(android.R.color.transparent);
             }
 
-            if (eventsList.get(this.month).contains(thisDay)) {
-                //Log.i(Constants.TAG, "this month event: " + thisDay);
-                final int index = eventsList.get(this.month).indexOf(thisDay);
-                temp_view_boxes[monthStart + i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
-                temp_view_boxes[monthStart + i].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        toast(String.format("%s: %s", String.valueOf(thisDay), eventsTitle.get(month).get(index)));
-                    }
-                });
+            if (eventsList != null) {
+                if (eventsList.get(this.month).contains(thisDay)) {
+                    //Log.i(Constants.TAG, "this month event: " + thisDay);
+                    final int index = eventsList.get(this.month).indexOf(thisDay);
+                    temp_view_boxes[monthStart + i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
+                    temp_view_boxes[monthStart + i].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            toast(String.format("%s: %s", String.valueOf(thisDay), eventsTitle.get(month).get(index)));
+                        }
+                    });
+                }
             }
         }
         // Populate next month's boxes
@@ -314,11 +318,13 @@ public class APcalendar {
             //Log.i(Constants.TAG, "next month day: " + currDay);
             temp_view_boxes[i].setText(String.valueOf(currDay));
             temp_view_boxes[i].setBackgroundResource(android.R.color.transparent);
-            if (eventsList.get(nextMonth).isEmpty()) {
-                temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
-            } else if (eventsList.get(nextMonth).contains(currDay)) {
-                //Log.i(Constants.TAG, "next month event: " + currDay);
-                temp_view_boxes[i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
+            if (eventsList != null) {
+                if (eventsList.get(nextMonth).isEmpty()) {
+                    temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
+                } else if (eventsList.get(nextMonth).contains(currDay)) {
+                    //Log.i(Constants.TAG, "next month event: " + currDay);
+                    temp_view_boxes[i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
+                }
             } else
                 temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
 
@@ -353,7 +359,7 @@ public class APcalendar {
     private void loadCalendarEvents() {
 
         // Load data
-        String calendarEvents = Settings.System.getString(mContext.getContentResolver(), "CustomCalendarData");
+        String calendarEvents = Settings.System.getString(mContext.getContentResolver(), Constants.CALENDAR_DATA);
 
         List<List<Integer>> events = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
@@ -367,39 +373,41 @@ public class APcalendar {
             titles.add(list);
         }
 
-        try {
-            // Check if correct form of JSON
-            JSONObject json_data = new JSONObject(calendarEvents);
+        if (calendarEvents != null && !calendarEvents.isEmpty()) {
+            try {
+                // Check if correct form of JSON
+                JSONObject json_data = new JSONObject(calendarEvents);
 
-            // If there are events
-            if( json_data.has("events") ){
-                int event_number = json_data.getJSONArray("events").length();
+                // If there are events
+                if (json_data.has("events")) {
+                    int event_number = json_data.getJSONArray("events").length();
 
-                Calendar calendar = Calendar.getInstance();
+                    Calendar calendar = Calendar.getInstance();
 
-                // Get data
-                for(int i=0; i<event_number; i++) {
-                    JSONArray data = json_data.getJSONArray("events").getJSONArray(i);
+                    // Get data
+                    for (int i = 0; i < event_number; i++) {
+                        JSONArray data = json_data.getJSONArray("events").getJSONArray(i);
 
-                    //Log.i(Constants.TAG, "title: " + data.getString(0) + " \\ start: " + data.getString(2));
-                    if(!data.getString(2).equals("") && !data.getString(2).equals("null")) {
-                        calendar.setTimeInMillis(Long.parseLong(data.getString(2)));
-                        if (calendar.get(Calendar.YEAR) >= this.year) {
-                            titles.get(calendar.get(Calendar.MONTH)).add(data.getString(0));
-                            events.get(calendar.get(Calendar.MONTH)).add(calendar.get(Calendar.DAY_OF_MONTH));
-                            Log.i(Constants.TAG, "month: " + calendar.get(Calendar.MONTH)
-                                    + " \\ days: " + events.get(calendar.get(Calendar.MONTH)).toString());
+                        //Log.i(Constants.TAG, "title: " + data.getString(0) + " \\ start: " + data.getString(2));
+                        if (!data.getString(2).equals("") && !data.getString(2).equals("null")) {
+                            calendar.setTimeInMillis(Long.parseLong(data.getString(2)));
+                            if (calendar.get(Calendar.YEAR) >= this.year) {
+                                titles.get(calendar.get(Calendar.MONTH)).add(data.getString(0));
+                                events.get(calendar.get(Calendar.MONTH)).add(calendar.get(Calendar.DAY_OF_MONTH));
+                                Log.i(Constants.TAG, "month: " + calendar.get(Calendar.MONTH)
+                                        + " \\ days: " + events.get(calendar.get(Calendar.MONTH)).toString());
+                            }
                         }
+
                     }
-
                 }
+            } catch (JSONException e) {
+                Log.e(Constants.TAG, e.getLocalizedMessage(), e);
             }
-        } catch (JSONException e) {
-            Log.e(Constants.TAG, e.getLocalizedMessage(), e);
-        }
 
-        this.eventsList = events;
-        this.eventsTitle = titles;
+            this.eventsList = events;
+            this.eventsTitle = titles;
+        }
     }
 
     // Toast wrapper

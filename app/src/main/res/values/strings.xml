@@ -5,4 +5,7 @@
     <string name="bull">⚫</string>
     <string name="refresh">↺</string>
     <string name="top">▲</string>
+    <string name="today">Today</string>
+    <string name="all_day">All Day</string>
+    <string name="no_events">No events</string>
 </resources>

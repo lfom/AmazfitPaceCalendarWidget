@@ -299,6 +299,7 @@ public class widget extends AbstractPlugin {
                 timelineIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                         Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 mContext.startActivity(timelineIntent);
+                widget.this.toast("Loading Timeline...");
                 return false;
             }
         });

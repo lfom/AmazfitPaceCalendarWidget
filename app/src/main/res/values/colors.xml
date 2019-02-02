@@ -9,4 +9,10 @@
     <color name="basecolor4">#9b27ae</color>
     <color name="basecolor5">#efb171</color>
     <color name="basecolor6">#ffec3a</color>
+    <!-- Timeline -->
+    <color name="time">#ADADAD</color>
+    <color name="date">#ADADAD</color>
+    <color name="bull">#C92626</color>
+    <color name="title">#FFFFFF</color>
+    <color name="description">#C7C7C7</color>
 </resources>

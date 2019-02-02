@@ -1,4 +1,4 @@
-[![latest release](https://img.shields.io/badge/latest%20release-v1.8.0-green.svg?style=flat-square) ![release date](https://img.shields.io/badge/release%20date-2019.01.16-orange.svg?style=flat-square)](https://github.com/GreatApo/AmazfitPaceCalendarWidget/releases/latest)
+[![latest release](https://img.shields.io/badge/latest%20release-v1.9.0-green.svg?style=flat-square) ![release date](https://img.shields.io/badge/release%20date-2019.02.02-orange.svg?style=flat-square)](https://github.com/GreatApo/AmazfitPaceCalendarWidget/releases/latest)
 
 # Amazfit Pace/Stratos/Verge Calendar Widget
 ![Amazfit Pace Calendar Widget Banner](other%20files/amazfit-calendar-widget.png)
@@ -21,6 +21,8 @@ So, here is the first Calendar Widget for our Amazfit Pace/Stratos!
 - Supported languages: English, Chinese, Czech, Dutch, French, German, Greek, Hebrew, Hungarian, Italian, Japanese, Korean, Polish, Portuguese, Romanian, Russian, Slovak, Spanish, Thai, Turkish
 - Right to left Calendar support
 - Settings are saved
+- Calendar events are shown (requires Amazmod phone + watch)
+- [Timeline Widget](https://forum.xda-developers.com/smartwatch/amazfit/app-widget-timeline-v1-0-1-pace-stratos-t3894632) is also integrated in the calendar
 
 
 
@@ -56,11 +58,13 @@ adb shell am force-stop com.huami.watch.launcher
 This project was made possible by:
 
  - GreatApo - *Widget Creator* - [ [Github](https://github.com/GreatApo) | [XDA](https://forum.xda-developers.com/member.php?u=3668555) ]
+ - LFOM - *Widget Developer*
  - Quinny899 - *Widget Example Creator / Springboard Settings Creator* - [ [Github](https://github.com/KieronQuinn) | [XDA](https://forum.xda-developers.com/member.php?u=3563640) ]
  - XDA developers community (testers, translators, developers)
 
 Some more links:
 
  - GreatApo's [Amazfit Pace Calendar Widget - XDA topic](https://forum.xda-developers.com/smartwatch/amazfit/app-widget-calendar-pace-t3751889)
+ - GreatApo's [Amazfit Timeline Widget - XDA topic](https://forum.xda-developers.com/smartwatch/amazfit/app-widget-timeline-v1-0-1-pace-stratos-t3894632)
  - Quinny's [Springboard Settings - XDA topic](https://forum.xda-developers.com/smartwatch/amazfit/app-springboard-settings-pace-rearrange-t3748651)
  - Quinny's [Widget Creation guide - XDA topic](https://forum.xda-developers.com/smartwatch/amazfit/dev-create-custom-home-screen-pages-pace-t3751731).

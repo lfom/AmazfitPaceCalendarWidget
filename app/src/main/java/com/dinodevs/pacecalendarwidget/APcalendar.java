@@ -3,6 +3,7 @@ package com.dinodevs.pacecalendarwidget;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
@@ -306,7 +307,14 @@ public class APcalendar {
 
                 if (thisDay == this.day) {
                     temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event_today);
-                    ((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
+
+                    LayerDrawable shape = (LayerDrawable) mContext.getResources().getDrawable(R.drawable.round_bg_event_today);
+                    GradientDrawable circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.outer_circle);
+                    circle.setColor(this.color);
+                    circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.inner_circle);
+                    circle.setColor(this.color);
+
+                    //((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
                 }
                 else {
                     temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event);
@@ -411,8 +419,7 @@ public class APcalendar {
                                 );
                                 // Save day
                                 events.get(calendar.get(Calendar.MONTH)).add(calendar.get(Calendar.DAY_OF_MONTH));
-                                Log.i(Constants.TAG, "month: " + calendar.get(Calendar.MONTH)
-                                        + " \\ days: " + events.get(calendar.get(Calendar.MONTH)).toString());
+                                //Log.i(Constants.TAG, "month: " + calendar.get(Calendar.MONTH) + " \\ days: " + events.get(calendar.get(Calendar.MONTH)).toString());
                             }
                         }
 

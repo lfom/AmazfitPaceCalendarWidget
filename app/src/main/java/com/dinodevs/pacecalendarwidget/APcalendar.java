@@ -273,19 +273,11 @@ public class APcalendar {
         // Populate last month boxes
         for (int i = monthStart - 1; i >= 0; i--) {
             int currDay = previousMonthDays - monthStart + i + 1;
-            int prevMonth = this.month > 0 ? this.month - 1 : 11;
+            //int prevMonth = this.month > 0 ? this.month - 1 : 11;
             //Log.i(Constants.TAG, "previous month day: " + currDay);
             temp_view_boxes[i].setText(String.valueOf(currDay));
             temp_view_boxes[i].setBackgroundResource(android.R.color.transparent);
-            if (eventsList != null) {
-                if (eventsList.get(prevMonth).isEmpty()) {
-                    temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
-                } else if (eventsList.get(prevMonth).contains(currDay)) {
-                    //Log.i(Constants.TAG, "previous month event: " + currDay);
-                    temp_view_boxes[i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
-                }
-            } else
-                temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
+            temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
         }
         // Populate month's boxes
         for (int i = 0; i < monthDays; i++) {
@@ -300,56 +292,48 @@ public class APcalendar {
                 temp_view_boxes[monthStart + i].setTextColor(Color.parseColor("#FFFFFF"));
                 temp_view_boxes[monthStart + i].setBackgroundResource(android.R.color.transparent);
             }
-          
+
             if (eventsList != null) {
                 if (eventsList.get(this.month).contains(thisDay)) {
-                  //Log.i(Constants.TAG, "this month event: " + thisDay);
-                  final int index = eventsList.get(this.month).indexOf(thisDay);
+                    //Log.i(Constants.TAG, "this month event: " + thisDay);
+                    final int index = eventsList.get(this.month).indexOf(thisDay);
 
-                  //temp_view_boxes[monthStart + i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
+                    //temp_view_boxes[monthStart + i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
 
-                  if (thisDay == this.day) {
-                      temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event_today);
+                    if (thisDay == this.day) {
+                        temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event_today);
 
-                      LayerDrawable shape = (LayerDrawable) mContext.getResources().getDrawable(R.drawable.round_bg_event_today);
-                      GradientDrawable circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.outer_circle);
-                      circle.setColor(this.color);
-                      circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.inner_circle);
-                      circle.setColor(this.color);
+                        LayerDrawable shape = (LayerDrawable) mContext.getResources().getDrawable(R.drawable.round_bg_event_today);
+                        GradientDrawable circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.outer_circle);
+                        circle.setColor(this.color);
+                        circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.inner_circle);
+                        circle.setColor(this.color);
 
-                      //((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
-                  }
-                  else {
-                      temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event);
-                      ((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
-                  }
+                        //((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
+                    } else {
+                        temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event);
+                        ((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
+                    }
 
-                  temp_view_boxes[monthStart + i].setOnClickListener(new View.OnClickListener() {
-                      @Override
-                      public void onClick(View v) {
-                          toast( String.valueOf(thisDay) + "/" + String.valueOf(month+1) +" - "+ eventsHours.get(month).get(index) +"\n"+ eventsTitle.get(month).get(index));
-                      }
-                  });
-                }
-            }
+                    temp_view_boxes[monthStart + i].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            toast(String.valueOf(thisDay) + "/" + String.valueOf(month + 1) + " - " + eventsHours.get(month).get(index) + "\n" + eventsTitle.get(month).get(index));
+                        }
+                    });
+                } else
+                    temp_view_boxes[monthStart + i].setOnClickListener(null);
+            } else
+                temp_view_boxes[monthStart + i].setOnClickListener(null);
         }
         // Populate next month's boxes
         for (int i = monthStart + monthDays; i < 42; i++) {
             int currDay = i - monthStart - monthDays + 1;
-            int nextMonth = this.month < 11 ? this.month + 1 : 0;
+            //int nextMonth = this.month < 11 ? this.month + 1 : 0;
             //Log.i(Constants.TAG, "next month day: " + currDay);
             temp_view_boxes[i].setText(String.valueOf(currDay));
             temp_view_boxes[i].setBackgroundResource(android.R.color.transparent);
-          
-            if (eventsList != null) {
-               if (eventsList.get(nextMonth).isEmpty()) {
-                  temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
-              } else if (eventsList.get(nextMonth).contains(currDay)) {
-                  temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event);
-                  ((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(Color.parseColor("#505050"));
-              } else
-                  temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
-            }
+            temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
         }
 
         // Populate week boxes
@@ -398,7 +382,7 @@ public class APcalendar {
             hours.add(list2);
         }
 
-        if (calendarEvents != null && !calendarEvents.isEmpty()) {
+        if(calendarEvents!=null && !calendarEvents.isEmpty()) {
             try {
                 // Check if correct form of JSON
                 JSONObject json_data = new JSONObject(calendarEvents);

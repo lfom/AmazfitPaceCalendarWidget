@@ -90,6 +90,7 @@ public class Timeline extends Activity {
         } else {
             header_pattern = Constants.HEADER_PATTERN_12H;
             time_pattern = Constants.TIME_PATTERN_12H;
+
         }
 
         // Show Time/Date
@@ -122,12 +123,7 @@ public class Timeline extends Activity {
             @Override
             public boolean onLongClick(View v) {
                 refresh_time();
-              
                 loadiCalData();
-              
-                loadCalendarEvents();
-                Timeline.this.toast("Events were refreshed...");
-              
                 return true;
             }
         });
@@ -139,6 +135,7 @@ public class Timeline extends Activity {
             public void onClick(View v) {
                 ListView list = Timeline.this.mView.findViewById(R.id.list);
                 list.setSelectionAfterHeaderView();
+                //Timeline.this.toast("▲ Top");
             }
         });
 
@@ -153,111 +150,118 @@ public class Timeline extends Activity {
         eventsList = new ArrayList<>();
         long next_event = 0;
 
-        if(calendarEvents !=null && !calendarEvents.isEmpty() ) {
-            try {
-                // Check if correct form of JSON
-                JSONObject json_data = new JSONObject(calendarEvents);
+        try {
+            // Load data
+            calendarEvents = Settings.System.getString(mContext.getContentResolver(), Constants.CALENDAR_DATA);
 
-                // If there are events
-                if (json_data.has(Constants.EVENTS_DATA)) {
-                    int event_number = json_data.getJSONArray(Constants.EVENTS_DATA).length();
+            if (!(calendarEvents != null && !calendarEvents.isEmpty() && !calendarEvents.equals("{\"events\":[]}")))
+                Timeline.this.toast("No events found!");
 
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.add(Calendar.MINUTE, -10); // Show only future events + 10 minutes old
-                    long current_time = calendar.getTimeInMillis();
-                    String current_loop_date = "";
+            if (calendarEvents == null)
+                calendarEvents = "{\"events\":[]}";
 
-                    // Get data
-                    for (int i = 0; i < event_number; i++) {
-                        JSONArray data = json_data.getJSONArray(Constants.EVENTS_DATA).getJSONArray(i);
-                        HashMap<String, String> event = new HashMap<>();
+            // Check if correct form of JSON
+            JSONObject json_data = new JSONObject(calendarEvents);
 
-                        // adding each child node to HashMap key => value
-                        event.put(TITLE, data.getString(0));
-                        //event.put("description", data.getString(1));
-                        //event.put("start", data.getString(2));
-                        //event.put("end", data.getString(3));
-                        //event.put("location", data.getString(4));
-                        //event.put("account", data.getString(5));
+            // If there are events
+            if (json_data.has(Constants.EVENTS_DATA)) {
+                int event_number = json_data.getJSONArray(Constants.EVENTS_DATA).length();
 
-                        String start;
-                        String end = "";
-                        String location = "";
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.MINUTE,-10); // Show only future events + 10 minutes old
+                long current_time = calendar.getTimeInMillis();
+                String current_loop_date = "";
 
-                        if (!data.getString(2).equals("") && !data.getString(2).equals("null")) {
-                            calendar.setTimeInMillis(Long.parseLong(data.getString(2)));
+                // Get data
+                for(int i=0; i<event_number; i++) {
+                    JSONArray data = json_data.getJSONArray(Constants.EVENTS_DATA).getJSONArray(i);
+                    HashMap<String, String> event = new HashMap<>();
 
-                            if (current_time > calendar.getTimeInMillis()) {
-                                // Event expired, go to next
-                                continue;
-                            }
-                            if (next_event == 0) // Hence this is the next event
-                                next_event = calendar.getTimeInMillis();
+                    // adding each child node to HashMap key => value
+                    event.put(TITLE, data.getString(0));
+                    //event.put("description", data.getString(1));
+                    //event.put("start", data.getString(2));
+                    //event.put("end", data.getString(3));
+                    //event.put("location", data.getString(4));
+                    //event.put("account", data.getString(5));
 
-                            start = dateToString(calendar, time_pattern);
+                    String start;
+                    String end = "";
+                    String location = "";
 
-                            // Insert day separator, or not :P
-                            if (!current_loop_date.equals(dateToString(calendar, Constants.ELEMENT_PATTERN))) {
-                                current_loop_date = dateToString(calendar, Constants.ELEMENT_PATTERN);
-                                // Is it today?
-                                if (current_loop_date.equals(dateToString(Calendar.getInstance(), Constants.ELEMENT_PATTERN))) {
-                                    current_loop_date = getString(R.string.today);
-                                }
-                                HashMap<String, String> date_elem = new HashMap<>();
-                                date_elem.put(TITLE, "");
-                                date_elem.put(SUBTITLE, current_loop_date);
-                                date_elem.put(DOT, "");
-                                eventsList.add(date_elem);
-                            }
-                        } else {
-                            // Event has no date, go to next
+                    if(!data.getString(2).equals("") && !data.getString(2).equals("null")) {
+                        calendar.setTimeInMillis(Long.parseLong(data.getString(2)));
+
+                        if(current_time > calendar.getTimeInMillis()){
+                            // Event expired, go to next
                             continue;
                         }
+                        if( next_event ==0 ) // Hence this is the next event
+                            next_event = calendar.getTimeInMillis();
 
-                        if (!data.getString(3).equals("") && !data.getString(3).equals("null")) {
-                            calendar.setTimeInMillis(Long.parseLong(data.getString(3)));
-                            end = " - " + dateToString(calendar, time_pattern);
-                        }
+                        start = dateToString(calendar, time_pattern);
 
-                        //All day events
-                        if ((start.startsWith("00") || start.startsWith("12")) && data.getString(3).equals("null")) {
-                            start = getString(R.string.all_day);
-                            end = "";
+                        // Insert day separator, or not :P
+                        if( !current_loop_date.equals(dateToString( calendar,Constants.ELEMENT_PATTERN )) ){
+                            current_loop_date = dateToString(calendar, Constants.ELEMENT_PATTERN);
+                            // Is it today?
+                            if(current_loop_date.equals(dateToString(Calendar.getInstance(), Constants.ELEMENT_PATTERN))){
+                                current_loop_date = getString(R.string.today);
+                            }
+                            HashMap<String, String> date_elem = new HashMap<>();
+                            date_elem.put(TITLE, "");
+                            date_elem.put(SUBTITLE, current_loop_date );
+                            date_elem.put(DOT, "" );
+                            eventsList.add(date_elem);
                         }
-
-                        if (!data.getString(4).equals("") && !data.getString(4).equals("null")) {
-                            location = "\n@ " + data.getString(4);
-                        }
-                        event.put(SUBTITLE, start + end + location);
-                        event.put(DOT, mContext.getResources().getString(R.string.bull));
-                        // adding events to events list
-                        eventsList.add(event);
+                    }else{
+                        // Event has no date, go to next
+                        continue;
                     }
-                } else {
-                    HashMap<String, String> event = new HashMap<>();
-                    event.put("title", getString(R.string.no_events));
-                    //event.put("description", "-");
-                    //event.put("start", "-");
-                    //event.put("end", "-");
-                    //event.put("location", "-");
-                    //event.put("account", "-");
-                    event.put(SUBTITLE, "-");
-                    event.put(DOT, "");
+
+                    if(!data.getString(3).equals("") && !data.getString(3).equals("null")) {
+                        calendar.setTimeInMillis(Long.parseLong(data.getString(3)));
+                        end = " - "+ dateToString(calendar, time_pattern);
+                    }
+
+                    //All day events
+                    if((start.startsWith("00") || start.startsWith("12")) && data.getString(3).equals("null")) {
+                        start = getString(R.string.all_day);
+                        end = "";
+                    }
+
+                    if(!data.getString(4).equals("") && !data.getString(4).equals("null")) {
+                        location = "\n@ "+data.getString(4);
+                    }
+                    event.put(SUBTITLE, start + end + location );
+                    event.put(DOT, mContext.getResources().getString(R.string.bull) );
+                    // adding events to events list
                     eventsList.add(event);
                 }
-            } catch (JSONException e) {
-                //default
+            }else{
                 HashMap<String, String> event = new HashMap<>();
-                event.put(TITLE, getString(R.string.no_events));
+                event.put("title", getString(R.string.no_events));
                 //event.put("description", "-");
                 //event.put("start", "-");
                 //event.put("end", "-");
                 //event.put("location", "-");
                 //event.put("account", "-");
                 event.put(SUBTITLE, "-");
-                event.put(DOT, "");
+                event.put(DOT, "" );
                 eventsList.add(event);
             }
+        } catch (JSONException e) {
+            //default
+            HashMap<String, String> event = new HashMap<>();
+            event.put(TITLE, getString(R.string.no_events));
+            //event.put("description", "-");
+            //event.put("start", "-");
+            //event.put("end", "-");
+            //event.put("location", "-");
+            //event.put("account", "-");
+            event.put(SUBTITLE, "-");
+            event.put(DOT, "" );
+            eventsList.add(event);
         }
 
         if(eventsList.isEmpty()){
@@ -274,28 +278,32 @@ public class Timeline extends Activity {
     }
 
     private void loadiCalData() {
-
         final String icalURL = FilesUtil.getiCalURL(mContext);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                toastMsg = "Getting iCal data,\nplease wait...";
-                activity.runOnUiThread(showToast);
-                if (iCalSupport.checkICSFile(mContext, icalURL)) {
-                    calendarEvents = iCalSupport.getICSCalendarEvents(mContext);
-                }
-                if (calendarEvents == null) {
-                    toastMsg = "No new events!";
+                if(icalURL!=null) {
+                    toastMsg = "Getting iCal data,\nplease wait...";
                     activity.runOnUiThread(showToast);
-                    settings.set(Constants.PREF_CALENDAR_URL, "");
-                } else {
-                    toastMsg = "Refreshing events...";
+                    if (iCalSupport.checkICSFile(mContext, icalURL)) {
+                        calendarEvents = iCalSupport.getICSCalendarEvents(mContext);
+                    }
+                    if (calendarEvents == null) {
+                        toastMsg = "No new events!";
+                        activity.runOnUiThread(showToast);
+                        settings.set(Constants.PREF_CALENDAR_URL, "");
+                    } else {
+                        toastMsg = "Refreshing events...";
+                        activity.runOnUiThread(showToast);
+                        lv.post(loadEvents);
+                    }
+                }else{
+                    // No file found
+                    toastMsg = "\niCal data not found.\n\nPlease write your ICS URL at the following file:\n/sdcard/Android/data/com.dinodevs.pacecalendar/files/pacecalendar.txt";
                     activity.runOnUiThread(showToast);
-                    lv.post(loadEvents);
                 }
             }
         }).start();
-
     }
 
     private final Runnable showToast = new Runnable() {

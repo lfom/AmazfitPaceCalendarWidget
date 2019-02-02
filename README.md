@@ -23,7 +23,7 @@ So, here is the first Calendar Widget for our Amazfit Pace/Stratos!
 - Settings are saved
 - Calendar events are shown, new style (requires Amazmod phone + watch or local ICS URL file)
 - [Timeline Widget](https://forum.xda-developers.com/smartwatch/amazfit/app-widget-timeline-v1-0-1-pace-stratos-t3894632) is also integrated in the calendar
-- iCal support by LFOM (write your ICS URL in a file at: /sdcard/Android/data/com.dinodevs.pacecalendar/files/pacecalendar.txt, updates through wifi)
+- iCal support by LFOM (write your ICS URL in a file at: /sdcard/Android/data/com.dinodevs.pacecalendar/files/pacecalendar.txt, updates through wifi, powered by [iCal4j](https://github.com/ical4j/ical4j) library)
 - Long press the timer/date at the top of the Timeline to load iCal events
 
 
@@ -63,6 +63,7 @@ This project was made possible by:
  - LFOM - *Widget Developer*
  - Quinny899 - *Widget Example Creator / Springboard Settings Creator* - [ [Github](https://github.com/KieronQuinn) | [XDA](https://forum.xda-developers.com/member.php?u=3563640) ]
  - XDA developers community (testers, translators, developers)
+ - [iCal4j](https://github.com/ical4j/ical4j) library
 
 Some more links:
 

@@ -76,67 +76,67 @@ public class APcalendar {
 
         // Get color-able view objects
         this.view_colorable = new TextView[]{
-                (TextView) view.findViewById(R.id.day1),
-                (TextView) view.findViewById(R.id.day2),
-                (TextView) view.findViewById(R.id.day3),
-                (TextView) view.findViewById(R.id.day4),
-                (TextView) view.findViewById(R.id.day5),
-                (TextView) view.findViewById(R.id.day6),
-                (TextView) view.findViewById(R.id.day7),
-                (TextView) view.findViewById(R.id.arrow_down),
-                (TextView) view.findViewById(R.id.arrow_up),
-                (TextView) view.findViewById(R.id.week1),
-                (TextView) view.findViewById(R.id.week2),
-                (TextView) view.findViewById(R.id.week3),
-                (TextView) view.findViewById(R.id.week4),
-                (TextView) view.findViewById(R.id.week5),
-                (TextView) view.findViewById(R.id.week6)
+            (TextView) view.findViewById(R.id.day1),
+            (TextView) view.findViewById(R.id.day2),
+            (TextView) view.findViewById(R.id.day3),
+            (TextView) view.findViewById(R.id.day4),
+            (TextView) view.findViewById(R.id.day5),
+            (TextView) view.findViewById(R.id.day6),
+            (TextView) view.findViewById(R.id.day7),
+            (TextView) view.findViewById(R.id.arrow_down),
+            (TextView) view.findViewById(R.id.arrow_up),
+            (TextView) view.findViewById(R.id.week1),
+            (TextView) view.findViewById(R.id.week2),
+            (TextView) view.findViewById(R.id.week3),
+            (TextView) view.findViewById(R.id.week4),
+            (TextView) view.findViewById(R.id.week5),
+            (TextView) view.findViewById(R.id.week6)
         };
 
         // Get dates boxes
         this.view_boxes = new TextView[]{
-                (TextView) view.findViewById(R.id.calbox1),
-                (TextView) view.findViewById(R.id.calbox2),
-                (TextView) view.findViewById(R.id.calbox3),
-                (TextView) view.findViewById(R.id.calbox4),
-                (TextView) view.findViewById(R.id.calbox5),
-                (TextView) view.findViewById(R.id.calbox6),
-                (TextView) view.findViewById(R.id.calbox7),
-                (TextView) view.findViewById(R.id.calbox8),
-                (TextView) view.findViewById(R.id.calbox9),
-                (TextView) view.findViewById(R.id.calbox10),
-                (TextView) view.findViewById(R.id.calbox11),
-                (TextView) view.findViewById(R.id.calbox12),
-                (TextView) view.findViewById(R.id.calbox13),
-                (TextView) view.findViewById(R.id.calbox14),
-                (TextView) view.findViewById(R.id.calbox15),
-                (TextView) view.findViewById(R.id.calbox16),
-                (TextView) view.findViewById(R.id.calbox17),
-                (TextView) view.findViewById(R.id.calbox18),
-                (TextView) view.findViewById(R.id.calbox19),
-                (TextView) view.findViewById(R.id.calbox20),
-                (TextView) view.findViewById(R.id.calbox21),
-                (TextView) view.findViewById(R.id.calbox22),
-                (TextView) view.findViewById(R.id.calbox23),
-                (TextView) view.findViewById(R.id.calbox24),
-                (TextView) view.findViewById(R.id.calbox25),
-                (TextView) view.findViewById(R.id.calbox26),
-                (TextView) view.findViewById(R.id.calbox27),
-                (TextView) view.findViewById(R.id.calbox28),
-                (TextView) view.findViewById(R.id.calbox29),
-                (TextView) view.findViewById(R.id.calbox30),
-                (TextView) view.findViewById(R.id.calbox31),
-                (TextView) view.findViewById(R.id.calbox32),
-                (TextView) view.findViewById(R.id.calbox33),
-                (TextView) view.findViewById(R.id.calbox34),
-                (TextView) view.findViewById(R.id.calbox35),
-                (TextView) view.findViewById(R.id.calbox36),
-                (TextView) view.findViewById(R.id.calbox37),
-                (TextView) view.findViewById(R.id.calbox38),
-                (TextView) view.findViewById(R.id.calbox39),
-                (TextView) view.findViewById(R.id.calbox40),
-                (TextView) view.findViewById(R.id.calbox41),
-                (TextView) view.findViewById(R.id.calbox42)
+            (TextView) view.findViewById(R.id.calbox1),
+            (TextView) view.findViewById(R.id.calbox2),
+            (TextView) view.findViewById(R.id.calbox3),
+            (TextView) view.findViewById(R.id.calbox4),
+            (TextView) view.findViewById(R.id.calbox5),
+            (TextView) view.findViewById(R.id.calbox6),
+            (TextView) view.findViewById(R.id.calbox7),
+            (TextView) view.findViewById(R.id.calbox8),
+            (TextView) view.findViewById(R.id.calbox9),
+            (TextView) view.findViewById(R.id.calbox10),
+            (TextView) view.findViewById(R.id.calbox11),
+            (TextView) view.findViewById(R.id.calbox12),
+            (TextView) view.findViewById(R.id.calbox13),
+            (TextView) view.findViewById(R.id.calbox14),
+            (TextView) view.findViewById(R.id.calbox15),
+            (TextView) view.findViewById(R.id.calbox16),
+            (TextView) view.findViewById(R.id.calbox17),
+            (TextView) view.findViewById(R.id.calbox18),
+            (TextView) view.findViewById(R.id.calbox19),
+            (TextView) view.findViewById(R.id.calbox20),
+            (TextView) view.findViewById(R.id.calbox21),
+            (TextView) view.findViewById(R.id.calbox22),
+            (TextView) view.findViewById(R.id.calbox23),
+            (TextView) view.findViewById(R.id.calbox24),
+            (TextView) view.findViewById(R.id.calbox25),
+            (TextView) view.findViewById(R.id.calbox26),
+            (TextView) view.findViewById(R.id.calbox27),
+            (TextView) view.findViewById(R.id.calbox28),
+            (TextView) view.findViewById(R.id.calbox29),
+            (TextView) view.findViewById(R.id.calbox30),
+            (TextView) view.findViewById(R.id.calbox31),
+            (TextView) view.findViewById(R.id.calbox32),
+            (TextView) view.findViewById(R.id.calbox33),
+            (TextView) view.findViewById(R.id.calbox34),
+            (TextView) view.findViewById(R.id.calbox35),
+            (TextView) view.findViewById(R.id.calbox36),
+            (TextView) view.findViewById(R.id.calbox37),
+            (TextView) view.findViewById(R.id.calbox38),
+            (TextView) view.findViewById(R.id.calbox39),
+            (TextView) view.findViewById(R.id.calbox40),
+            (TextView) view.findViewById(R.id.calbox41),
+            (TextView) view.findViewById(R.id.calbox42)
         };
 
         // Get date boxes for rtl
@@ -273,17 +273,11 @@ public class APcalendar {
         // Populate last month boxes
         for (int i = monthStart - 1; i >= 0; i--) {
             int currDay = previousMonthDays - monthStart + i + 1;
-            int prevMonth = this.month > 0 ? this.month - 1 : 11;
+            //int prevMonth = this.month > 0 ? this.month - 1 : 11;
             //Log.i(Constants.TAG, "previous month day: " + currDay);
             temp_view_boxes[i].setText(String.valueOf(currDay));
             temp_view_boxes[i].setBackgroundResource(android.R.color.transparent);
-            if (eventsList.get(prevMonth).isEmpty()) {
-                temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
-            } else if (eventsList.get(prevMonth).contains(currDay)) {
-                //Log.i(Constants.TAG, "previous month event: " + currDay);
-                temp_view_boxes[i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
-            } else
-                temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
+            temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
         }
         // Populate month's boxes
         for (int i = 0; i < monthDays; i++) {
@@ -299,51 +293,47 @@ public class APcalendar {
                 temp_view_boxes[monthStart + i].setBackgroundResource(android.R.color.transparent);
             }
 
-            if (eventsList.get(this.month).contains(thisDay)) {
-                //Log.i(Constants.TAG, "this month event: " + thisDay);
-                final int index = eventsList.get(this.month).indexOf(thisDay);
+            if (eventsList != null) {
+                if (eventsList.get(this.month).contains(thisDay)) {
+                    //Log.i(Constants.TAG, "this month event: " + thisDay);
+                    final int index = eventsList.get(this.month).indexOf(thisDay);
 
-                //temp_view_boxes[monthStart + i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
+                    //temp_view_boxes[monthStart + i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
 
-                if (thisDay == this.day) {
-                    temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event_today);
+                    if (thisDay == this.day) {
+                        temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event_today);
 
-                    LayerDrawable shape = (LayerDrawable) mContext.getResources().getDrawable(R.drawable.round_bg_event_today);
-                    GradientDrawable circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.outer_circle);
-                    circle.setColor(this.color);
-                    circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.inner_circle);
-                    circle.setColor(this.color);
+                        LayerDrawable shape = (LayerDrawable) mContext.getResources().getDrawable(R.drawable.round_bg_event_today);
+                        GradientDrawable circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.outer_circle);
+                        circle.setColor(this.color);
+                        circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.inner_circle);
+                        circle.setColor(this.color);
 
-                    //((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
-                }
-                else {
-                    temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event);
-                    ((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
-                }
-
-                temp_view_boxes[monthStart + i].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        toast( String.valueOf(thisDay) + "/" + String.valueOf(month+1) +" - "+ eventsHours.get(month).get(index) +"\n"+ eventsTitle.get(month).get(index));
+                        //((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
+                    } else {
+                        temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event);
+                        ((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
                     }
-                });
-            }
+
+                    temp_view_boxes[monthStart + i].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            toast(String.valueOf(thisDay) + "/" + String.valueOf(month + 1) + " - " + eventsHours.get(month).get(index) + "\n" + eventsTitle.get(month).get(index));
+                        }
+                    });
+                } else
+                    temp_view_boxes[monthStart + i].setOnClickListener(null);
+            } else
+                temp_view_boxes[monthStart + i].setOnClickListener(null);
         }
         // Populate next month's boxes
         for (int i = monthStart + monthDays; i < 42; i++) {
             int currDay = i - monthStart - monthDays + 1;
-            int nextMonth = this.month < 11 ? this.month + 1 : 0;
+            //int nextMonth = this.month < 11 ? this.month + 1 : 0;
             //Log.i(Constants.TAG, "next month day: " + currDay);
             temp_view_boxes[i].setText(String.valueOf(currDay));
             temp_view_boxes[i].setBackgroundResource(android.R.color.transparent);
-            if (eventsList.get(nextMonth).isEmpty()) {
-                temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
-            } else if (eventsList.get(nextMonth).contains(currDay)) {
-                temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event);
-                ((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(Color.parseColor("#505050"));
-            } else
-                temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
-
+            temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
         }
 
         // Populate week boxes
@@ -375,7 +365,7 @@ public class APcalendar {
     private void loadCalendarEvents() {
 
         // Load data
-        String calendarEvents = Settings.System.getString(mContext.getContentResolver(), "CustomCalendarData");
+        String calendarEvents = Settings.System.getString(mContext.getContentResolver(), Constants.CALENDAR_DATA);
 
         List<List<Integer>> events = new ArrayList<>();
         for (int i = 0; i < 12; i++) {

@@ -14,4 +14,10 @@ public class Constants {
     public static final String TIME_PATTERN_12H = "hh:mm a";
     public static final String TIME_PATTERN_24H = "HH:mm";
     public static final String DATE_PATTERN = "dd/MM/yyyy";
+    public static final String TIME_FORMAT_SETTING = "time_12_24";
+    public static final String TIME_FORMAT_SETTING_DEFAULT = "24";
+    public static final String CALENDAR_CONFIG_FILE = "pacecalendar.txt";
+
+    public static final String PREF_CALENDAR_URL = "pref.calendar.url";
+
 }

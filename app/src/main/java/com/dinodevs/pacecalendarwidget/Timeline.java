@@ -3,8 +3,6 @@ package com.dinodevs.pacecalendarwidget;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
@@ -29,37 +27,38 @@ import java.util.Locale;
 
 public class Timeline extends Activity {
 
-    // Version
-    private String version = Constants.VERSION;
-
     // Activity variables
-    private boolean isActive = false;
     private Context mContext;
-    private View mView;
+    private Activity activity;
 
+    private View mView;
     private ListView lv;
+    private TextView time;
+
     private ArrayList<HashMap<String, String>> eventsList;
 
-    private long next_event;
-    private String calendarEvents;
     private String header_pattern;
     private String time_pattern;
+    private static String toastMsg;
 
     private static final String TITLE = "title";
     private static final String SUBTITLE = "subtitle";
     private static final String DOT = "dot";
 
-    private static boolean is24h;
+    private static String calendarEvents;
+    private static APsettings settings;
 
-
-    // Set up the widget's layout
+    // Set up
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Save Activity variables
         this.mContext = this;
+        activity = this;
         setContentView(R.layout.widget_timeline);
         this.mView = this.findViewById(android.R.id.content);
+
+        settings = new APsettings(Constants.TAG, mContext);
 
         // Initialize variables
         Log.d(Constants.TAG, "Timeline: Starting...");
@@ -73,17 +72,16 @@ public class Timeline extends Activity {
         Log.d(Constants.TAG, "Timeline: Done...");
     }
 
-    // Initialize widget
-    private void init() {
-        // Get widget version number
-        try {
-            PackageInfo pInfo = this.mContext.getPackageManager().getPackageInfo(this.mContext.getPackageName(), 0);
-            this.version = pInfo.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(Constants.TAG, e.getLocalizedMessage(), e);
-        }
+    @Override
+    public void onDestroy() {
+        Log.d(Constants.TAG, "Timeline onDestroy");
+        super.onDestroy();
+    }
 
-        is24h = Settings.System.getString(mContext.getContentResolver(), "time_12_24").equals("24");
+    // Initialize
+    private void init() {
+
+        boolean is24h = Settings.System.getString(mContext.getContentResolver(), Constants.TIME_FORMAT_SETTING).equals(Constants.TIME_FORMAT_SETTING_DEFAULT);
         Log.d(Constants.TAG, "Timeline init is24h: " + is24h);
 
         if (is24h) {
@@ -95,20 +93,21 @@ public class Timeline extends Activity {
         }
 
         // Show Time/Date
+        time = this.mView.findViewById(R.id.time);
         refresh_time();
 
         // Calendar Events Data
         eventsList = new ArrayList<>();
         lv = this.mView.findViewById(R.id.list);
-
         loadCalendarEvents();
     }
 
     // Attach listeners
     @SuppressLint("ClickableViewAccessibility")
     private void initListeners(){
+
         // About button event
-        TextView time = this.mView.findViewById(R.id.time);
+        /*
         time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,16 +115,23 @@ public class Timeline extends Activity {
                 Timeline.this.toast("Calendar Widget v" + Timeline.this.version + " by GreatApo, LFOM & DarkThanos");
             }
         });
+        */
+
         // Refresh events
         time.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 refresh_time();
+              
+                loadiCalData();
+              
                 loadCalendarEvents();
                 Timeline.this.toast("Events were refreshed...");
+              
                 return true;
             }
         });
+
         // Scroll to top
         TextView top = this.mView.findViewById(R.id.backToTop);
         top.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +141,7 @@ public class Timeline extends Activity {
                 list.setSelectionAfterHeaderView();
             }
         });
+
     }
 
     private void refresh_time(){
@@ -144,10 +151,7 @@ public class Timeline extends Activity {
 
     private void loadCalendarEvents() {
         eventsList = new ArrayList<>();
-        next_event = 0;
-
-        // Load data
-        calendarEvents = Settings.System.getString(mContext.getContentResolver(), Constants.CALENDAR_DATA);
+        long next_event = 0;
 
         if(calendarEvents !=null && !calendarEvents.isEmpty() ) {
             try {
@@ -266,8 +270,45 @@ public class Timeline extends Activity {
 
         ListAdapter adapter = new SimpleAdapter(mContext, eventsList, R.layout.list_item, new String[]{"title", "subtitle", "dot"}, new int[]{R.id.title, R.id.description, R.id.dot});
         lv.setAdapter(adapter);
+
     }
 
+    private void loadiCalData() {
+
+        final String icalURL = FilesUtil.getiCalURL(mContext);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                toastMsg = "Getting iCal data,\nplease wait...";
+                activity.runOnUiThread(showToast);
+                if (iCalSupport.checkICSFile(mContext, icalURL)) {
+                    calendarEvents = iCalSupport.getICSCalendarEvents(mContext);
+                }
+                if (calendarEvents == null) {
+                    toastMsg = "No new events!";
+                    activity.runOnUiThread(showToast);
+                    settings.set(Constants.PREF_CALENDAR_URL, "");
+                } else {
+                    toastMsg = "Refreshing events...";
+                    activity.runOnUiThread(showToast);
+                    lv.post(loadEvents);
+                }
+            }
+        }).start();
+
+    }
+
+    private final Runnable showToast = new Runnable() {
+        public void run() {
+            toast(toastMsg);
+        }
+    };
+
+    private final Runnable loadEvents = new Runnable() {
+        public void run() {
+            loadCalendarEvents();
+        }
+    };
 
     // Toast wrapper
     private void toast (String message) {
@@ -283,44 +324,6 @@ public class Timeline extends Activity {
     }
     private String dateToString (Calendar date, String pattern) {
         return (new SimpleDateFormat(pattern, Locale.US)).format(date.getTime());
-    }
-
-    private void onShow() {
-        // If view loaded (and was inactive)
-        if (this.mView != null && !this.isActive) {
-            refresh_time();
-
-            // If an event expired OR new events
-            if ( next_event+10*1000 < Calendar.getInstance().getTimeInMillis()
-                    || !calendarEvents.equals(Settings.System.getString(mContext.getContentResolver(), "CustomCalendarData")) ) {
-                // Refresh timeline
-                loadCalendarEvents();
-            }
-        }
-        // Save state
-        this.isActive = true;
-    }
-
-    private void onHide() {
-        // Save state
-        this.isActive = false;
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        this.onHide();
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
-        this.onHide();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        this.onShow();
     }
 
 }

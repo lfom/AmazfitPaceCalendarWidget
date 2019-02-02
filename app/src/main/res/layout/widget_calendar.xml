@@ -447,7 +447,7 @@
 
         </android.support.constraint.ConstraintLayout>
 
-        <TextView
+         <TextView
             android:id="@+id/refresh"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -460,7 +460,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.963"
-            app:layout_constraintHorizontal_bias="0.40" />
+            app:layout_constraintHorizontal_bias="0.32" />
 
 
         <TextView
@@ -474,7 +474,23 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.963" />
+
+        <TextView
+            android:id="@+id/events_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="⌸"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.68"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.963" />

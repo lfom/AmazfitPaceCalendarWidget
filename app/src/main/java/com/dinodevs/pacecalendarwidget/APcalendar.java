@@ -3,6 +3,7 @@ package com.dinodevs.pacecalendarwidget;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
@@ -14,10 +15,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by GreatApo on 06/04/2018.
@@ -46,6 +49,7 @@ public class APcalendar {
     private Context mContext;
     private List<List<Integer>> eventsList;
     private List<List<String>> eventsTitle;
+    private List<List<String>> eventsHours;
 
     // Constructor
     APcalendar(View view, Context context, Calendar date, int color){
@@ -296,18 +300,36 @@ public class APcalendar {
                 temp_view_boxes[monthStart + i].setTextColor(Color.parseColor("#FFFFFF"));
                 temp_view_boxes[monthStart + i].setBackgroundResource(android.R.color.transparent);
             }
-
+          
             if (eventsList != null) {
                 if (eventsList.get(this.month).contains(thisDay)) {
-                    //Log.i(Constants.TAG, "this month event: " + thisDay);
-                    final int index = eventsList.get(this.month).indexOf(thisDay);
-                    temp_view_boxes[monthStart + i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
-                    temp_view_boxes[monthStart + i].setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            toast(String.format("%s: %s", String.valueOf(thisDay), eventsTitle.get(month).get(index)));
-                        }
-                    });
+                  //Log.i(Constants.TAG, "this month event: " + thisDay);
+                  final int index = eventsList.get(this.month).indexOf(thisDay);
+
+                  //temp_view_boxes[monthStart + i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
+
+                  if (thisDay == this.day) {
+                      temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event_today);
+
+                      LayerDrawable shape = (LayerDrawable) mContext.getResources().getDrawable(R.drawable.round_bg_event_today);
+                      GradientDrawable circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.outer_circle);
+                      circle.setColor(this.color);
+                      circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.inner_circle);
+                      circle.setColor(this.color);
+
+                      //((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
+                  }
+                  else {
+                      temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event);
+                      ((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
+                  }
+
+                  temp_view_boxes[monthStart + i].setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View v) {
+                          toast( String.valueOf(thisDay) + "/" + String.valueOf(month+1) +" - "+ eventsHours.get(month).get(index) +"\n"+ eventsTitle.get(month).get(index));
+                      }
+                  });
                 }
             }
         }
@@ -318,16 +340,16 @@ public class APcalendar {
             //Log.i(Constants.TAG, "next month day: " + currDay);
             temp_view_boxes[i].setText(String.valueOf(currDay));
             temp_view_boxes[i].setBackgroundResource(android.R.color.transparent);
+          
             if (eventsList != null) {
-                if (eventsList.get(nextMonth).isEmpty()) {
-                    temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
-                } else if (eventsList.get(nextMonth).contains(currDay)) {
-                    //Log.i(Constants.TAG, "next month event: " + currDay);
-                    temp_view_boxes[i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
-                }
-            } else
-                temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
-
+               if (eventsList.get(nextMonth).isEmpty()) {
+                  temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
+              } else if (eventsList.get(nextMonth).contains(currDay)) {
+                  temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event);
+                  ((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(Color.parseColor("#505050"));
+              } else
+                  temp_view_boxes[i].setTextColor(Color.parseColor("#505050"));
+            }
         }
 
         // Populate week boxes
@@ -368,9 +390,12 @@ public class APcalendar {
         }
 
         List<List<String>> titles = new ArrayList<>();
+        List<List<String>> hours = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             List<String> list = new ArrayList<>();
             titles.add(list);
+            List<String> list2 = new ArrayList<>();
+            hours.add(list2);
         }
 
         if (calendarEvents != null && !calendarEvents.isEmpty()) {
@@ -392,10 +417,15 @@ public class APcalendar {
                         if (!data.getString(2).equals("") && !data.getString(2).equals("null")) {
                             calendar.setTimeInMillis(Long.parseLong(data.getString(2)));
                             if (calendar.get(Calendar.YEAR) >= this.year) {
+                                // Save title
                                 titles.get(calendar.get(Calendar.MONTH)).add(data.getString(0));
+                                // Save hour (based on 12/24h)
+                                hours.get(calendar.get(Calendar.MONTH)).add(
+                                        (new SimpleDateFormat( (Settings.System.getString(mContext.getContentResolver(), "time_12_24").equals("24")?"HH:mm":"hh:mm a"), Locale.US)).format(calendar.getTime())
+                                );
+                                // Save day
                                 events.get(calendar.get(Calendar.MONTH)).add(calendar.get(Calendar.DAY_OF_MONTH));
-                                Log.i(Constants.TAG, "month: " + calendar.get(Calendar.MONTH)
-                                        + " \\ days: " + events.get(calendar.get(Calendar.MONTH)).toString());
+                                //Log.i(Constants.TAG, "month: " + calendar.get(Calendar.MONTH) + " \\ days: " + events.get(calendar.get(Calendar.MONTH)).toString());
                             }
                         }
 
@@ -404,10 +434,11 @@ public class APcalendar {
             } catch (JSONException e) {
                 Log.e(Constants.TAG, e.getLocalizedMessage(), e);
             }
-
-            this.eventsList = events;
-            this.eventsTitle = titles;
         }
+
+        this.eventsList = events;
+        this.eventsTitle = titles;
+        this.eventsHours = hours;
     }
 
     // Toast wrapper

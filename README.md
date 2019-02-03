@@ -1,4 +1,4 @@
-[![latest release](https://img.shields.io/badge/latest%20release-v1.9.1-green.svg?style=flat-square) ![release date](https://img.shields.io/badge/release%20date-2019.02.02-orange.svg?style=flat-square)](https://github.com/GreatApo/AmazfitPaceCalendarWidget/releases/latest)
+[![latest release](https://img.shields.io/github/release/GreatApo/AmazfitPaceCalendarWidget.svg?colorB=green&label=latest%20release&style=flat-square) ![release date](https://img.shields.io/badge/release%20date-2019.02.02-orange.svg?style=flat-square) ![Downloads](https://img.shields.io/github/downloads/GreatApo/AmazfitPaceCalendarWidget/total.svg?style=flat-square) ![HitCount](http://hits.dwyl.io/GreatApo/AmazfitPaceCalendarWidget.svg)](https://github.com/GreatApo/AmazfitPaceCalendarWidget/releases/latest)
 
 # Amazfit Pace/Stratos/Verge Calendar Widget
 ![Amazfit Pace Calendar Widget Banner](other%20files/amazfit-calendar-widget.png)
@@ -23,7 +23,7 @@ So, here is the first Calendar Widget for our Amazfit Pace/Stratos!
 - Settings are saved
 - Calendar events are shown, new style (requires Amazmod phone + watch or local ICS URL file)
 - [Timeline Widget](https://forum.xda-developers.com/smartwatch/amazfit/app-widget-timeline-v1-0-1-pace-stratos-t3894632) is also integrated in the calendar
-- iCal support by LFOM (write your ICS URL in a file at: /sdcard/Android/data/com.dinodevs.pacecalendar/files/pacecalendar.txt, updates through wifi)
+- iCal support by LFOM (write your ICS URL in a file at: /sdcard/Android/data/com.dinodevs.pacecalendar/files/pacecalendar.txt, updates through wifi, powered by [iCal4j](https://github.com/ical4j/ical4j) library)
 - Long press the timer/date at the top of the Timeline to load iCal events
 
 
@@ -63,6 +63,7 @@ This project was made possible by:
  - LFOM - *Widget Developer*
  - Quinny899 - *Widget Example Creator / Springboard Settings Creator* - [ [Github](https://github.com/KieronQuinn) | [XDA](https://forum.xda-developers.com/member.php?u=3563640) ]
  - XDA developers community (testers, translators, developers)
+ - [iCal4j](https://github.com/ical4j/ical4j) library
 
 Some more links:
 

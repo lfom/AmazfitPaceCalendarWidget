@@ -155,7 +155,7 @@ public class Timeline extends Activity {
             calendarEvents = Settings.System.getString(mContext.getContentResolver(), Constants.CALENDAR_DATA);
 
             if (!(calendarEvents != null && !calendarEvents.isEmpty() && !calendarEvents.equals("{\"events\":[]}")))
-                Timeline.this.toast("No events found!");
+                Timeline.this.toast("No events found!", true);
 
             if (calendarEvents == null)
                 calendarEvents = "{\"events\":[]}";
@@ -225,7 +225,7 @@ public class Timeline extends Activity {
                     }
 
                     //All day events
-                    if((start.startsWith("00") || start.startsWith("12")) && data.getString(3).equals("null")) {
+                    if((start.startsWith("00") || start.startsWith("12")) && ("null".equals(data.getString(3)) || data.getString(3).isEmpty())) {
                         start = getString(R.string.all_day);
                         end = "";
                     }
@@ -282,11 +282,13 @@ public class Timeline extends Activity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if(icalURL!=null) {
                     toastMsg = "Getting iCal data,\nplease wait...";
                     activity.runOnUiThread(showToast);
                     if (iCalSupport.checkICSFile(mContext, icalURL)) {
                         calendarEvents = iCalSupport.getICSCalendarEvents(mContext);
+                    } else {
+                        toastMsg = "\niCal data not found.\n\nPlease write your ICS URL at the following file:\n/sdcard/Android/data/com.dinodevs.pacecalendar/files/pacecalendar.txt";
+                        activity.runOnUiThread(showToast);
                     }
                     if (calendarEvents == null) {
                         toastMsg = "No new events!";
@@ -297,18 +299,13 @@ public class Timeline extends Activity {
                         activity.runOnUiThread(showToast);
                         lv.post(loadEvents);
                     }
-                }else{
-                    // No file found
-                    toastMsg = "\niCal data not found.\n\nPlease write your ICS URL at the following file:\n/sdcard/Android/data/com.dinodevs.pacecalendar/files/pacecalendar.txt";
-                    activity.runOnUiThread(showToast);
-                }
             }
         }).start();
     }
 
     private final Runnable showToast = new Runnable() {
         public void run() {
-            toast(toastMsg);
+            toast(toastMsg, false);
         }
     };
 
@@ -319,8 +316,12 @@ public class Timeline extends Activity {
     };
 
     // Toast wrapper
-    private void toast (String message) {
-        Toast toast = Toast.makeText(this.mContext, message, Toast.LENGTH_SHORT);
+    private void toast (String message, boolean shortTime) {
+        Toast toast;
+        if (shortTime)
+            toast = Toast.makeText(this.mContext, message, Toast.LENGTH_SHORT);
+        else
+            toast = Toast.makeText(this.mContext, message, Toast.LENGTH_LONG);
         TextView v = toast.getView().findViewById(android.R.id.message);
         if( v != null) v.setGravity(Gravity.CENTER);
         toast.show();

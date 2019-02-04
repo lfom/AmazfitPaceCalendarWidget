@@ -51,8 +51,8 @@ adb shell am force-stop com.huami.watch.launcher
 ### Calendar Events: How To
 There are 3 ways to get your calendar evens.
 1. From phone: Install Amazmod (both phone+watch) and forward phone's stock calendar events
-2. From iCalendar feed: Create the file "/sdcard/Android/data/com.dinodevs.pacecalendar/files/pacecalendar.txt" and write your iCalendar feed url in the first line (eg. http://mysuperdupercalendar.ics). Your events will be updated from WiFi (be connected). Powered by [iCal4j](https://github.com/ical4j/ical4j) library.
-3. From iCalendar local file: Put your ics file at "/sdcard/Android/data/com.dinodevs.pacecalendar/files/" name as "calendar.ics". This file is been searched only if there is no URL of method 2 and WiFi is off.
+2. From iCalendar feed: Create the file "/sdcard/Android/data/com.dinodevs.pacecalendarwidget/files/pacecalendar.txt" and write your iCalendar feed url in the first line (eg. http://mysuperdupercalendar.ics). Your events will be updated from WiFi (be connected). Powered by [iCal4j](https://github.com/ical4j/ical4j) library.
+3. From iCalendar local file: Put your ics file at "/sdcard/Android/data/com.dinodevs.pacecalendarwidget/files/" name as "calendar.ics". This file is been searched only if there is no URL of method 2 and WiFi is off.
 
 
 

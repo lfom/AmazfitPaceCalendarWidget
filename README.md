@@ -1,4 +1,4 @@
-[![latest release](https://img.shields.io/github/release/GreatApo/AmazfitPaceCalendarWidget.svg?colorB=green&label=latest%20release&style=flat-square) ![release date](https://img.shields.io/badge/release%20date-2019.02.02-orange.svg?style=flat-square) ![Downloads](https://img.shields.io/github/downloads/GreatApo/AmazfitPaceCalendarWidget/total.svg?style=flat-square) ![HitCount](http://hits.dwyl.io/GreatApo/AmazfitPaceCalendarWidget.svg)](https://github.com/GreatApo/AmazfitPaceCalendarWidget/releases/latest)
+[![latest release](https://img.shields.io/github/release/GreatApo/AmazfitPaceCalendarWidget.svg?colorB=green&label=latest%20release&style=flat-square) ![release date](https://img.shields.io/badge/release%20date-2019.02.04-orange.svg?style=flat-square) ![Downloads](https://img.shields.io/github/downloads/GreatApo/AmazfitPaceCalendarWidget/total.svg?style=flat-square) ![HitCount](http://hits.dwyl.io/GreatApo/AmazfitPaceCalendarWidget.svg)](https://github.com/GreatApo/AmazfitPaceCalendarWidget/releases/latest)
 
 # Amazfit Pace/Stratos/Verge Calendar Widget
 ![Amazfit Pace Calendar Widget Banner](other%20files/amazfit-calendar-widget.png)
@@ -21,10 +21,9 @@ So, here is the first Calendar Widget for our Amazfit Pace/Stratos!
 - Supported languages: English, Chinese, Czech, Dutch, French, German, Greek, Hebrew, Hungarian, Italian, Japanese, Korean, Polish, Portuguese, Romanian, Russian, Slovak, Spanish, Thai, Turkish
 - Right to left Calendar support
 - Settings are saved
-- Calendar events are shown, new style (requires Amazmod phone + watch or local ICS URL file)
-- [Timeline Widget](https://forum.xda-developers.com/smartwatch/amazfit/app-widget-timeline-v1-0-1-pace-stratos-t3894632) is also integrated in the calendar
-- iCal support by LFOM (write your ICS URL in a file at: /sdcard/Android/data/com.dinodevs.pacecalendar/files/pacecalendar.txt, updates through wifi, powered by [iCal4j](https://github.com/ical4j/ical4j) library)
-- Long press the timer/date at the top of the Timeline to load iCal events
+- Calendar events are shown (new style, phone events through Amazmod or iCalendar feed/file)
+- [Timeline Widget](https://forum.xda-developers.com/smartwatch/amazfit/app-widget-timeline-v1-0-1-pace-stratos-t3894632) is also integrated in the calendar (for better events view)
+- Long press the timer/date at the top of the Timeline to reload iCal events
 
 
 
@@ -46,6 +45,14 @@ adb uninstall com.dinodevs.pacecalendarwidget
 adb install -r PaceCalendarWidget.X.X.X.apk
 adb shell am force-stop com.huami.watch.launcher
 ```
+
+
+
+### Calendar Events: How To
+There are 3 ways to get your calendar evens.
+1. From phone: Install Amazmod (both phone+watch) and forward phone's stock calendar events
+2. From iCalendar feed: Create the file "/sdcard/Android/data/com.dinodevs.pacecalendar/files/pacecalendar.txt" and write your iCalendar feed url in the first line (eg. http://mysuperdupercalendar.ics). Your events will be updated from WiFi (be connected). Powered by [iCal4j](https://github.com/ical4j/ical4j) library.
+3. From iCalendar local file: Put your ics file at "/sdcard/Android/data/com.dinodevs.pacecalendar/files/" name as "calendar.ics". This file is been searched only if there is no URL of method 2 and WiFi is off.
 
 
 

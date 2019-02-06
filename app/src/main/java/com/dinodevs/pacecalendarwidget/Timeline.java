@@ -3,13 +3,17 @@ package com.dinodevs.pacecalendarwidget;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -36,6 +40,7 @@ public class Timeline extends Activity {
     private ListView lv;
     private TextView time;
     private ImageView refresh;
+    private int current_color;
 
     private ArrayList<HashMap<String, String>> eventsList;
 
@@ -61,6 +66,9 @@ public class Timeline extends Activity {
         this.mView = this.findViewById(android.R.id.content);
 
         settings = new APsettings(Constants.TAG, mContext);
+
+        Intent myIntent = getIntent(); // gets the previously created intent
+        this.current_color = myIntent.getIntExtra("color", 0);
 
         // Initialize variables
         Log.d(Constants.TAG, "Timeline: Starting...");
@@ -288,9 +296,39 @@ public class Timeline extends Activity {
             eventsList.add(elem);
         }
 
-        ListAdapter adapter = new SimpleAdapter(mContext, eventsList, R.layout.list_item, new String[]{"title", "subtitle", "dot"}, new int[]{R.id.title, R.id.description, R.id.dot});
-        lv.setAdapter(adapter);
+        ListAdapter adapter = new SimpleAdapter(mContext, eventsList, R.layout.list_item, new String[]{"title", "subtitle", "dot"}, new int[]{R.id.title, R.id.description, R.id.dot}){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
 
+                View v = convertView;
+                if(v== null){
+                    LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    v=vi.inflate(R.layout.list_item, null);
+                }
+
+                TextView title = v.findViewById(R.id.title);
+                TextView subtitle = v.findViewById(R.id.description);
+                TextView dot = v.findViewById(R.id.dot);
+                LinearLayout header = v.findViewById(R.id.header);
+
+                title.setText(eventsList.get(position).get("title"));
+                subtitle.setText(eventsList.get(position).get("subtitle"));
+                dot.setText(eventsList.get(position).get("dot"));
+
+                if(Timeline.this.current_color!=0) {
+                    dot.setTextColor(Timeline.this.current_color);
+
+                    // Day separator
+                    if(eventsList.get(position).get("dot").isEmpty() && eventsList.get(position).get("title").isEmpty())
+                        subtitle.setTextColor(Timeline.this.current_color);
+                    else
+                        subtitle.setTextColor(getResources().getColor(R.color.description));
+                }
+
+                return v;
+            }
+        };
+        lv.setAdapter(adapter);
     }
 
     private void loadiCalData() {

@@ -302,6 +302,7 @@ public class widget extends AbstractPlugin {
                 final Intent timelineIntent = new Intent(mContext, Timeline.class);
                 timelineIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                         Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                timelineIntent.putExtra("color",widget.this.current_color);
                 mContext.startActivity(timelineIntent);
             }
         });

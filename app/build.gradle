@@ -9,8 +9,8 @@ android {
         targetSdkVersion 27
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionName '1.9.2'
-        versionCode 20190204
+        versionName '1.9.3'
+        versionCode 20190206
     }
     buildTypes {
         release {

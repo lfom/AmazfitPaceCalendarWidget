@@ -33,7 +33,6 @@ public class APcalendar {
     private int month;
     private int day;
     public boolean isMondayFirst;
-    public boolean doIvibrate;
 
     // Calendar View objects
     private TextView view_monthName;
@@ -54,7 +53,7 @@ public class APcalendar {
     // Constructor
     APcalendar(View view, Context context, Calendar date, int color){
         this.isMondayFirst = false;
-        this.doIvibrate = true;
+
         mContext = context;
 
         // Create translations instance
@@ -298,18 +297,14 @@ public class APcalendar {
                     //Log.i(Constants.TAG, "this month event: " + thisDay);
                     final int index = eventsList.get(this.month).indexOf(thisDay);
 
-                    //temp_view_boxes[monthStart + i].setTextColor(Color.parseColor(Constants.EVENT_COLOR));
-
                     if (thisDay == this.day) {
-                        temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event_today);
-
                         LayerDrawable shape = (LayerDrawable) mContext.getResources().getDrawable(R.drawable.round_bg_event_today);
                         GradientDrawable circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.outer_circle);
                         circle.setColor(this.color);
                         circle = (GradientDrawable) shape.findDrawableByLayerId(R.id.inner_circle);
                         circle.setColor(this.color);
 
-                        //((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);
+                        temp_view_boxes[monthStart + i].setBackground(shape);
                     } else {
                         temp_view_boxes[monthStart + i].setBackgroundResource(R.drawable.round_bg_event);
                         ((GradientDrawable) temp_view_boxes[monthStart + i].getBackground()).setColor(this.color);

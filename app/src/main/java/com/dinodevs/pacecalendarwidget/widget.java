@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -44,6 +45,7 @@ public class widget extends AbstractPlugin {
     private Calendar shown_date;
     private boolean shown_year;
     private boolean show_week;
+    public boolean doIvibrate;
     private int current_color;
     private TextView current_color_element;
 
@@ -102,13 +104,13 @@ public class widget extends AbstractPlugin {
         this.shown_year = this.settings.get("show_year", true);
         this.show_week = this.settings.get("show_week", false);
         this.changeColorByName(this.settings.get("color", "orange"));
+        this.doIvibrate = this.settings.get("vibrate", true);
 
         // Init Calendar
         try {
             // Create calendar
             this.apcalendar = new APcalendar(this.mView, this.mContext, this.shown_date, this.current_color);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             this.errors += e.getMessage();
         }
@@ -137,7 +139,7 @@ public class widget extends AbstractPlugin {
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                widget.this.toast("Calendar Widget v" + widget.this.version + " by GreatApo, LFOM & DarkThanos" + (widget.this.errors.length() > 0 ? " Errors: " + widget.this.errors : ""));
+                widget.this.toast("Calendar Widget v" + widget.this.version + "\n'\nby GreatApo,\nLFOM & DarkThanos" + (widget.this.errors.length() > 0 ? " Errors: " + widget.this.errors : ""));
                 widget.this.vibrate();
             }
         });
@@ -237,9 +239,8 @@ public class widget extends AbstractPlugin {
         });
 
         // Vibration switch
-        boolean doIvibrate = this.settings.get("vibrate", false);
         CheckBox vibrate_checkbox = this.mView.findViewById(R.id.vibrate_switch);
-        vibrate_checkbox.setChecked(doIvibrate);
+        vibrate_checkbox.setChecked(this.doIvibrate);
         vibrate_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 widget.this.changeVibration(isChecked);
@@ -296,6 +297,7 @@ public class widget extends AbstractPlugin {
         events.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                widget.this.vibrate();
                 toast("Loading events...");
                 final Intent timelineIntent = new Intent(mContext, Timeline.class);
                 timelineIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
@@ -447,7 +449,7 @@ public class widget extends AbstractPlugin {
 
     // Vibration
     private void changeVibration(boolean vibrate){
-        this.apcalendar.doIvibrate = vibrate;
+        this.doIvibrate = vibrate;
 
         // Save setting
         this.settings.set("vibrate", vibrate);
@@ -503,17 +505,21 @@ public class widget extends AbstractPlugin {
 
     // Vibrator wrappers
     private void vibrate () {
-        if(apcalendar.doIvibrate)
+        if(doIvibrate)
             this.vibrate(10);
     }
     private void vibrate (long milliseconds) {
-        if(apcalendar.doIvibrate)
+        if(doIvibrate)
             this.vibe.vibrate(milliseconds);
     }
 
     // Toast wrapper
     private void toast (String message) {
-        Toast.makeText(this.mContext, message, Toast.LENGTH_SHORT).show();
+        Toast toast;
+        toast = Toast.makeText(this.mContext, message, Toast.LENGTH_SHORT);
+        TextView v = toast.getView().findViewById(android.R.id.message);
+        if( v != null) v.setGravity(Gravity.CENTER);
+        toast.show();
     }
 
     // Convert a date to dd/MM/yyyy format

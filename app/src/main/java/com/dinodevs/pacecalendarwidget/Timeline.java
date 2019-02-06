@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -34,6 +35,7 @@ public class Timeline extends Activity {
     private View mView;
     private ListView lv;
     private TextView time;
+    private ImageView refresh;
 
     private ArrayList<HashMap<String, String>> eventsList;
 
@@ -97,6 +99,10 @@ public class Timeline extends Activity {
         time = this.mView.findViewById(R.id.time);
         refresh_time();
 
+
+        // Refresh button
+        refresh = this.mView.findViewById(R.id.refresh);
+
         // Calendar Events Data
         eventsList = new ArrayList<>();
         lv = this.mView.findViewById(R.id.list);
@@ -116,7 +122,6 @@ public class Timeline extends Activity {
                 Timeline.this.toast("Calendar Widget v" + Timeline.this.version + " by GreatApo, LFOM & DarkThanos");
             }
         });
-        */
 
         // Refresh events
         time.setOnLongClickListener(new View.OnLongClickListener() {
@@ -127,6 +132,17 @@ public class Timeline extends Activity {
                 return true;
             }
         });
+        */
+
+        // Refresh events
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refresh_time();
+                loadiCalData();
+            }
+        });
+
 
         // Scroll to top
         TextView top = this.mView.findViewById(R.id.backToTop);
@@ -287,7 +303,7 @@ public class Timeline extends Activity {
                     if (iCalSupport.checkICSFile(mContext, icalURL)) {
                         calendarEvents = iCalSupport.getICSCalendarEvents(mContext);
                     } else {
-                        toastMsg = "\niCal data not found.\n\nPlease write your ICS URL at the following file:\n/sdcard/Android/data/com.dinodevs.pacecalendar/files/pacecalendar.txt";
+                        toastMsg = "\niCal data not found.\nPlease write/place your ICS feed URL/file at:\n/sdcard/Android/data/com.dinodevs.pacecalendarwidget/files/pacecalendar.txt";
                         activity.runOnUiThread(showToast);
                     }
                     if (calendarEvents == null) {

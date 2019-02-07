@@ -8,7 +8,7 @@
     <string name="today">Today</string>
     <string name="all_day">All Day</string>
     <string name="no_events">No events</string>
-    <string name="no_events_description">Make sure you use one of the following ways:\n- Amazmod on your phone/watch and your stock calendar has events\n- You have placed locally an iCalendar feed (create/write the URL in a file named pacecalendar.txt) or ICS file (named pacecalendar.ics) at: /sdcard/Android/data/com.dinodevs.pacecalendarwidget/files/</string>
+    <string name="no_events_description">Make sure you use one of the following ways:\n\n1. Amazmod on your phone/watch and your stock calendar has events\n\n2. You have placed locally an iCalendar feed (create/write the URL in a file named pacecalendar.txt) or ICS file (named pacecalendar.ics) at:\n/sdcard/Android/data/com.dinodevs.pacecalendarwidget/files/\n\nTouch the refresh button to load them</string>
     <!-- Calendar -->
     <string name="settings">✎</string>
     <string name="events">⌸</string>

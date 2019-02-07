@@ -1,4 +1,4 @@
-[![latest release](https://img.shields.io/github/release/GreatApo/AmazfitPaceCalendarWidget.svg?colorB=green&label=latest%20release&style=flat-square) ![release date](https://img.shields.io/badge/release%20date-2019.02.04-orange.svg?style=flat-square) ![Downloads](https://img.shields.io/github/downloads/GreatApo/AmazfitPaceCalendarWidget/total.svg?style=flat-square) ![HitCount](http://hits.dwyl.io/GreatApo/AmazfitPaceCalendarWidget.svg)](https://github.com/GreatApo/AmazfitPaceCalendarWidget/releases/latest)
+[![latest release](https://img.shields.io/github/release/GreatApo/AmazfitPaceCalendarWidget.svg?colorB=green&label=latest%20release&style=flat-square) ![release date](https://img.shields.io/badge/release%20date-2019.02.07-orange.svg?style=flat-square) ![Downloads](https://img.shields.io/github/downloads/GreatApo/AmazfitPaceCalendarWidget/total.svg?style=flat-square) ![HitCount](http://hits.dwyl.io/GreatApo/AmazfitPaceCalendarWidget.svg)](https://github.com/GreatApo/AmazfitPaceCalendarWidget/releases/latest)
 
 # Amazfit Pace/Stratos/Verge Calendar Widget
 ![Amazfit Pace Calendar Widget Banner](other%20files/amazfit-calendar-widget.png)
@@ -22,8 +22,9 @@ So, here is the first Calendar Widget for our Amazfit Pace/Stratos!
 - Right to left Calendar support
 - Settings are saved
 - Calendar events are shown (new style, phone events through Amazmod or iCalendar feed/file)
+- You can touch on each day for more events info
 - [Timeline Widget](https://forum.xda-developers.com/smartwatch/amazfit/app-widget-timeline-v1-0-1-pace-stratos-t3894632) is also integrated in the calendar (for better events view)
-- Long press the timer/date at the top of the Timeline to reload iCal events
+- Support of iCalendar feed (URL) and local ICS file
 
 
 
@@ -56,9 +57,10 @@ There are 3 ways to get your calendar evens.
 
 
 
-### Screenshots (Version 1.6)
-![Amazfit Pace Calendar Widget v1.6](other%20files/com.dinodevs.pacecalendarwidget-1.3.png)
-![Amazfit Pace Calendar Widget v1.6](other%20files/com.dinodevs.pacecalendarwidget-1.3-settings.png)
+### Screenshots (Version 1.9.3)
+![Amazfit Pace Calendar Widget v1.9.3](other%20files/com.dinodevs.pacecalendarwidget-1.9.3.png)
+![Amazfit Pace Calendar Widget v1.9.3 Settings](other%20files/com.dinodevs.pacecalendarwidget-1.9.3-settings.png)
+![Amazfit Pace Calendar Widget v1.9.3 Timeline](other%20files/com.dinodevs.pacecalendarwidget-1.9.3-timeline.png)
 
 
 

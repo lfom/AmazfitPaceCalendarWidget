@@ -228,13 +228,10 @@ public class Timeline extends Activity {
                         // Insert day separator, or not :P
                         if( !current_loop_date.equals(dateToString( calendar,Constants.ELEMENT_PATTERN )) ){
                             current_loop_date = dateToString(calendar, Constants.ELEMENT_PATTERN);
-                            // Is it today?
-                            if(current_loop_date.equals(dateToString(Calendar.getInstance(), Constants.ELEMENT_PATTERN))){
-                                current_loop_date = getString(R.string.today);
-                            }
+
                             HashMap<String, String> date_elem = new HashMap<>();
                             date_elem.put(TITLE, "");
-                            date_elem.put(SUBTITLE, current_loop_date );
+                            date_elem.put(SUBTITLE, (current_loop_date.equals(dateToString(Calendar.getInstance(), Constants.ELEMENT_PATTERN)))?getString(R.string.today):current_loop_date );
                             date_elem.put(DOT, "" );
                             eventsList.add(date_elem);
                         }

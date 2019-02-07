@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/time"
@@ -23,11 +25,21 @@
     <TextView
         android:id="@+id/backToTop"
         android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:gravity="center|top"
+        android:layout_height="50dp"
+        android:gravity="center"
         android:text="@string/top"
         android:textColor="#fff"
         android:textSize="16sp"
         android:layout_centerVertical="true"
         android:layout_marginStart="4dip"/>
+
+    <ImageView
+        android:id="@+id/refresh"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:contentDescription="@string/refresh"
+        android:layout_below="@id/backToTop"
+        android:layout_marginStart="10dip"
+        android:layout_marginTop="6dip"
+        android:src="@drawable/ic_round_refresh_24px"/>
 </RelativeLayout>

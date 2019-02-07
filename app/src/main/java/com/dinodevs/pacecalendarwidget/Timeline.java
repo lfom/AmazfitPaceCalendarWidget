@@ -3,12 +3,17 @@ package com.dinodevs.pacecalendarwidget;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -34,6 +39,8 @@ public class Timeline extends Activity {
     private View mView;
     private ListView lv;
     private TextView time;
+    private ImageView refresh;
+    private int current_color;
 
     private ArrayList<HashMap<String, String>> eventsList;
 
@@ -59,6 +66,9 @@ public class Timeline extends Activity {
         this.mView = this.findViewById(android.R.id.content);
 
         settings = new APsettings(Constants.TAG, mContext);
+
+        Intent myIntent = getIntent(); // gets the previously created intent
+        this.current_color = myIntent.getIntExtra("color", 0);
 
         // Initialize variables
         Log.d(Constants.TAG, "Timeline: Starting...");
@@ -97,6 +107,10 @@ public class Timeline extends Activity {
         time = this.mView.findViewById(R.id.time);
         refresh_time();
 
+
+        // Refresh button
+        refresh = this.mView.findViewById(R.id.refresh);
+
         // Calendar Events Data
         eventsList = new ArrayList<>();
         lv = this.mView.findViewById(R.id.list);
@@ -116,7 +130,6 @@ public class Timeline extends Activity {
                 Timeline.this.toast("Calendar Widget v" + Timeline.this.version + " by GreatApo, LFOM & DarkThanos");
             }
         });
-        */
 
         // Refresh events
         time.setOnLongClickListener(new View.OnLongClickListener() {
@@ -127,6 +140,17 @@ public class Timeline extends Activity {
                 return true;
             }
         });
+        */
+
+        // Refresh events
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refresh_time();
+                loadiCalData();
+            }
+        });
+
 
         // Scroll to top
         TextView top = this.mView.findViewById(R.id.backToTop);
@@ -204,13 +228,10 @@ public class Timeline extends Activity {
                         // Insert day separator, or not :P
                         if( !current_loop_date.equals(dateToString( calendar,Constants.ELEMENT_PATTERN )) ){
                             current_loop_date = dateToString(calendar, Constants.ELEMENT_PATTERN);
-                            // Is it today?
-                            if(current_loop_date.equals(dateToString(Calendar.getInstance(), Constants.ELEMENT_PATTERN))){
-                                current_loop_date = getString(R.string.today);
-                            }
+
                             HashMap<String, String> date_elem = new HashMap<>();
                             date_elem.put(TITLE, "");
-                            date_elem.put(SUBTITLE, current_loop_date );
+                            date_elem.put(SUBTITLE, (current_loop_date.equals(dateToString(Calendar.getInstance(), Constants.ELEMENT_PATTERN)))?getString(R.string.today):current_loop_date );
                             date_elem.put(DOT, "" );
                             eventsList.add(date_elem);
                         }
@@ -272,9 +293,39 @@ public class Timeline extends Activity {
             eventsList.add(elem);
         }
 
-        ListAdapter adapter = new SimpleAdapter(mContext, eventsList, R.layout.list_item, new String[]{"title", "subtitle", "dot"}, new int[]{R.id.title, R.id.description, R.id.dot});
-        lv.setAdapter(adapter);
+        ListAdapter adapter = new SimpleAdapter(mContext, eventsList, R.layout.list_item, new String[]{"title", "subtitle", "dot"}, new int[]{R.id.title, R.id.description, R.id.dot}){
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
 
+                View v = convertView;
+                if(v== null){
+                    LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    v=vi.inflate(R.layout.list_item, null);
+                }
+
+                TextView title = v.findViewById(R.id.title);
+                TextView subtitle = v.findViewById(R.id.description);
+                TextView dot = v.findViewById(R.id.dot);
+                LinearLayout header = v.findViewById(R.id.header);
+
+                title.setText(eventsList.get(position).get("title"));
+                subtitle.setText(eventsList.get(position).get("subtitle"));
+                dot.setText(eventsList.get(position).get("dot"));
+
+                if(Timeline.this.current_color!=0) {
+                    dot.setTextColor(Timeline.this.current_color);
+
+                    // Day separator
+                    if(eventsList.get(position).get("dot").isEmpty() && eventsList.get(position).get("title").isEmpty())
+                        subtitle.setTextColor(Timeline.this.current_color);
+                    else
+                        subtitle.setTextColor(getResources().getColor(R.color.description));
+                }
+
+                return v;
+            }
+        };
+        lv.setAdapter(adapter);
     }
 
     private void loadiCalData() {
@@ -287,7 +338,7 @@ public class Timeline extends Activity {
                     if (iCalSupport.checkICSFile(mContext, icalURL)) {
                         calendarEvents = iCalSupport.getICSCalendarEvents(mContext);
                     } else {
-                        toastMsg = "\niCal data not found.\n\nPlease write your ICS URL at the following file:\n/sdcard/Android/data/com.dinodevs.pacecalendar/files/pacecalendar.txt";
+                        toastMsg = "\niCal data not found.\nPlease write/place your ICS feed URL/file at:\n/sdcard/Android/data/com.dinodevs.pacecalendarwidget/files/pacecalendar.txt";
                         activity.runOnUiThread(showToast);
                     }
                     if (calendarEvents == null) {
